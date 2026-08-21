@@ -1,19 +1,40 @@
 #!/bin/sh
 set -e
 
-DOMAIN="${SSL_DOMAIN:-redfox.loyalitsolution.com}"
+DOMAIN="${SSL_DOMAIN:-erp.temesgenkefyalew.com}"
+EXTRA_DOMAINS="${SSL_EXTRA_DOMAINS:-}"
 TEMPLATES_DIR=/etc/nginx/templates
 CONF=/etc/nginx/conf.d/default.conf
 CERT="/etc/letsencrypt/live/${DOMAIN}/fullchain.pem"
 CERT_MTIME_FILE=/tmp/nginx-cert-mtime
 
+server_names() {
+    names="$DOMAIN"
+    old_ifs=$IFS
+    IFS=,
+    for extra in $EXTRA_DOMAINS; do
+        extra=$(echo "$extra" | tr -d ' ')
+        if [ -n "$extra" ] && [ "$extra" != "$DOMAIN" ]; then
+            names="$names $extra"
+        fi
+    done
+    IFS=$old_ifs
+    echo "$names"
+}
+
+SERVER_NAMES="$(server_names)"
+
 render_config() {
     if [ -f "$CERT" ]; then
-        echo "Nginx: using HTTPS for ${DOMAIN}"
-        sed "s/__SSL_DOMAIN__/${DOMAIN}/g" "${TEMPLATES_DIR}/odoo-ssl.conf" > "$CONF"
+        echo "Nginx: using HTTPS for ${SERVER_NAMES}"
+        sed -e "s/__SSL_SERVER_NAMES__/${SERVER_NAMES}/g" \
+            -e "s/__SSL_DOMAIN__/${DOMAIN}/g" \
+            "${TEMPLATES_DIR}/odoo-ssl.conf" > "$CONF"
     else
-        echo "Nginx: no certificate yet — serving HTTP for ${DOMAIN}"
-        sed "s/__SSL_DOMAIN__/${DOMAIN}/g" "${TEMPLATES_DIR}/odoo-http.conf" > "$CONF"
+        echo "Nginx: no certificate yet — serving HTTP for ${SERVER_NAMES}"
+        sed -e "s/__SSL_SERVER_NAMES__/${SERVER_NAMES}/g" \
+            -e "s/__SSL_DOMAIN__/${DOMAIN}/g" \
+            "${TEMPLATES_DIR}/odoo-http.conf" > "$CONF"
     fi
 }
 

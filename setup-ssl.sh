@@ -5,7 +5,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOMAIN="${1:-redfox.loyalitsolution.com}"
+DOMAIN="${1:-erp.temesgenkefyalew.com}"
 EMAIL="${2:-admin@${DOMAIN}}"
 
 cd "$SCRIPT_DIR"
@@ -19,8 +19,6 @@ if [ -f .env ]; then
     fi
 else
     cp .env.example .env
-    echo "SSL_DOMAIN=${DOMAIN}" >> .env
-    echo "CERTBOT_EMAIL=${EMAIL}" >> .env
     echo "Created .env from .env.example — set POSTGRES_PASSWORD before continuing."
 fi
 
