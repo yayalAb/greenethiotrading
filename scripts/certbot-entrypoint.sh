@@ -30,11 +30,11 @@ request_certificate() {
     # shellcheck disable=SC2086
     certbot certonly --webroot \
         -w "$WEBROOT" \
+        --cert-name "$DOMAIN" \
         $CERTBOT_D_FLAGS \
         --email "$EMAIL" \
         --agree-tos \
         --non-interactive \
-        --keep-until-expiring \
         --expand
 }
 
