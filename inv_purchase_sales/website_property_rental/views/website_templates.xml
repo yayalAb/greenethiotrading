@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="property_listing" name="Properties For Rent and For Sale">
+        <t t-call="website.layout">
+            <t t-set="title">
+                <t t-if="listing_type == 'sale'">For Sale</t>
+                <t t-else="">For Rent</t>
+            </t>
+            <div id="wrap" class="oe_structure kad-site">
+                <section class="kad-hero kad-property-hero">
+                    <div class="kad-hero__media" aria-hidden="true">
+                        <div class="kad-hero__slides">
+                            <img t-att-src="hero_image" alt="" class="kad-hero__photo is-active"/>
+                        </div>
+                        <div class="kad-hero__shade"/>
+                    </div>
+                    <div class="container-fluid kad-hero__inner">
+                        <p class="kad-kicker" style="color:#c8f59a;">Green Ethio Trading</p>
+                        <h1 class="kad-hero__title">
+                            <t t-if="listing_type == 'sale'">Properties <span class="kad-hero__title-accent">for sale.</span></t>
+                            <t t-else="">Properties <span class="kad-hero__title-accent">for rent.</span></t>
+                        </h1>
+                        <p class="kad-hero__lead">
+                            <t t-if="listing_type == 'sale'">Browse homes and commercial units listed for purchase.</t>
+                            <t t-else="">Browse available tenancies and send an enquiry from the listing page.</t>
+                        </p>
+                    </div>
+                </section>
+
+                <section class="kad-section kad-products">
+                    <div class="container-fluid kad-section__inner">
+                        <div class="kad-tabs__nav" role="tablist">
+                            <a t-attf-class="kad-tabs__btn #{listing_type != 'sale' and 'is-active' or ''}" href="/property?type=rent">For Rent</a>
+                            <a t-attf-class="kad-tabs__btn #{listing_type == 'sale' and 'is-active' or ''}" href="/property?type=sale">For Sale</a>
+                        </div>
+                        <div class="kad-pcard-grid">
+                            <t t-foreach="properties" t-as="property">
+                                <t t-set="image_url" t-value="(property_images or {}).get(property.id)"/>
+                                <t t-call="website_property_rental.property_card"/>
+                            </t>
+                        </div>
+                        <t t-if="not properties">
+                            <div class="kad-empty mt-3">
+                                <h3>No listings in this category yet</h3>
+                                <p>Mark properties as Available and For Rent or For Sale to publish them here.</p>
+                            </div>
+                        </t>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+
+    <template id="property_detail" name="Property Detail">
+        <t t-call="website.layout">
+            <t t-set="title" t-value="property_id.name"/>
+            <div id="wrap" class="oe_structure kad-site wr-wrap">
+                <section class="kad-section">
+                    <div class="container-fluid kad-section__inner">
+                        <a t-attf-href="/property?type=#{property_id.sale_rent == 'for_sale' and 'sale' or 'rent'}" class="kad-pcard__cta d-inline-block mb-4">
+                            Back to
+                            <t t-if="property_id.sale_rent == 'for_sale'">For Sale</t>
+                            <t t-else="">For Rent</t>
+                        </a>
+                        <t t-if="success">
+                            <div class="alert alert-success">Thank you. Your enquiry has been sent.</div>
+                        </t>
+                        <t t-if="error">
+                            <div class="alert alert-danger">Please enter your name and email.</div>
+                        </t>
+                        <div class="row g-5">
+                            <div class="col-lg-7">
+                                <div class="wr-gallery">
+                                    <img class="kad-gallery-main wr-gallery-main" t-att-src="(gallery and gallery[0]) or '/website_property_rental/static/src/img/lobby.jpg'" t-att-alt="property_id.name"/>
+                                    <div class="kad-thumbs wr-thumbs" t-if="gallery and len(gallery) &gt; 1">
+                                        <t t-foreach="gallery" t-as="src">
+                                            <img t-att-src="src" t-att-alt="property_id.name"/>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <p class="kad-kicker">
+                                    <t t-if="property_id.sale_rent == 'for_sale'">For Sale</t>
+                                    <t t-else="">For Rent</t>
+                                </p>
+                                <h1><t t-esc="property_id.name"/></h1>
+                                <p class="kad-lead">
+                                    <t t-esc="(property_id.property_type or '').replace('_', ' ').title()"/>
+                                    <t t-if="property_id.city"> · <t t-esc="property_id.city"/></t>
+                                </p>
+                                <p class="kad-pcard__price" style="font-size:1.4rem;">
+                                    <t t-if="property_id.sale_rent == 'for_sale'">
+                                        <t t-esc="property_id.unit_price" t-options="{'widget': 'monetary', 'display_currency': property_id.currency_id}"/>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-esc="property_id.rent_month" t-options="{'widget': 'monetary', 'display_currency': property_id.currency_id}"/>
+                                        <small> / month</small>
+                                    </t>
+                                </p>
+                                <p t-if="property_id.street or property_id.location">
+                                    <t t-esc="property_id.location or property_id.street"/>
+                                    <t t-if="property_id.street2"><br/><t t-esc="property_id.street2"/></t>
+                                </p>
+                                <ul class="kad-pcard__meta">
+                                    <li t-if="property_id.bedroom"><strong>Beds:</strong> <t t-esc="property_id.bedroom"/></li>
+                                    <li t-if="property_id.bathroom"><strong>Baths:</strong> <t t-esc="property_id.bathroom"/></li>
+                                    <li t-if="property_id.parking"><strong>Parking:</strong> <t t-esc="property_id.parking"/></li>
+                                    <li t-if="property_id.total_sq_feet"><strong>Area:</strong> <t t-esc="property_id.total_sq_feet"/> sq ft</li>
+                                </ul>
+                                <form class="kad-form mt-3" t-attf-action="/property/#{property_id.id}/enquire" method="post">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <h3 t-if="property_id.sale_rent == 'for_sale'">Request this sale listing</h3>
+                                    <h3 t-else="">Request this rental</h3>
+                                    <label class="kad-label">Full name</label>
+                                    <input type="text" name="partner_name" class="kad-input mb-2" required="required"/>
+                                    <label class="kad-label">Email</label>
+                                    <input type="email" name="partner_email" class="kad-input mb-2" required="required"/>
+                                    <label class="kad-label">Phone</label>
+                                    <input type="tel" name="partner_phone" class="kad-input mb-2"/>
+                                    <label class="kad-label" t-if="property_id.sale_rent != 'for_sale'">Move-in date</label>
+                                    <input type="date" name="start_date" class="kad-input mb-2" t-if="property_id.sale_rent != 'for_sale'"/>
+                                    <label class="kad-label">Message</label>
+                                    <textarea name="message" class="kad-input kad-textarea mb-3" rows="3"/>
+                                    <button type="submit" class="kad-btn kad-btn--primary">Send enquiry</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>

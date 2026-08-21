@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_property_rental_request_public,property.rental.request.public,model_property_rental_request,base.group_public,1,0,1,0
+access_property_rental_request_portal,property.rental.request.portal,model_property_rental_request,base.group_portal,1,0,1,0
+access_property_rental_request_user,property.rental.request.user,model_property_rental_request,base.group_user,1,1,1,0
+access_property_rental_request_agent,property.rental.request.agent,model_property_rental_request,advanced_property_management.group_property_agent,1,1,1,0
+access_property_rental_request_manager,property.rental.request.manager,model_property_rental_request,advanced_property_management.group_property_manager,1,1,1,1
+access_property_property_public,property.property.public,advanced_property_management.model_property_property,base.group_public,1,0,0,0
+access_property_image_public,property.image.public,advanced_property_management.model_property_image,base.group_public,1,0,0,0
+access_property_facility_public,property.facility.public,advanced_property_management.model_property_facility,base.group_public,1,0,0,0
+access_property_tag_public,property.tag.public,advanced_property_management.model_property_tag,base.group_public,1,0,0,0
+access_property_area_public,property.area.public,advanced_property_management.model_property_area_measure,base.group_public,1,0,0,0
+access_property_nearby_public,property.nearby.public,advanced_property_management.model_property_nearby_connectivity,base.group_public,1,0,0,0

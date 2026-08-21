@@ -1,0 +1,78 @@
+/* Green Ethio — property-page extras on top of KAD layout */
+
+.kad-hero__title {
+    white-space: normal;
+}
+
+a.kad-tabs__btn {
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+}
+
+.kad-style--industrial .kad-empty,
+.kad-style--industrial .kad-empty h3 {
+    color: var(--kad-ink);
+}
+
+.kad-pcard__price {
+    margin: 0.15rem 0 0;
+    font-weight: 800;
+    color: var(--kad-blue-deep);
+    font-size: 1.05rem;
+}
+
+.kad-pcard__price small {
+    font-weight: 600;
+    color: var(--kad-muted);
+    font-size: 0.78rem;
+}
+
+.kad-property-hero {
+    min-height: min(62vh, 560px);
+}
+
+.kad-gallery-main {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+}
+
+.kad-thumbs {
+    display: flex;
+    gap: 0.55rem;
+    margin-top: 0.7rem;
+    overflow-x: auto;
+}
+
+.kad-thumbs img {
+    width: 92px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.kad-empty {
+    padding: 2rem 1.25rem;
+    border-radius: 20px;
+    background: #fff;
+    border: 1px solid rgba(10, 47, 107, 0.08);
+}
+
+@media (max-width: 991px) {
+    .kad-gallery-main {
+        height: 260px;
+    }
+    .kad-pcard-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .kad-pcard-grid {
+        grid-template-columns: 1fr;
+    }
+}

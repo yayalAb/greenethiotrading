@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="property_card" name="Property Card">
+        <a class="kad-pcard" t-attf-href="/property/#{property.id}">
+            <div class="kad-pcard__media">
+                <img t-att-src="image_url" t-att-alt="property.name" loading="lazy"/>
+                <span t-attf-class="kad-pcard__badge #{property.sale_rent == 'for_sale' and 'kad-pcard__badge--import' or ''}">
+                    <t t-if="property.sale_rent == 'for_sale'">For Sale</t>
+                    <t t-else="">For Rent</t>
+                </span>
+            </div>
+            <div class="kad-pcard__body">
+                <span class="kad-pcard__cat">
+                    <t t-esc="(property.property_type or 'residential').replace('_', ' ').title()"/>
+                    <t t-if="property.city"> · <t t-esc="property.city"/></t>
+                </span>
+                <h3><t t-esc="property.name"/></h3>
+                <p t-if="property.location or property.street" t-esc="property.location or property.street"/>
+                <p class="kad-pcard__price">
+                    <t t-if="property.sale_rent == 'for_sale'">
+                        <t t-esc="property.unit_price" t-options="{'widget': 'monetary', 'display_currency': property.currency_id}"/>
+                    </t>
+                    <t t-else="">
+                        <t t-esc="property.rent_month" t-options="{'widget': 'monetary', 'display_currency': property.currency_id}"/>
+                        <small> / month</small>
+                    </t>
+                </p>
+                <ul class="kad-pcard__meta">
+                    <li t-if="property.bedroom"><strong>Beds:</strong> <t t-esc="property.bedroom"/></li>
+                    <li t-if="property.bathroom"><strong>Baths:</strong> <t t-esc="property.bathroom"/></li>
+                    <li t-if="property.parking"><strong>Parking:</strong> <t t-esc="property.parking"/></li>
+                </ul>
+                <span class="kad-pcard__cta">View details</span>
+            </div>
+        </a>
+    </template>
+</odoo>

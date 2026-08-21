@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="get_frontend_fonts" inherit_id="web.layout" name="Green Ethio Frontend Fonts">
+        <xpath expr="//head" position="inside">
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+            <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Fira+Sans:wght@400;600;700;800&amp;family=Noto+Sans+Ethiopic:wght@500;700&amp;display=swap" rel="stylesheet"/>
+        </xpath>
+    </template>
+
+    <template id="get_layout_body" inherit_id="website.layout" name="Green Ethio Body Class">
+        <xpath expr="//div[@id='wrapwrap']" position="attributes">
+            <attribute name="class" add="kad-wrapwrap" separator=" "/>
+        </xpath>
+        <xpath expr="//div[@id='wrapwrap']" position="inside">
+            <nav class="kad-float" aria-label="Quick contact">
+                <a class="kad-float__mail" href="mailto:info@greenethiotrading.com" title="Email">Mail</a>
+                <a class="kad-float__top" href="#top" title="Back to top">Top</a>
+            </nav>
+        </xpath>
+    </template>
+
+    <template id="get_footer_custom" inherit_id="website.footer_custom" name="Green Ethio Footer">
+        <xpath expr="//div[@id='footer']" position="replace">
+            <div id="footer" class="kad-footer oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer">
+                <div class="container py-5">
+                    <div class="row g-4">
+                        <div class="col-lg-4">
+                            <h3 class="kad-footer__title mb-3" style="font-size:1.15rem;">Green Ethio Trading</h3>
+                            <p class="kad-footer__text">
+                                Homes and commercial spaces for rent and for sale in Ethiopia.
+                                Browse listings, compare amenities, and send an enquiry in minutes.
+                            </p>
+                        </div>
+                        <div class="col-6 col-lg-2">
+                            <h5 class="kad-footer__title">Company</h5>
+                            <ul class="kad-footer__list">
+                                <li><a href="/#about">About Us</a></li>
+                                <li><a href="/#services">Services</a></li>
+                                <li><a href="/#why-us">Why Us</a></li>
+                                <li><a href="/#contact">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <h5 class="kad-footer__title">Properties</h5>
+                            <ul class="kad-footer__list">
+                                <li><a href="/#for-rent">For Rent</a></li>
+                                <li><a href="/#for-sale">For Sale</a></li>
+                                <li><a href="/property?type=rent">All rental listings</a></li>
+                                <li><a href="/property?type=sale">All sale listings</a></li>
+                                <li><a href="/#enquire">Send an Enquiry</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3">
+                            <h5 class="kad-footer__title">Contact</h5>
+                            <ul class="kad-footer__list">
+                                <li>Addis Ababa, Ethiopia</li>
+                                <li><a href="mailto:info@greenethiotrading.com">info@greenethiotrading.com</a></li>
+                                <li><a href="https://greenethiotrading.com">greenethiotrading.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="kad-footer__bar">
+                    <div class="container d-flex flex-wrap justify-content-between gap-2">
+                        <span>© 2026 Green Ethio Trading</span>
+                        <span>Homes for rent and for sale</span>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
