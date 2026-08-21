@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-DOMAIN="${SSL_DOMAIN:-erp.temesgenkefyalew.com}"
-EXTRA_DOMAINS="${SSL_EXTRA_DOMAINS:-}"
+DOMAIN="${SSL_DOMAIN:-temesgenkefyalew.com}"
+EXTRA_DOMAINS="${SSL_EXTRA_DOMAINS:-www.temesgenkefyalew.com,greenethiotrading.com,www.greenethiotrading.com}"
 TEMPLATES_DIR=/etc/nginx/templates
 CONF=/etc/nginx/conf.d/default.conf
 CERT="/etc/letsencrypt/live/${DOMAIN}/fullchain.pem"

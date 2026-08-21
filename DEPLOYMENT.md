@@ -2,9 +2,13 @@
 
 This stack runs **Odoo 18**, **PostgreSQL 15**, **Nginx**, and **Certbot** with Docker Compose.
 
-**Production URL:** `https://erp.temesgenkefyalew.com`
+**Production URLs (same Odoo, one SSL certificate):**
+- `https://temesgenkefyalew.com`
+- `https://www.temesgenkefyalew.com`
+- `https://greenethiotrading.com`
+- `https://www.greenethiotrading.com`
 
-SSL is issued automatically by the Certbot container once DNS points at this server. Nginx starts on HTTP, then reloads to HTTPS when the certificate appears.
+SSL is issued automatically once **every** hostname above has a DNS A (or CNAME) record pointing **only** at the VPS IP `196.188.249.207`.
 
 ## Prerequisites
 
@@ -13,33 +17,50 @@ SSL is issued automatically by the Certbot container once DNS points at this ser
 - 4 GB RAM minimum (8 GB+ recommended)
 - 2 vCPUs minimum (4+ recommended)
 - Ports **80** and **443** open to the internet
-- Ability to create a DNS A record for `erp.temesgenkefyalew.com`
+- Ability to point `temesgenkefyalew.com` and `greenethiotrading.com` at the VPS
 
 ---
 
-## Step 1 — Point DNS at the VPS (Zergaw Cloud CWP)
+## Step 1 — Point both domains at the VPS (DNS)
 
-Do **not** use **+Add a New SubDomain**. That creates a site on Zergaw hosting and often adds a second A record to the shared-hosting IP. Odoo runs on your VPS, so only one DNS **A** record should exist for `erp`.
+VPS IP: **`196.188.249.207`**
 
-1. Log in to Zergaw Cloud for `temesgenkefyalew.com`.
-2. Open **DNS Functions → Edit DNS Zone** and select `temesgenkefyalew.com`.
-3. Search for `erp`. Keep **only** this record:
+**Edit** existing A records. Do **not** add a second A for the same name (Let’s Encrypt fails if two IPs exist). Do **not** use **+Add a New SubDomain**.
 
-| Type | Name | Value | TTL |
-|------|------|-------|-----|
-| A | `erp` or `erp.temesgenkefyalew.com` | **`196.188.249.207`** (VPS) | 300 |
+Leave **MX**, `webmail`, `cpanel`, and `cwp` on Zergaw (`196.188.249.61`) so email keeps working.
 
-If a second A record points `erp` to `196.188.249.61` (Zergaw hosting), **delete** it.
+### A) `temesgenkefyalew.com` in Zergaw Cloud
 
-Leave `@`, `www`, and MX unchanged so the main site and email on Zergaw keep working.
+**DNS Functions → Edit DNS Zone** → `temesgenkefyalew.com`
 
-Check:
+| Record | Action |
+|--------|--------|
+| `temesgenkefyalew.com.` **A** `196.188.249.61` | **Edit** to `196.188.249.207` (do not add another A) |
+| `www` **CNAME** `temesgenkefyalew.com` | Keep (www will follow the new A) |
+| `erp...` A record | Optional: delete; not used anymore |
+| MX / webmail / cpanel / cwp | Do not change |
+
+### B) `greenethiotrading.com` in that domain’s DNS panel
+
+Open DNS for **`greenethiotrading.com`** (Zergaw if the domain is there, otherwise the registrar).
+
+| Type | Name | Value |
+|------|------|--------|
+| A | `@` or `greenethiotrading.com` | `196.188.249.207` |
+| A or CNAME | `www` | `196.188.249.207` or `greenethiotrading.com` |
+
+Only **one** A record per name. If `@` already exists, edit it; do not create a duplicate.
+
+### Check (must be a single IP each)
 
 ```bash
-nslookup erp.temesgenkefyalew.com
+nslookup temesgenkefyalew.com 8.8.8.8
+nslookup www.temesgenkefyalew.com 8.8.8.8
+nslookup greenethiotrading.com 8.8.8.8
+nslookup www.greenethiotrading.com 8.8.8.8
 ```
 
-It must return **only** `196.188.249.207`. Two addresses means SSL and the site will fail at random.
+Every name must return **only** `196.188.249.207`. If you still see `196.188.249.61` as well, SSL will fail.
 
 ---
 
@@ -97,7 +118,8 @@ Set at least:
 ```bash
 POSTGRES_USER=odoo
 POSTGRES_PASSWORD=use-a-strong-unique-password
-SSL_DOMAIN=erp.temesgenkefyalew.com
+SSL_DOMAIN=temesgenkefyalew.com
+SSL_EXTRA_DOMAINS=www.temesgenkefyalew.com,greenethiotrading.com,www.greenethiotrading.com
 CERTBOT_EMAIL=you@your-real-email.com
 ```
 
@@ -158,7 +180,8 @@ docker compose logs -f odoo
 
 Until the certificate is issued, the site is available on HTTP:
 
-`http://erp.temesgenkefyalew.com`
+- `http://temesgenkefyalew.com`
+- `http://greenethiotrading.com`
 
 ---
 
@@ -179,12 +202,13 @@ Nginx then reloads HTTPS by itself (it polls for the cert every 15 seconds). Con
 
 ```bash
 docker compose logs nginx | grep -i ssl
-ls -l letsencrypt/live/erp.temesgenkefyalew.com/
+ls -l letsencrypt/live/temesgenkefyalew.com/
 ```
 
 Open:
 
-**https://erp.temesgenkefyalew.com**
+- **https://temesgenkefyalew.com**
+- **https://greenethiotrading.com**
 
 HTTP should redirect to HTTPS after the cert exists.
 
@@ -194,21 +218,21 @@ You can also start/restart SSL with:
 
 ```bash
 chmod +x setup-ssl.sh renew-ssl.sh
-./setup-ssl.sh erp.temesgenkefyalew.com you@your-real-email.com
+./setup-ssl.sh temesgenkefyalew.com you@your-real-email.com
 ```
 
 ---
 
 ## Step 9 — Create the Odoo database (first login)
 
-1. Open `https://erp.temesgenkefyalew.com`
+1. Open `https://temesgenkefyalew.com` or `https://greenethiotrading.com`
 2. Create the database (master password = `admin_passwd` from `etc/odoo.conf`)
 3. In Odoo: **Settings → Technical → System Parameters** (enable Developer Mode first)
 4. Set:
 
 | Key | Value |
 |-----|--------|
-| `web.base.url` | `https://erp.temesgenkefyalew.com` |
+| `web.base.url` | `https://greenethiotrading.com` |
 | `web.base.url.freeze` | `True` |
 
 That keeps email links, reports, and portal URLs on the HTTPS domain.
@@ -286,7 +310,7 @@ Internet
 
 | Issue | What to check |
 |-------|----------------|
-| Certbot keeps retrying | `nslookup erp.temesgenkefyalew.com` must return only this server IP (`196.188.249.207`). Ports 80 and 443 must be open. |
+| Certbot keeps retrying | Every hostname must return **only** `196.188.249.207` (no `61`). Ports 80 and 443 must be open. |
 | 502 Bad Gateway | Odoo still starting: `docker compose ps` and `docker compose logs odoo` |
 | Odoo will not start | Password mismatch between `.env` `POSTGRES_PASSWORD` and `etc/odoo.conf` `db_password` |
 | Site stays on HTTP | `docker compose logs certbot` and `ls letsencrypt/live/` |
@@ -297,12 +321,14 @@ Internet
 
 ## Production checklist
 
-- [ ] DNS A record for `erp.temesgenkefyalew.com` → `196.188.249.207` only (no second IP)
+- [ ] `temesgenkefyalew.com` A → `196.188.249.207` only
+- [ ] `greenethiotrading.com` A → `196.188.249.207` only
+- [ ] `www` for both domains also resolves to `196.188.249.207`
 - [ ] Strong `POSTGRES_PASSWORD` in `.env` matching `db_password` in `etc/odoo.conf`
 - [ ] Changed `admin_passwd` in `etc/odoo.conf`
 - [ ] Real `CERTBOT_EMAIL` in `.env`
 - [ ] Firewall: 22, 80, 443 only (block 5432/8069 from the public internet)
 - [ ] HTTPS loads and HTTP redirects
-- [ ] `web.base.url` set to `https://erp.temesgenkefyalew.com`
+- [ ] `web.base.url` set to `https://greenethiotrading.com`
 - [ ] Database backup scheduled
 

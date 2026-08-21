@@ -5,7 +5,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOMAIN="${1:-erp.temesgenkefyalew.com}"
+DOMAIN="${1:-temesgenkefyalew.com}"
 EMAIL="${2:-admin@${DOMAIN}}"
 
 cd "$SCRIPT_DIR"
@@ -13,6 +13,9 @@ cd "$SCRIPT_DIR"
 if [ -f .env ]; then
     if ! grep -q '^SSL_DOMAIN=' .env; then
         echo "SSL_DOMAIN=${DOMAIN}" >> .env
+    fi
+    if ! grep -q '^SSL_EXTRA_DOMAINS=' .env; then
+        echo "SSL_EXTRA_DOMAINS=www.temesgenkefyalew.com,greenethiotrading.com,www.greenethiotrading.com" >> .env
     fi
     if ! grep -q '^CERTBOT_EMAIL=' .env; then
         echo "CERTBOT_EMAIL=${EMAIL}" >> .env

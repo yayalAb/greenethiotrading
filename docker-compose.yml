@@ -69,8 +69,8 @@ services:
             - "80:80"
             - "443:443"
         environment:
-            SSL_DOMAIN: ${SSL_DOMAIN:-erp.temesgenkefyalew.com}
-            SSL_EXTRA_DOMAINS: ${SSL_EXTRA_DOMAINS:-}
+            SSL_DOMAIN: ${SSL_DOMAIN:-temesgenkefyalew.com}
+            SSL_EXTRA_DOMAINS: ${SSL_EXTRA_DOMAINS:-www.temesgenkefyalew.com,greenethiotrading.com,www.greenethiotrading.com}
         volumes:
             - ./nginx/entrypoint.sh:/entrypoint.sh:ro
             - ./nginx/templates:/etc/nginx/templates:ro
@@ -87,8 +87,8 @@ services:
         depends_on:
             - nginx
         environment:
-            SSL_DOMAIN: ${SSL_DOMAIN:-erp.temesgenkefyalew.com}
-            SSL_EXTRA_DOMAINS: ${SSL_EXTRA_DOMAINS:-}
+            SSL_DOMAIN: ${SSL_DOMAIN:-temesgenkefyalew.com}
+            SSL_EXTRA_DOMAINS: ${SSL_EXTRA_DOMAINS:-www.temesgenkefyalew.com,greenethiotrading.com,www.greenethiotrading.com}
             CERTBOT_EMAIL: ${CERTBOT_EMAIL:-admin@temesgenkefyalew.com}
             CERTBOT_RETRY_SECONDS: ${CERTBOT_RETRY_SECONDS:-300}
             CERTBOT_RENEW_INTERVAL: ${CERTBOT_RENEW_INTERVAL:-43200}
