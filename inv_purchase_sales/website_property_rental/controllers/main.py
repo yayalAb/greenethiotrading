@@ -29,11 +29,15 @@ class WebsitePropertyRental(PropertyController):
         return self._fallback_image(property_rec)
 
     def _listing_domain(self, listing_type=None, kind=None, city=None):
+        listing_type = (listing_type or "rent").strip().lower()
+        sale_rent = "for_sale" if listing_type == "sale" else "for_tenancy"
         domain = [
             ("state", "=", "available"),
-            ("sale_rent", "=", "for_tenancy"),
+            ("sale_rent", "=", sale_rent),
         ]
-        kind = (kind or listing_type or "").strip().lower()
+        kind = (kind or "").strip().lower()
+        if kind in ("rent", "sale"):
+            kind = ""
         if kind in ("office", "offices"):
             domain += [
                 "|",
@@ -63,8 +67,17 @@ class WebsitePropertyRental(PropertyController):
             ]
         return domain
 
-    def _listing_title(self, kind=None, city=None):
+    def _listing_title(self, listing_type=None, kind=None, city=None):
+        listing_type = (listing_type or "rent").strip().lower()
         kind = (kind or "").strip().lower()
+        if listing_type == "sale":
+            if kind in ("office", "offices"):
+                return "Offices for sale"
+            if kind in ("shop", "shops"):
+                return "Shops for sale"
+            if city:
+                return "For Sale in %s" % city
+            return "Units in our building for sale."
         if kind in ("office", "offices"):
             return "Offices for rent"
         if kind in ("shop", "shops"):
@@ -73,24 +86,29 @@ class WebsitePropertyRental(PropertyController):
             return "For Rent in %s" % city
         return "Units in our building for rent."
 
-    def _public_rental(self, property_id):
+    def _public_property(self, property_id):
         property_rec = request.env["property.property"].sudo().browse(property_id)
-        if not property_rec.exists() or property_rec.sale_rent != "for_tenancy":
+        if not property_rec.exists() or property_rec.sale_rent not in (
+            "for_tenancy",
+            "for_sale",
+        ):
             return None
         return property_rec
 
     @http.route("/property", auth="public", website=True)
     def property(self, **kwargs):
-        if kwargs.get("type") == "sale":
-            return request.redirect("/property")
-        kind = kwargs.get("kind") or kwargs.get("type")
+        listing_type = "sale" if kwargs.get("type") == "sale" else "rent"
+        kind = kwargs.get("kind")
         city = kwargs.get("city")
-        if kind == "rent":
+        if (kind or "").strip().lower() in ("rent", "sale"):
             kind = None
         properties = (
             request.env["property.property"]
             .sudo()
-            .search(self._listing_domain(kind=kind, city=city), order="id desc")
+            .search(
+                self._listing_domain(listing_type=listing_type, kind=kind, city=city),
+                order="id desc",
+            )
         )
         return request.render(
             "website_property_rental.property_listing",
@@ -99,17 +117,19 @@ class WebsitePropertyRental(PropertyController):
                 "property_images": {
                     prop.id: self._property_image(prop) for prop in properties
                 },
-                "listing_type": "rent",
+                "listing_type": listing_type,
                 "listing_kind": kind or "",
                 "listing_city": city or "",
-                "listing_title": self._listing_title(kind=kind, city=city),
+                "listing_title": self._listing_title(
+                    listing_type=listing_type, kind=kind, city=city
+                ),
                 "hero_image": "%s/plaza-night-banner.png" % self.IMG,
             },
         )
 
     @http.route("/property/<int:property_id>", auth="public", website=True)
     def property_item(self, property_id, **kwargs):
-        property_rec = self._public_rental(property_id)
+        property_rec = self._public_property(property_id)
         if not property_rec:
             return request.not_found()
         gallery = []
@@ -151,7 +171,7 @@ class WebsitePropertyRental(PropertyController):
         csrf=True,
     )
     def rental_enquire(self, property_id, **post):
-        property_rec = self._public_rental(property_id)
+        property_rec = self._public_property(property_id)
         if not property_rec:
             return request.not_found()
         name = (post.get("partner_name") or "").strip()

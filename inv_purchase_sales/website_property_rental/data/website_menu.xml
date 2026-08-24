@@ -9,12 +9,17 @@
     </record>
 
     <data noupdate="0">
-        <delete model="website.menu" search="[('url', 'in', ['/#for-sale', '/property?type=sale'])]"/>
         <record id="menu_get_for_rent" model="website.menu">
             <field name="name">For Rent</field>
             <field name="url">/#for-rent</field>
             <field name="parent_id" ref="website.main_menu"/>
             <field name="sequence">20</field>
+        </record>
+        <record id="menu_get_for_sale" model="website.menu">
+            <field name="name">For Sale</field>
+            <field name="url">/property?type=sale</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence">25</field>
         </record>
         <record id="menu_get_services" model="website.menu">
             <field name="name">Services</field>

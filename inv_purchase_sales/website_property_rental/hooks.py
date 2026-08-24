@@ -57,6 +57,7 @@ def _sync_website_menus(env):
     Menu = env["website.menu"].sudo()
     updates = {
         "menu_get_for_rent": ("For Rent", "/#for-rent", 20),
+        "menu_get_for_sale": ("For Sale", "/property?type=sale", 25),
         "menu_get_services": ("Services", "/#services", 30),
         "menu_get_about": ("About Us", "/#about", 40),
         "menu_get_why": ("Why Us", "/#why-us", 70),
@@ -80,26 +81,12 @@ def _sync_website_menus(env):
     )
     if extra:
         extra.unlink()
-    sale_menu = env.ref(
-        "website_property_rental.menu_get_for_sale", raise_if_not_found=False
-    )
-    if sale_menu:
-        sale_menu.unlink()
-    Menu.search(
-        [
-            "|",
-            "|",
-            ("name", "=", "For Sale"),
-            ("url", "in", ["/#for-sale", "/property?type=sale"]),
-            ("url", "ilike", "type=sale"),
-        ]
-    ).unlink()
 
     Menu.search([("url", "in", ["/rentals", "/property"])]).unlink()
 
     _set_website_branding(env)
 
-    # 1 Home, 2 For Rent, 3 Services, 4 About Us,
+    # 1 Home, 2 For Rent, 3 For Sale, 4 Services, 5 About Us,
     # then Courses, Why Us, Jobs, Contact us
     parent = env.ref("website.main_menu", raise_if_not_found=False)
     if not parent:
@@ -107,6 +94,7 @@ def _sync_website_menus(env):
     by_name = {
         "home": 10,
         "for rent": 20,
+        "for sale": 25,
         "services": 30,
         "about us": 40,
         "courses": 60,

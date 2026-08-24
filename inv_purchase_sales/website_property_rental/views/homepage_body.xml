@@ -3,6 +3,7 @@
     <template id="homepage_body" name="Temesgen Kefyalew Homepage Body">
         <t t-set="Property" t-value="request.env['property.property'].sudo()"/>
         <t t-set="rentals" t-value="Property.search([('state', '=', 'available'), ('sale_rent', '=', 'for_tenancy')], limit=8, order='id desc')"/>
+        <t t-set="sales" t-value="Property.search([('state', '=', 'available'), ('sale_rent', '=', 'for_sale')], limit=8, order='id desc')"/>
         <t t-set="fallback_imgs" t-value="['plaza-night-banner.png', 'plaza-night.png', 'towers-day.png', 'street-white.png', 'gold-glass.png', 'gold-tower.png']"/>
 
         <section class="kad-hero kad-style kad-style--cinematic">
@@ -46,7 +47,7 @@
                         <a href="/property?kind=office" class="kad-chip">Offices</a>
                         <a href="/property?kind=shop" class="kad-chip">Shops</a>
                         <a href="/property" class="kad-chip">For Rent</a>
-                        <a href="/property?city=Addis%20Ababa" class="kad-chip">Addis Ababa</a>
+                        <a href="/property?type=sale" class="kad-chip">For Sale</a>
                     </div>
                 </div>
             </div>
@@ -167,6 +168,30 @@
                 </t>
                 <div class="mt-4">
                     <a href="/property" class="kad-btn kad-btn--primary">View all for rent</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="for-sale" class="kad-section kad-products kad-style kad-style--catalog">
+            <div class="container-fluid kad-section__inner">
+                <div class="kad-section__head kad-section__head--wide" data-kad-anim="fade-up">
+                    <p class="kad-kicker">For Sale</p>
+                    <h2>Available units in our building for sale.</h2>
+                </div>
+                <div class="kad-pcard-grid">
+                    <t t-foreach="sales" t-as="property">
+                        <t t-set="image_url" t-value="'/web/image/property.property/%s/image' % property.id if property.image else '/website_property_rental/static/src/img/%s' % fallback_imgs[property.id % len(fallback_imgs)]"/>
+                        <t t-call="website_property_rental.property_card"/>
+                    </t>
+                </div>
+                <t t-if="not sales">
+                    <div class="kad-empty mt-3">
+                        <h3>No For Sale listings yet</h3>
+                        <p>No For Sale listings yet. Check back soon.</p>
+                    </div>
+                </t>
+                <div class="mt-4">
+                    <a href="/property?type=sale" class="kad-btn kad-btn--primary">View all for sale</a>
                 </div>
             </div>
         </section>

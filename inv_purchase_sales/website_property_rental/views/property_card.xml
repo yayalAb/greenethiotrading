@@ -4,7 +4,10 @@
         <a class="kad-pcard" t-attf-href="/property/#{property.id}">
             <div class="kad-pcard__media">
                 <img t-att-src="image_url" t-att-alt="property.name" loading="lazy"/>
-                <span class="kad-pcard__badge">For Rent</span>
+                <span class="kad-pcard__badge">
+                    <t t-if="property.sale_rent == 'for_sale'">For Sale</t>
+                    <t t-else="">For Rent</t>
+                </span>
             </div>
             <div class="kad-pcard__body">
                 <span class="kad-pcard__cat">
@@ -14,8 +17,13 @@
                 <h3><t t-esc="property.name"/></h3>
                 <p t-if="property.location or property.street" t-esc="property.location or property.street"/>
                 <p class="kad-pcard__price">
-                    <t t-esc="property.rent_month" t-options="{'widget': 'monetary', 'display_currency': property.currency_id}"/>
-                    <small> / month</small>
+                    <t t-if="property.sale_rent == 'for_sale'">
+                        <t t-esc="property.unit_price" t-options="{'widget': 'monetary', 'display_currency': property.currency_id}"/>
+                    </t>
+                    <t t-else="">
+                        <t t-esc="property.rent_month" t-options="{'widget': 'monetary', 'display_currency': property.currency_id}"/>
+                        <small> / month</small>
+                    </t>
                 </p>
                 <ul class="kad-pcard__meta">
                     <li t-if="property.bedroom"><strong>Beds:</strong> <t t-esc="property.bedroom"/></li>

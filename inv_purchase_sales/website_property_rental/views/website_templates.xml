@@ -2,7 +2,7 @@
 <odoo>
     <template id="property_listing" name="Properties For Rent">
         <t t-call="website.layout">
-            <t t-set="title">For Rent</t>
+            <t t-set="title" t-value="'For Sale' if listing_type == 'sale' else 'For Rent'"/>
             <div id="wrap" class="oe_structure kad-site">
                 <section class="kad-hero kad-property-hero">
                     <div class="kad-hero__media" aria-hidden="true">
@@ -23,10 +23,11 @@
                             <a href="/#enquire" class="kad-btn kad-btn--ghost">Send an Enquiry</a>
                         </div>
                         <div class="kad-hero__chips">
-                            <a href="/property?kind=office" t-attf-class="kad-chip #{'is-active' if listing_kind in ('office', 'offices') else ''}">Offices</a>
-                            <a href="/property?kind=shop" t-attf-class="kad-chip #{'is-active' if listing_kind in ('shop', 'shops') else ''}">Shops</a>
-                            <a href="/property" t-attf-class="kad-chip #{'is-active' if not listing_kind and not listing_city else ''}">For Rent</a>
-                            <a href="/property?city=Addis%20Ababa" t-attf-class="kad-chip #{'is-active' if listing_city else ''}">Addis Ababa</a>
+                            <a t-attf-href="/property?#{'type=sale&amp;' if listing_type == 'sale' else ''}kind=office" t-attf-class="kad-chip #{'is-active' if listing_kind in ('office', 'offices') else ''}">Offices</a>
+                            <a t-attf-href="/property?#{'type=sale&amp;' if listing_type == 'sale' else ''}kind=shop" t-attf-class="kad-chip #{'is-active' if listing_kind in ('shop', 'shops') else ''}">Shops</a>
+                            <a href="/property" t-attf-class="kad-chip #{'is-active' if listing_type != 'sale' and not listing_kind and not listing_city else ''}">For Rent</a>
+                            <a href="/property?type=sale" t-attf-class="kad-chip #{'is-active' if listing_type == 'sale' and not listing_kind else ''}">For Sale</a>
+                            <a t-attf-href="/property?#{'type=sale&amp;' if listing_type == 'sale' else ''}city=Addis%20Ababa" t-attf-class="kad-chip #{'is-active' if listing_city else ''}">Addis Ababa</a>
                         </div>
                     </div>
                 </section>
@@ -41,7 +42,8 @@
                         </div>
                         <t t-if="not properties">
                             <div class="kad-empty mt-3">
-                                <h3>No For Rent listings yet</h3>
+                                <h3 t-if="listing_type == 'sale'">No For Sale listings yet</h3>
+                                <h3 t-else="">No For Rent listings yet</h3>
                                 <p>Check back soon, or send an enquiry and we will follow up.</p>
                                 <a href="/#enquire" class="kad-btn kad-btn--primary mt-3">Send an Enquiry</a>
                             </div>
@@ -58,7 +60,10 @@
             <div id="wrap" class="oe_structure kad-site wr-wrap">
                 <section class="kad-section">
                     <div class="container-fluid kad-section__inner">
-                        <a href="/property" class="kad-pcard__cta d-inline-block mb-4">Back to For Rent</a>
+                        <a t-attf-href="/property#{'?type=sale' if property_id.sale_rent == 'for_sale' else ''}" class="kad-pcard__cta d-inline-block mb-4">
+                            <t t-if="property_id.sale_rent == 'for_sale'">Back to For Sale</t>
+                            <t t-else="">Back to For Rent</t>
+                        </a>
                         <t t-if="success">
                             <div class="alert alert-success">Thank you. Your enquiry has been sent.</div>
                         </t>
@@ -77,15 +82,23 @@
                                 </div>
                             </div>
                             <div class="col-lg-5">
-                                <p class="kad-kicker">For Rent</p>
+                                <p class="kad-kicker">
+                                    <t t-if="property_id.sale_rent == 'for_sale'">For Sale</t>
+                                    <t t-else="">For Rent</t>
+                                </p>
                                 <h1><t t-esc="property_id.name"/></h1>
                                 <p class="kad-lead">
                                     <t t-esc="(property_id.property_type or '').replace('_', ' ').title()"/>
                                     <t t-if="property_id.city"> · <t t-esc="property_id.city"/></t>
                                 </p>
                                 <p class="kad-pcard__price" style="font-size:1.4rem;">
-                                    <t t-esc="property_id.rent_month" t-options="{'widget': 'monetary', 'display_currency': property_id.currency_id}"/>
-                                    <small> / month</small>
+                                    <t t-if="property_id.sale_rent == 'for_sale'">
+                                        <t t-esc="property_id.unit_price" t-options="{'widget': 'monetary', 'display_currency': property_id.currency_id}"/>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-esc="property_id.rent_month" t-options="{'widget': 'monetary', 'display_currency': property_id.currency_id}"/>
+                                        <small> / month</small>
+                                    </t>
                                 </p>
                                 <p t-if="property_id.street or property_id.location">
                                     <t t-esc="property_id.location or property_id.street"/>
@@ -99,7 +112,8 @@
                                 </ul>
                                 <form class="kad-form mt-3" t-attf-action="/property/#{property_id.id}/enquire" method="post">
                                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                                    <h3>Request this rental</h3>
+                                    <h3 t-if="property_id.sale_rent == 'for_sale'">Request this sale</h3>
+                                    <h3 t-else="">Request this rental</h3>
                                     <label class="kad-label">Full name</label>
                                     <input type="text" name="partner_name" class="kad-input mb-2" required="required"/>
                                     <label class="kad-label">Email</label>
