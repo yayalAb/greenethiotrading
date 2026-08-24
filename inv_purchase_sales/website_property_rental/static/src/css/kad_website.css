@@ -60,9 +60,9 @@ header .navbar {
 
 header .navbar-brand img,
 header .navbar-brand .img {
-    height: 48px !important;
+    height: 52px !important;
     width: auto !important;
-    max-width: 170px;
+    max-width: 72px;
     object-fit: contain;
 }
 
@@ -1188,11 +1188,11 @@ a.kad-chip:hover,
 }
 
 .kad-footer__logo {
-    width: 160px;
+    width: 96px;
     height: auto;
     background: #fff;
     border-radius: 14px;
-    padding: 0.55rem 0.7rem;
+    padding: 0.45rem;
 }
 
 .kad-footer__text { font-size: 0.95rem; line-height: 1.7; margin: 0; opacity: 0.85; }
