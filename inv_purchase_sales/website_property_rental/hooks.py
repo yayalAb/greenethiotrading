@@ -19,6 +19,8 @@ def _reset_homepage_customizations(env):
                 [
                     "website_property_rental.homepage_body",
                     "website_property_rental.page_home",
+                    "website_property_rental.get_footer_custom",
+                    "website.footer_custom",
                 ],
             ),
             ("website_id", "!=", False),

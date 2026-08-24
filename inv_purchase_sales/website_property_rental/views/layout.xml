@@ -70,13 +70,8 @@
                     </div>
                 </div>
                 <div class="kad-footer__bar">
-                    <div class="container d-flex flex-wrap justify-content-between gap-2">
-                        <span>© 2026 Temesgen Kefyalew Building Rent</span>
-                        <span>
-                            <a href="tel:+251911200998">+251 911 20 09 98</a>
-                            ·
-                            <a href="tel:+251930589650">+251 930 58 96 50</a>
-                        </span>
+                    <div class="container text-center">
+                        <span>© 2026 Temesgen Kefyalew Building Rent · Powered by Loyal IT Solution</span>
                     </div>
                 </div>
             </div>

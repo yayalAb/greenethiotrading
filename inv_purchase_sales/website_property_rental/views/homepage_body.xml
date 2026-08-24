@@ -20,9 +20,6 @@
             </div>
             <div class="container-fluid kad-hero__inner">
                 <div class="kad-hero__brand" data-kad-anim="fade-up" data-kad-delay="0">
-                    <img src="/website_property_rental/static/src/img/logo.png"
-                         alt="Temesgen Kefyalew Building Rent"
-                         class="kad-hero__logo"/>
                     <div class="kad-hero__names">
                         <p class="kad-hero__amharic" lang="am">ተመስገን ከፍያለው ህንፃ አከራይ</p>
                         <p class="kad-hero__company">Temesgen Kefyalew Building Rent</p>

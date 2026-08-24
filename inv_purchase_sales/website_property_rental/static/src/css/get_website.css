@@ -47,11 +47,8 @@ header a.btn-primary {
     white-space: normal;
 }
 
-.kad-hero__logo {
-    width: min(280px, 70vw);
-    background: #fff;
-    border-radius: 16px;
-    padding: 0.7rem 0.9rem;
+.kad-hero .kad-hero__logo {
+    display: none !important;
 }
 
 .kad-hero__names {
@@ -244,4 +241,16 @@ a.kad-pcard {
     .kad-pcard-grid {
         grid-template-columns: 1fr;
     }
+}
+
+.o_footer_copyright {
+    display: none !important;
+}
+
+.kad-footer__bar .container {
+    white-space: nowrap;
+}
+
+.kad-footer__bar a[href^="tel:"] {
+    display: none !important;
 }
