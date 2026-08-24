@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="property_dashboard.PropertyDashboard" owl="1">
+        <div class="o_property_dashboard">
+            <div t-if="state.loading" class="pd-loading">Loading property dashboard…</div>
+            <t t-else="">
+                <div class="pd-grid pd-row-1">
+                    <section class="pd-card">
+                        <div class="pd-card-head">
+                            <div>
+                                <h2>Today’s Collection</h2>
+                                <p>Rent, sales, contracts and enquiries</p>
+                            </div>
+                            <div class="pd-card-actions">
+                                <button class="pd-link" t-on-click="() => this.onOpen('overdue')">
+                                    Outstanding <t t-esc="state.data.collection.outstanding"/>
+                                    · <t t-esc="state.data.collection.overdue"/> overdue
+                                </button>
+                                <button class="pd-export" t-on-click="onExport">Export</button>
+                            </div>
+                        </div>
+                        <div class="pd-kpi-grid">
+                            <t t-foreach="state.data.kpis" t-as="kpi" t-key="kpi.key">
+                                <button type="button" t-att-class="'pd-kpi ' + kpi.tone" t-on-click="() => this.onOpen(kpi.action)">
+                                    <span class="pd-kpi-icon"><i t-att-class="'fa ' + kpi.icon"/></span>
+                                    <strong t-esc="kpi.value"/>
+                                    <span class="pd-kpi-label" t-esc="kpi.label"/>
+                                    <em t-att-class="kpi.change >= 0 ? 'up' : 'down'">
+                                        <t t-esc="kpi.change >= 0 ? '+' : ''"/><t t-esc="kpi.change"/>% from yesterday
+                                    </em>
+                                </button>
+                            </t>
+                        </div>
+                    </section>
+                    <section class="pd-card">
+                        <div class="pd-card-head">
+                            <div>
+                                <h2>Collection Insights</h2>
+                                <p>Paid rent, sales and new enquiries</p>
+                            </div>
+                        </div>
+                        <div class="pd-chart pd-chart-lg">
+                            <canvas t-ref="insightChart"/>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="pd-grid pd-row-2">
+                    <section class="pd-card">
+                        <div class="pd-card-head">
+                            <div>
+                                <h2>Total Revenue</h2>
+                                <p>This week · rent vs sales billed</p>
+                            </div>
+                        </div>
+                        <div class="pd-chart">
+                            <canvas t-ref="revenueChart"/>
+                        </div>
+                    </section>
+                    <section class="pd-card">
+                        <div class="pd-card-head">
+                            <div>
+                                <h2>Collection Trend</h2>
+                                <p>Billed vs collected over 6 months</p>
+                            </div>
+                        </div>
+                        <div class="pd-chart pd-chart-sm">
+                            <canvas t-ref="satisfactionChart"/>
+                        </div>
+                        <div class="pd-split">
+                            <div>
+                                <span class="pd-dot blue"/> Last Month
+                                <strong t-esc="state.data.collection.last_month"/>
+                            </div>
+                            <div>
+                                <span class="pd-dot green"/> This Month
+                                <strong t-esc="state.data.collection.this_month"/>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="pd-card">
+                        <div class="pd-card-head">
+                            <div>
+                                <h2>Target vs Reality</h2>
+                                <p>Billed vs collected (6 months)</p>
+                            </div>
+                        </div>
+                        <div class="pd-chart pd-chart-sm">
+                            <canvas t-ref="targetChart"/>
+                        </div>
+                        <div class="pd-target-legend">
+                            <div>
+                                <span class="pd-sq green"/> Reality Sales
+                                <strong t-esc="state.data.collection.collected_month"/>
+                            </div>
+                            <div>
+                                <span class="pd-sq yellow"/> Target Sales
+                                <strong t-esc="state.data.collection.billed_month"/>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="pd-grid pd-row-3">
+                    <section class="pd-card">
+                        <div class="pd-card-head">
+                            <div>
+                                <h2>Top Properties</h2>
+                                <p>Highest collected rent and sales</p>
+                            </div>
+                        </div>
+                        <table class="pd-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Popularity</th>
+                                    <th>Sales</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-if="!state.data.top_properties.length">
+                                    <td colspan="4" class="pd-empty">No collected invoices yet</td>
+                                </tr>
+                                <t t-foreach="state.data.top_properties" t-as="row" t-key="row.index">
+                                    <tr>
+                                        <td t-esc="row.index"/>
+                                        <td>
+                                            <div class="pd-name" t-esc="row.name"/>
+                                            <small t-esc="row.city"/>
+                                        </td>
+                                        <td>
+                                            <div class="pd-bar">
+                                                <span t-att-style="'width:' + row.popularity + '%; background:' + row.color"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="pd-badge" t-att-style="'color:' + row.color + '; border-color:' + row.color">
+                                                <t t-esc="row.popularity"/>%
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </section>
+                    <section class="pd-card">
+                        <div class="pd-card-head">
+                            <div>
+                                <h2>Sales Mapping by Country</h2>
+                                <p>Collected value by city / country</p>
+                            </div>
+                        </div>
+                        <div class="pd-map">
+                            <svg viewBox="0 0 100 70" class="pd-map-svg" aria-hidden="true">
+                                <path class="pd-land" d="M8 22 C18 10, 32 12, 38 22 C42 18, 52 16, 58 22 C70 12, 88 18, 92 30 C94 42, 88 52, 78 48 C72 58, 60 62, 50 58 C38 66, 22 60, 16 48 C8 42, 4 32, 8 22 Z"/>
+                                <path class="pd-land" d="M28 52 C34 48, 42 54, 40 62 C34 66, 26 62, 28 52 Z"/>
+                                <path class="pd-land" d="M70 52 C78 50, 86 56, 82 64 C74 68, 66 60, 70 52 Z"/>
+                                <t t-foreach="state.data.countries" t-as="place" t-key="place.name">
+                                    <circle t-att-cx="place.x" t-att-cy="place.y" r="3.2" t-att-fill="place.color"/>
+                                </t>
+                            </svg>
+                            <ul class="pd-map-legend">
+                                <li t-if="!state.data.countries.length">No geographic data yet</li>
+                                <t t-foreach="state.data.countries" t-as="place" t-key="place.name">
+                                    <li>
+                                        <span class="pd-dot" t-att-style="'background:' + place.color"/>
+                                        <span t-esc="place.name"/>
+                                        <em t-esc="place.amount"/>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                    </section>
+                    <section class="pd-card">
+                        <div class="pd-card-head">
+                            <div>
+                                <h2>Volume vs Service Level</h2>
+                                <p>Invoices billed vs contracts started</p>
+                            </div>
+                        </div>
+                        <div class="pd-chart">
+                            <canvas t-ref="volumeChart"/>
+                        </div>
+                        <div class="pd-split">
+                            <div>
+                                <span class="pd-dot blue"/> Volume
+                                <strong t-esc="state.data.summary.volume_total"/>
+                            </div>
+                            <div>
+                                <span class="pd-dot green"/> Services
+                                <strong t-esc="state.data.summary.service_total"/>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

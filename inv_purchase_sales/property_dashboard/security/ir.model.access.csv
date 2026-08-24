@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_property_dashboard_agent,access.property.dashboard.agent,model_property_dashboard,advanced_property_management.group_property_agent,1,0,0,0
+access_property_dashboard_manager,access.property.dashboard.manager,model_property_dashboard,advanced_property_management.group_property_manager,1,0,0,0
