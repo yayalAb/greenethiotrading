@@ -17,7 +17,7 @@
         </record>
         <record id="menu_get_for_sale" model="website.menu">
             <field name="name">For Sale</field>
-            <field name="url">/property?type=sale</field>
+            <field name="url">/#for-sale</field>
             <field name="parent_id" ref="website.main_menu"/>
             <field name="sequence">25</field>
         </record>

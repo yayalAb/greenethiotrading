@@ -97,6 +97,8 @@ class WebsitePropertyRental(PropertyController):
 
     @http.route("/property", auth="public", website=True)
     def property(self, **kwargs):
+        if kwargs.get("type") == "sale":
+            return request.redirect("/#for-sale")
         listing_type = "sale" if kwargs.get("type") == "sale" else "rent"
         kind = kwargs.get("kind")
         city = kwargs.get("city")

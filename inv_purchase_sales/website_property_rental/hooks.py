@@ -57,7 +57,7 @@ def _sync_website_menus(env):
     Menu = env["website.menu"].sudo()
     updates = {
         "menu_get_for_rent": ("For Rent", "/#for-rent", 20),
-        "menu_get_for_sale": ("For Sale", "/property?type=sale", 25),
+        "menu_get_for_sale": ("For Sale", "/#for-sale", 25),
         "menu_get_services": ("Services", "/#services", 30),
         "menu_get_about": ("About Us", "/#about", 40),
         "menu_get_why": ("Why Us", "/#why-us", 70),
@@ -81,6 +81,30 @@ def _sync_website_menus(env):
     )
     if extra:
         extra.unlink()
+
+    # Keep For Sale on the homepage, same pattern as For Rent.
+    sale_menus = Menu.search(
+        [
+            "|",
+            "|",
+            ("name", "ilike", "For Sale"),
+            ("url", "ilike", "type=sale"),
+            ("url", "in", ["/#for-sale", "/property?type=sale"]),
+        ]
+    )
+    if sale_menus:
+        sale_menus.write({"name": "For Sale", "url": "/#for-sale", "sequence": 25})
+    else:
+        parent_menu = env.ref("website.main_menu", raise_if_not_found=False)
+        if parent_menu:
+            Menu.create(
+                {
+                    "name": "For Sale",
+                    "url": "/#for-sale",
+                    "parent_id": parent_menu.id,
+                    "sequence": 25,
+                }
+            )
 
     Menu.search([("url", "in", ["/rentals", "/property"])]).unlink()
 

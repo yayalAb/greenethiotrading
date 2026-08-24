@@ -37,17 +37,17 @@
                         Compare amenities and send a rental enquiry.
                     </p>
                     <div class="kad-hero__actions" data-kad-anim="fade-up" data-kad-delay="300">
-                        <a href="/property" class="kad-btn kad-btn--primary">
+                        <a href="/#for-rent" class="kad-btn kad-btn--primary">
                             <span>View rentals</span>
                             <span class="kad-btn__shine" aria-hidden="true"/>
                         </a>
-                        <a href="#enquire" class="kad-btn kad-btn--ghost">Send an Enquiry</a>
+                        <a href="/#enquire" class="kad-btn kad-btn--ghost">Send an Enquiry</a>
                     </div>
                     <div class="kad-hero__chips" data-kad-anim="fade-up" data-kad-delay="380">
-                        <a href="/property?kind=office" class="kad-chip">Offices</a>
-                        <a href="/property?kind=shop" class="kad-chip">Shops</a>
-                        <a href="/property" class="kad-chip">For Rent</a>
-                        <a href="/property?type=sale" class="kad-chip">For Sale</a>
+                        <a href="/#for-rent" class="kad-chip">Offices</a>
+                        <a href="/#for-rent" class="kad-chip">Shops</a>
+                        <a href="/#for-rent" class="kad-chip">For Rent</a>
+                        <a href="/#for-sale" class="kad-chip">For Sale</a>
                     </div>
                 </div>
             </div>
@@ -190,9 +190,6 @@
                         <p>No For Sale listings yet. Check back soon.</p>
                     </div>
                 </t>
-                <div class="mt-4">
-                    <a href="/property?type=sale" class="kad-btn kad-btn--primary">View all for sale</a>
-                </div>
             </div>
         </section>
 

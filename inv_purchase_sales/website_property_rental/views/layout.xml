@@ -51,7 +51,7 @@
                             <h5 class="kad-footer__title">Properties</h5>
                             <ul class="kad-footer__list">
                                 <li><a href="/#for-rent">For Rent</a></li>
-                                <li><a href="/property?type=sale">For Sale</a></li>
+                                <li><a href="/#for-sale">For Sale</a></li>
                                 <li><a href="/property">All rental listings</a></li>
                                 <li><a href="/#enquire">Send an Enquiry</a></li>
                             </ul>

@@ -26,7 +26,7 @@
                             <a t-attf-href="/property?#{'type=sale&amp;' if listing_type == 'sale' else ''}kind=office" t-attf-class="kad-chip #{'is-active' if listing_kind in ('office', 'offices') else ''}">Offices</a>
                             <a t-attf-href="/property?#{'type=sale&amp;' if listing_type == 'sale' else ''}kind=shop" t-attf-class="kad-chip #{'is-active' if listing_kind in ('shop', 'shops') else ''}">Shops</a>
                             <a href="/property" t-attf-class="kad-chip #{'is-active' if listing_type != 'sale' and not listing_kind and not listing_city else ''}">For Rent</a>
-                            <a href="/property?type=sale" t-attf-class="kad-chip #{'is-active' if listing_type == 'sale' and not listing_kind else ''}">For Sale</a>
+                            <a href="/#for-sale" t-attf-class="kad-chip #{'is-active' if listing_type == 'sale' and not listing_kind else ''}">For Sale</a>
                             <a t-attf-href="/property?#{'type=sale&amp;' if listing_type == 'sale' else ''}city=Addis%20Ababa" t-attf-class="kad-chip #{'is-active' if listing_city else ''}">Addis Ababa</a>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
             <div id="wrap" class="oe_structure kad-site wr-wrap">
                 <section class="kad-section">
                     <div class="container-fluid kad-section__inner">
-                        <a t-attf-href="/property#{'?type=sale' if property_id.sale_rent == 'for_sale' else ''}" class="kad-pcard__cta d-inline-block mb-4">
+                        <a t-attf-href="/#{'#for-sale' if property_id.sale_rent == 'for_sale' else '#for-rent'}" class="kad-pcard__cta d-inline-block mb-4">
                             <t t-if="property_id.sale_rent == 'for_sale'">Back to For Sale</t>
                             <t t-else="">Back to For Rent</t>
                         </a>

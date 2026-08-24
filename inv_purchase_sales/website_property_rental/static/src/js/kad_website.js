@@ -3,23 +3,38 @@
 import publicWidget from "@web/legacy/js/public/public_widget";
 
 function getScrollRoot() {
-    return document.getElementById("wrapwrap") || document.scrollingElement || document.documentElement;
+    const wrap = document.getElementById("wrapwrap");
+    if (wrap && wrap.scrollHeight > wrap.clientHeight + 8) {
+        const overflowY = window.getComputedStyle(wrap).overflowY;
+        if (overflowY === "auto" || overflowY === "scroll" || overflowY === "overlay") {
+            return wrap;
+        }
+    }
+    return document.scrollingElement || document.documentElement;
 }
 
-function scrollToTarget(target, headerOffset = 88) {
-    const root = getScrollRoot();
-    if (!target || !root) {
+function scrollToTarget(target) {
+    if (!target) {
         return;
     }
-    if (root === document.body || root === document.documentElement || root === document.scrollingElement) {
-        const top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-        window.scrollTo({ top, behavior: "smooth" });
-        return;
+    const header = document.querySelector("header");
+    const offset = header ? header.getBoundingClientRect().height + 12 : 88;
+    const wrap = document.getElementById("wrapwrap");
+    const wrapScrolls =
+        wrap &&
+        wrap.scrollHeight > wrap.clientHeight + 8 &&
+        ["auto", "scroll", "overlay"].includes(window.getComputedStyle(wrap).overflowY);
+
+    if (wrapScrolls) {
+        const top =
+            target.getBoundingClientRect().top -
+            wrap.getBoundingClientRect().top +
+            wrap.scrollTop -
+            offset;
+        wrap.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
     }
-    const rootRect = root.getBoundingClientRect();
-    const targetRect = target.getBoundingClientRect();
-    const top = targetRect.top - rootRect.top + root.scrollTop - headerOffset;
-    root.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    const pageTop = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: Math.max(0, pageTop), behavior: "smooth" });
 }
 
 function animateCount(el, delay = 0) {
@@ -84,6 +99,31 @@ function animateStatsIn(root) {
     stats.forEach((stat, index) => animateCount(stat, index * 160));
 }
 
+function hashFromHref(href) {
+    if (!href || href === "#") {
+        return "";
+    }
+    if (href.startsWith("#")) {
+        return href;
+    }
+    try {
+        const url = new URL(href, window.location.origin);
+        if (!url.hash || url.hash === "#") {
+            return "";
+        }
+        const here = window.location.pathname.replace(/\/$/, "") || "/";
+        const there = url.pathname.replace(/\/$/, "") || "/";
+        if (there === "/" || there === here) {
+            return url.hash;
+        }
+    } catch (error) {
+        if (href.startsWith("/#")) {
+            return href.slice(1);
+        }
+    }
+    return "";
+}
+
 publicWidget.registry.KadWebsite = publicWidget.Widget.extend({
     selector: ".kad-site",
     events: {
@@ -114,13 +154,13 @@ publicWidget.registry.KadWebsite = publicWidget.Widget.extend({
 
     _bindGlobalAnchors() {
         this._globalClickHandler = (event) => {
-            const anchor = event.target.closest("a[href^='#']");
-            if (!anchor || !document.querySelector(".kad-site")) {
+            const anchor = event.target.closest("a[href*='#']");
+            if (!anchor) {
                 return;
             }
             this._scrollFromAnchor(event, anchor);
         };
-        document.addEventListener("click", this._globalClickHandler, true);
+        document.addEventListener("click", this._globalClickHandler);
     },
 
     _onAnchorClick(event) {
@@ -128,8 +168,8 @@ publicWidget.registry.KadWebsite = publicWidget.Widget.extend({
     },
 
     _scrollFromAnchor(event, anchor) {
-        const id = anchor.getAttribute("href");
-        if (!id || id === "#" || !id.startsWith("#")) {
+        const id = hashFromHref(anchor.getAttribute("href"));
+        if (!id) {
             return;
         }
         const target = document.querySelector(id);
@@ -137,7 +177,6 @@ publicWidget.registry.KadWebsite = publicWidget.Widget.extend({
             return;
         }
         event.preventDefault();
-        event.stopPropagation();
         scrollToTarget(target);
         if (history.replaceState) {
             history.replaceState(null, "", id);

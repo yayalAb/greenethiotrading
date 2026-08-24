@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Website Property Rental",
-    "version": "18.0.1.3.9",
+    "version": "18.0.1.4.3",
     "category": "Website/Website",
     "summary": "Public building rental website for Advanced Property Management",
     "description": """
