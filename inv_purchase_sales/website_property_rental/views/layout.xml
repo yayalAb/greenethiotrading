@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="get_frontend_fonts" inherit_id="web.layout" name="Green Ethio Frontend Fonts">
+    <template id="get_frontend_fonts" inherit_id="web.layout" name="TK Frontend Fonts">
         <xpath expr="//head" position="inside">
             <link rel="preconnect" href="https://fonts.googleapis.com"/>
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
@@ -8,28 +8,34 @@
         </xpath>
     </template>
 
-    <template id="get_layout_body" inherit_id="website.layout" name="Green Ethio Body Class">
+    <template id="get_layout_body" inherit_id="website.layout" name="TK Body Class">
         <xpath expr="//div[@id='wrapwrap']" position="attributes">
             <attribute name="class" add="kad-wrapwrap" separator=" "/>
         </xpath>
         <xpath expr="//div[@id='wrapwrap']" position="inside">
             <nav class="kad-float" aria-label="Quick contact">
-                <a class="kad-float__mail" href="mailto:info@greenethiotrading.com" title="Email">Mail</a>
+                <a class="kad-float__call" href="tel:+251911200998" title="Call">Call</a>
+                <a class="kad-float__wa" href="https://wa.me/251911200998" target="_blank" rel="noopener" title="WhatsApp">WA</a>
+                <a class="kad-float__mail" href="mailto:info@temesgenkefyalew.com" title="Email">Mail</a>
                 <a class="kad-float__top" href="#top" title="Back to top">Top</a>
             </nav>
         </xpath>
     </template>
 
-    <template id="get_footer_custom" inherit_id="website.footer_custom" name="Green Ethio Footer">
+    <template id="get_footer_custom" inherit_id="website.footer_custom" name="TK Footer">
         <xpath expr="//div[@id='footer']" position="replace">
             <div id="footer" class="kad-footer oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer">
                 <div class="container py-5">
                     <div class="row g-4">
                         <div class="col-lg-4">
-                            <h3 class="kad-footer__title mb-3" style="font-size:1.15rem;">Green Ethio Trading</h3>
+                            <img src="/website_property_rental/static/src/img/logo.png"
+                                 alt="Temesgen Kefyalew Building Rent"
+                                 class="kad-footer__logo mb-3"/>
+                            <h3 class="kad-footer__title mb-3" style="font-size:1.05rem;">Temesgen Kefyalew Building Rent</h3>
+                            <p class="kad-footer__text" lang="am">ተመስገን ከፍያለው ህንፃ አከራይ</p>
                             <p class="kad-footer__text">
-                                Homes and commercial spaces for rent and for sale in Ethiopia.
-                                Browse listings, compare amenities, and send an enquiry in minutes.
+                                Offices, shops, and homes for rent in Temesgen Kefyalew Building, Addis Ababa.
+                                Browse available units, compare amenities, and send an enquiry.
                             </p>
                         </div>
                         <div class="col-6 col-lg-2">
@@ -45,26 +51,31 @@
                             <h5 class="kad-footer__title">Properties</h5>
                             <ul class="kad-footer__list">
                                 <li><a href="/#for-rent">For Rent</a></li>
-                                <li><a href="/#for-sale">For Sale</a></li>
-                                <li><a href="/property?type=rent">All rental listings</a></li>
-                                <li><a href="/property?type=sale">All sale listings</a></li>
+                                <li><a href="/property">All rental listings</a></li>
                                 <li><a href="/#enquire">Send an Enquiry</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-3">
                             <h5 class="kad-footer__title">Contact</h5>
                             <ul class="kad-footer__list">
+                                <li lang="am">አዲስ አበባ ኢትዮጵያ</li>
                                 <li>Addis Ababa, Ethiopia</li>
-                                <li><a href="mailto:info@greenethiotrading.com">info@greenethiotrading.com</a></li>
-                                <li><a href="https://greenethiotrading.com">greenethiotrading.com</a></li>
+                                <li><a href="tel:+251911200998">Mob: +251 911 20 09 98</a></li>
+                                <li><a href="tel:+251930589650">Tel: +251 930 58 96 50</a></li>
+                                <li><a href="https://wa.me/251911200998" target="_blank" rel="noopener">WhatsApp</a></li>
+                                <li><a href="mailto:info@temesgenkefyalew.com">info@temesgenkefyalew.com</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="kad-footer__bar">
                     <div class="container d-flex flex-wrap justify-content-between gap-2">
-                        <span>© 2026 Green Ethio Trading</span>
-                        <span>Homes for rent and for sale</span>
+                        <span>© 2026 Temesgen Kefyalew Building Rent</span>
+                        <span>
+                            <a href="tel:+251911200998">+251 911 20 09 98</a>
+                            ·
+                            <a href="tel:+251930589650">+251 930 58 96 50</a>
+                        </span>
                     </div>
                 </div>
             </div>

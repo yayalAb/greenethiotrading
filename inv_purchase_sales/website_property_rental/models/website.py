@@ -10,8 +10,12 @@ class Website(models.Model):
         from odoo.addons.website_property_rental.hooks import (
             _sync_website_menus,
             _unlock_homepage_noupdate,
+            _reset_homepage_customizations,
+            _set_website_branding,
         )
 
         _unlock_homepage_noupdate(self.env)
+        _reset_homepage_customizations(self.env)
         _sync_website_menus(self.env)
+        _set_website_branding(self.env)
         return True

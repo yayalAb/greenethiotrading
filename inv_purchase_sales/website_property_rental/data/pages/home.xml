@@ -11,12 +11,12 @@
         <field name="url">/</field>
         <field name="type">qweb</field>
         <field name="website_indexed" eval="True"/>
-        <field name="website_meta_title">For Rent and For Sale | Green Ethio Trading</field>
-        <field name="website_meta_description">Green Ethio Trading lists homes and commercial spaces for rent and for sale in Ethiopia.</field>
+        <field name="website_meta_title">Building Rent | Temesgen Kefyalew Building Rent</field>
+        <field name="website_meta_description">Offices, shops, and homes for rent in Temesgen Kefyalew Building, Addis Ababa.</field>
         <field name="arch" type="xml">
             <t t-name="website_property_rental.page_home">
                 <t t-call="website.layout">
-                    <t t-set="additional_title">For Rent and For Sale | Green Ethio Trading</t>
+                    <t t-set="additional_title">Building Rent | Temesgen Kefyalew Building Rent</t>
                     <div id="wrap" class="oe_structure kad-site">
                         <t t-call="website_property_rental.homepage_body"/>
                     </div>

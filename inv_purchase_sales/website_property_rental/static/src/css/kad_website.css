@@ -448,10 +448,20 @@ header a.btn-primary {
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.04em;
-    color: #fff;
+    color: #fff !important;
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(8px);
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+a.kad-chip:hover,
+.kad-chip.is-active {
+    background: rgba(201, 162, 39, 0.45);
+    border-color: #f0d78c;
+    transform: translateY(-1px);
 }
 
 .kad-hero__scroll {
@@ -467,6 +477,7 @@ header a.btn-primary {
     display: flex;
     justify-content: center;
     padding-top: 8px;
+    pointer-events: none;
 }
 
 .kad-hero__scroll span {

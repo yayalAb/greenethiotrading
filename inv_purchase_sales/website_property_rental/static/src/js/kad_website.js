@@ -96,6 +96,7 @@ publicWidget.registry.KadWebsite = publicWidget.Widget.extend({
         this._bindGlobalAnchors();
         this._bindScrollChrome();
         this._setupBackToTop();
+        this._scrollHashOnLoad();
         return this._super(...arguments);
     },
 
@@ -140,6 +141,17 @@ publicWidget.registry.KadWebsite = publicWidget.Widget.extend({
         scrollToTarget(target);
         if (history.replaceState) {
             history.replaceState(null, "", id);
+        }
+    },
+
+    _scrollHashOnLoad() {
+        const id = window.location.hash;
+        if (!id || id === "#") {
+            return;
+        }
+        const target = document.querySelector(id);
+        if (target) {
+            window.setTimeout(() => scrollToTarget(target), 120);
         }
     },
 

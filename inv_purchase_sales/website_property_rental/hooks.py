@@ -8,14 +8,57 @@ def _unlock_homepage_noupdate(env):
     ).write({"noupdate": False})
 
 
+def _reset_homepage_customizations(env):
+    """Drop website-editor copies so module XML is what visitors see."""
+    View = env["ir.ui.view"].sudo()
+    View.search(
+        [
+            (
+                "key",
+                "in",
+                [
+                    "website_property_rental.homepage_body",
+                    "website_property_rental.page_home",
+                ],
+            ),
+            ("website_id", "!=", False),
+        ]
+    ).unlink()
+
+
+def _set_website_branding(env):
+    import base64
+    from os.path import abspath, dirname, join
+
+    img_path = join(dirname(abspath(__file__)), "static", "src", "img", "logo.png")
+    vals = {"name": "TEMESGEN KEFEYALEW BUILDING RENT"}
+    try:
+        with open(img_path, "rb") as logo_file:
+            vals["logo"] = base64.b64encode(logo_file.read())
+    except OSError:
+        pass
+    websites = env["website"].sudo().search([])
+    if websites:
+        if "phone" in websites._fields:
+            vals["phone"] = "+251 911 20 09 98"
+        websites.write(vals)
+    companies = env["res.company"].sudo().search([])
+    if companies:
+        companies.write(
+            {
+                "phone": "+251 911 20 09 98",
+                "mobile": "+251 930 58 96 50",
+            }
+        )
+
+
 def _sync_website_menus(env):
     Data = env["ir.model.data"].sudo()
     Menu = env["website.menu"].sudo()
     updates = {
         "menu_get_for_rent": ("For Rent", "/#for-rent", 20),
-        "menu_get_for_sale": ("For Sale", "/#for-sale", 30),
-        "menu_get_services": ("Services", "/#services", 40),
-        "menu_get_about": ("About Us", "/#about", 50),
+        "menu_get_services": ("Services", "/#services", 30),
+        "menu_get_about": ("About Us", "/#about", 40),
         "menu_get_why": ("Why Us", "/#why-us", 70),
         "menu_get_enquire": ("Enquire", "/#enquire", 85),
         "menu_get_contact": ("Contact", "/#contact", 95),
@@ -37,10 +80,26 @@ def _sync_website_menus(env):
     )
     if extra:
         extra.unlink()
+    sale_menu = env.ref(
+        "website_property_rental.menu_get_for_sale", raise_if_not_found=False
+    )
+    if sale_menu:
+        sale_menu.unlink()
+    Menu.search(
+        [
+            "|",
+            "|",
+            ("name", "=", "For Sale"),
+            ("url", "in", ["/#for-sale", "/property?type=sale"]),
+            ("url", "ilike", "type=sale"),
+        ]
+    ).unlink()
 
     Menu.search([("url", "in", ["/rentals", "/property"])]).unlink()
 
-    # 1 Home, 2 For Rent, 3 For Sale, 4 Services, 5 About Us,
+    _set_website_branding(env)
+
+    # 1 Home, 2 For Rent, 3 Services, 4 About Us,
     # then Courses, Why Us, Jobs, Contact us
     parent = env.ref("website.main_menu", raise_if_not_found=False)
     if not parent:
@@ -48,9 +107,8 @@ def _sync_website_menus(env):
     by_name = {
         "home": 10,
         "for rent": 20,
-        "for sale": 30,
-        "services": 40,
-        "about us": 50,
+        "services": 30,
+        "about us": 40,
         "courses": 60,
         "why us": 70,
         "jobs": 80,
@@ -69,6 +127,7 @@ def _sync_website_menus(env):
 
 def post_init_hook(env):
     _unlock_homepage_noupdate(env)
+    _reset_homepage_customizations(env)
     _sync_website_menus(env)
 
 

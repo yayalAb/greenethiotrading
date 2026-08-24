@@ -1,13 +1,127 @@
-/* Green Ethio — property-page extras on top of KAD layout */
+/* Temesgen Kefyalew Building Rent — gold brand on KAD layout */
+
+:root {
+    --kad-navy: #1a1408;
+    --kad-blue-deep: #6b4e16;
+    --kad-blue: #c9a227;
+    --kad-blue-bright: #e8c547;
+    --kad-green-deep: #8a6a1a;
+    --kad-green: #c9a227;
+    --kad-green-bright: #f0d78c;
+    --kad-ink: #1a1408;
+    --kad-muted: #6b5d45;
+    --kad-line: rgba(201, 162, 39, 0.2);
+    --kad-surface: #faf6ec;
+    --kad-grad-blue: linear-gradient(145deg, #1a1408 0%, #3d2e12 48%, #8a6a1a 100%);
+    --kad-grad-green: linear-gradient(135deg, #8a6a1a 0%, #c9a227 55%, #e8c547 100%);
+    --kad-grad-brand: linear-gradient(90deg, #6b4e16 0%, #c9a227 52%, #e8c547 100%);
+}
+
+header .navbar-brand img,
+header .navbar-brand .img {
+    height: 58px !important;
+    max-width: 280px !important;
+    width: auto !important;
+    object-fit: contain;
+}
+
+header .nav-link:hover {
+    color: var(--kad-blue) !important;
+}
+
+.tk-header-phones {
+    display: none !important;
+}
+
+header a[href*="555"] {
+    display: none !important;
+}
+
+header .btn-primary,
+header a.btn-primary {
+    background: var(--kad-grad-green) !important;
+    box-shadow: 0 10px 24px rgba(201, 162, 39, 0.35) !important;
+}
 
 .kad-hero__title {
     white-space: normal;
+}
+
+.kad-hero__logo {
+    width: min(280px, 70vw);
+    background: #fff;
+    border-radius: 16px;
+    padding: 0.7rem 0.9rem;
+}
+
+.kad-hero__names {
+    white-space: normal;
+    max-width: min(820px, 100%);
+}
+
+.kad-hero__company {
+    margin: 0.15rem 0 0;
+    color: #fff;
+    font-family: var(--kad-font);
+    font-size: clamp(1.15rem, 2.6vw, 2rem);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    white-space: normal;
+}
+
+.kad-hero__contacts {
+    margin: 0.55rem 0 0;
+    color: #f0d78c;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.kad-hero__contacts a {
+    color: #f0d78c !important;
+    text-decoration: none;
+}
+
+.kad-hero__contacts a:hover {
+    color: #fff !important;
+}
+
+.kad-hero__shade {
+    background:
+        linear-gradient(105deg, rgba(26, 20, 8, 0.92) 0%, rgba(61, 46, 18, 0.78) 42%, rgba(26, 20, 8, 0.42) 72%, rgba(201, 162, 39, 0.28) 100%),
+        linear-gradient(0deg, rgba(26, 20, 8, 0.55) 0%, transparent 45%) !important;
+}
+
+.kad-word--accent {
+    background: linear-gradient(90deg, #f0d78c, #c9a227) !important;
+}
+
+.kad-hero__title-accent {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    color: inherit !important;
+}
+
+.kad-footer__logo {
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+    background: #fff;
+    border-radius: 14px;
+    padding: 0.55rem 0.7rem;
 }
 
 a.kad-tabs__btn {
     text-decoration: none !important;
     display: inline-flex;
     align-items: center;
+}
+
+a.kad-pcard {
+    color: inherit;
+    text-decoration: none !important;
 }
 
 .kad-style--industrial .kad-empty,
@@ -59,7 +173,52 @@ a.kad-tabs__btn {
     padding: 2rem 1.25rem;
     border-radius: 20px;
     background: #fff;
-    border: 1px solid rgba(10, 47, 107, 0.08);
+    border: 1px solid rgba(201, 162, 39, 0.18);
+}
+
+.tk-mosaic {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 160px;
+    gap: 0.75rem;
+}
+
+.tk-mosaic figure {
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+}
+
+.tk-mosaic__wide {
+    grid-column: span 6;
+    grid-row: span 2;
+}
+
+.tk-mosaic figure:not(.tk-mosaic__wide) {
+    grid-column: span 2;
+}
+
+.tk-mosaic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s var(--kad-ease);
+}
+
+.tk-mosaic figure:hover img {
+    transform: scale(1.06);
+}
+
+.tk-mosaic figcaption {
+    position: absolute;
+    left: 0.9rem;
+    bottom: 0.75rem;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
 @media (max-width: 991px) {
@@ -68,6 +227,16 @@ a.kad-tabs__btn {
     }
     .kad-pcard-grid {
         grid-template-columns: 1fr 1fr;
+    }
+    .tk-mosaic {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 140px;
+    }
+    .tk-mosaic__wide {
+        grid-column: span 2;
+    }
+    .tk-mosaic figure:not(.tk-mosaic__wide) {
+        grid-column: span 1;
     }
 }
 

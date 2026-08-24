@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="homepage_body" name="Green Ethio Homepage Body">
+    <template id="homepage_body" name="Temesgen Kefyalew Homepage Body">
         <t t-set="Property" t-value="request.env['property.property'].sudo()"/>
         <t t-set="rentals" t-value="Property.search([('state', '=', 'available'), ('sale_rent', '=', 'for_tenancy')], limit=8, order='id desc')"/>
-        <t t-set="sales" t-value="Property.search([('state', '=', 'available'), ('sale_rent', '=', 'for_sale')], limit=8, order='id desc')"/>
-        <t t-set="fallback_imgs" t-value="['podium.jpg', 'lobby.jpg', 'aerial.jpg', 'night.jpg', 'facade.jpg', 'interior.jpg', 'street-day.jpg', 'towers.jpg']"/>
+        <t t-set="fallback_imgs" t-value="['plaza-night-banner.png', 'plaza-night.png', 'towers-day.png', 'street-white.png', 'gold-glass.png', 'gold-tower.png']"/>
 
         <section class="kad-hero kad-style kad-style--cinematic">
             <div class="kad-hero__media" aria-hidden="true">
                 <div class="kad-hero__slides">
-                    <img src="/website_property_rental/static/src/img/hero.jpg" alt="" class="kad-hero__photo is-active" loading="eager" fetchpriority="high" decoding="async"/>
+                    <img src="/website_property_rental/static/src/img/plaza-night-banner.png" alt="" class="kad-hero__photo is-active" loading="eager" fetchpriority="high" decoding="async"/>
+                    <img src="/website_property_rental/static/src/img/plaza-night.png" alt="" class="kad-hero__photo" loading="lazy" decoding="async"/>
+                    <img src="/website_property_rental/static/src/img/towers-day.png" alt="" class="kad-hero__photo" loading="lazy" decoding="async"/>
+                    <img src="/website_property_rental/static/src/img/gold-glass.png" alt="" class="kad-hero__photo" loading="lazy" decoding="async"/>
                 </div>
                 <div class="kad-hero__shade"/>
                 <span class="kad-orb kad-orb--1"/>
@@ -17,77 +19,38 @@
             </div>
             <div class="container-fluid kad-hero__inner">
                 <div class="kad-hero__brand" data-kad-anim="fade-up" data-kad-delay="0">
+                    <img src="/website_property_rental/static/src/img/logo.png"
+                         alt="Temesgen Kefyalew Building Rent"
+                         class="kad-hero__logo"/>
                     <div class="kad-hero__names">
-                        <p class="kad-hero__eyebrow">
-                            <span class="kad-word" style="--i:0">Green</span>
-                            <span class="kad-word" style="--i:1">Ethio</span>
-                            <span class="kad-word kad-word--accent" style="--i:2">Trading</span>
-                        </p>
-                        <p class="kad-hero__amharic" lang="am">ቤት ኪራይና ሽያጭ</p>
+                        <p class="kad-hero__amharic" lang="am">ተመስገን ከፍያለው ህንፃ አከራይ</p>
+                        <p class="kad-hero__company">Temesgen Kefyalew Building Rent</p>
                     </div>
                 </div>
                 <div class="kad-hero__copy kad-hero__copy--wide">
                     <h1 class="kad-hero__title" data-kad-anim="fade-up" data-kad-delay="140">
-                        Homes and spaces <span class="kad-hero__title-accent">for rent and for sale.</span>
+                        Spaces in our building for rent.
                     </h1>
                     <p class="kad-hero__lead" data-kad-anim="fade-up" data-kad-delay="220">
-                        Browse available properties, compare amenities, and send an enquiry.
-                        From residences to commercial spaces across Ethiopia.
+                        Browse available units in Temesgen Kefyalew Building, Addis Ababa.
+                        Compare amenities and send a rental enquiry.
                     </p>
                     <div class="kad-hero__actions" data-kad-anim="fade-up" data-kad-delay="300">
-                        <a href="#for-rent" class="kad-btn kad-btn--primary">
-                            <span>For Rent</span>
+                        <a href="/property" class="kad-btn kad-btn--primary">
+                            <span>View rentals</span>
                             <span class="kad-btn__shine" aria-hidden="true"/>
                         </a>
-                        <a href="#for-sale" class="kad-btn kad-btn--ghost">For Sale</a>
+                        <a href="#enquire" class="kad-btn kad-btn--ghost">Send an Enquiry</a>
                     </div>
                     <div class="kad-hero__chips" data-kad-anim="fade-up" data-kad-delay="380">
-                        <span class="kad-chip">Residential</span>
-                        <span class="kad-chip">Commercial</span>
-                        <span class="kad-chip">For Rent</span>
-                        <span class="kad-chip">For Sale</span>
+                        <a href="/property?kind=office" class="kad-chip">Offices</a>
+                        <a href="/property?kind=shop" class="kad-chip">Shops</a>
+                        <a href="/property" class="kad-chip">For Rent</a>
+                        <a href="/property?city=Addis%20Ababa" class="kad-chip">Addis Ababa</a>
                     </div>
                 </div>
             </div>
             <div class="kad-hero__scroll" aria-hidden="true"><span/></div>
-        </section>
-
-        <section class="kad-marquee" aria-label="Property focus">
-            <div class="kad-marquee__fade kad-marquee__fade--left" aria-hidden="true"/>
-            <div class="kad-marquee__fade kad-marquee__fade--right" aria-hidden="true"/>
-            <div class="kad-marquee__row">
-                <div class="kad-marquee__track kad-marquee__track--left">
-                    <span class="kad-pill kad-pill--accent">For Rent</span>
-                    <span class="kad-pill">Apartments</span>
-                    <span class="kad-pill">Villas</span>
-                    <span class="kad-pill">Offices</span>
-                    <span class="kad-pill">Retail</span>
-                    <span class="kad-pill kad-pill--accent">For Sale</span>
-                    <span class="kad-pill">Addis Ababa</span>
-                    <span class="kad-pill">Furnished</span>
-                    <span class="kad-pill kad-pill--accent">For Rent</span>
-                    <span class="kad-pill">Apartments</span>
-                    <span class="kad-pill">Villas</span>
-                    <span class="kad-pill">Offices</span>
-                    <span class="kad-pill">Retail</span>
-                    <span class="kad-pill kad-pill--accent">For Sale</span>
-                    <span class="kad-pill">Addis Ababa</span>
-                    <span class="kad-pill">Furnished</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="kad-trusted" aria-label="Coverage">
-            <div class="container-fluid kad-section__inner">
-                <p class="kad-trusted__label" data-kad-anim="fade-up">Property listings for tenants, buyers, and investors</p>
-                <div class="kad-trusted__row" data-kad-anim="fade-up" data-kad-delay="80">
-                    <span>Residential</span>
-                    <span>Commercial</span>
-                    <span>For Rent</span>
-                    <span>For Sale</span>
-                    <span>Enquiries</span>
-                </div>
-            </div>
         </section>
 
         <section id="about" class="kad-section kad-about kad-style kad-style--editorial">
@@ -95,8 +58,8 @@
                 <div class="row align-items-center g-5">
                     <div class="col-lg-5" data-kad-anim="fade-up">
                         <div class="kad-photo-stack">
-                            <img src="/website_property_rental/static/src/img/aerial.jpg"
-                                 alt="Green Ethio properties"
+                            <img src="/website_property_rental/static/src/img/towers-day.png"
+                                 alt="Temesgen Kefyalew Building Rent properties"
                                  class="kad-photo-stack__main"
                                  loading="lazy"/>
                         </div>
@@ -106,9 +69,9 @@
                             <p class="kad-kicker">About Us</p>
                             <h2>Who We Are</h2>
                             <p class="kad-lead">
-                                Green Ethio Trading helps people find homes and commercial spaces
-                                for rent and for sale. Listings are managed from our property desk
-                                so availability, photos, and prices stay current.
+                                Temesgen Kefyalew Building Rent offers offices, shops, and residential units
+                                for rent in our building in Addis Ababa. Availability, photos, and monthly
+                                rent are updated from the property desk.
                             </p>
                         </div>
                         <div class="row g-3 kad-about-facts">
@@ -116,10 +79,10 @@
                                 <div class="kad-fact" data-kad-anim="fade-up"><strong t-esc="len(rentals)"/> <span>For Rent</span></div>
                             </div>
                             <div class="col-6 col-md-3">
-                                <div class="kad-fact" data-kad-anim="fade-up" data-kad-delay="80"><strong t-esc="len(sales)"/> <span>For Sale</span></div>
+                                <div class="kad-fact" data-kad-anim="fade-up" data-kad-delay="80"><strong>TK</strong><span>Building Rent</span></div>
                             </div>
                             <div class="col-6 col-md-3">
-                                <div class="kad-fact" data-kad-anim="fade-up" data-kad-delay="140"><strong>ET</strong><span>Based in Ethiopia</span></div>
+                                <div class="kad-fact" data-kad-anim="fade-up" data-kad-delay="140"><strong>AA</strong><span>Addis Ababa</span></div>
                             </div>
                             <div class="col-6 col-md-3">
                                 <div class="kad-fact" data-kad-anim="fade-up" data-kad-delay="200"><strong>24/7</strong><span>Online listings</span></div>
@@ -134,21 +97,21 @@
             <div class="container-fluid kad-section__inner">
                 <div class="kad-section__head kad-section__head--wide" data-kad-anim="fade-up">
                     <p class="kad-kicker">Services</p>
-                    <h2>Rental and sales support from listing to move-in.</h2>
+                    <h2>Rental support from listing to move-in.</h2>
                 </div>
                 <div class="row g-4">
                     <div class="col-md-6 col-lg-3">
                         <article class="kad-service" data-kad-anim="fade-up">
                             <span class="kad-service__icon">FR</span>
                             <h3>For Rent</h3>
-                            <p>Available tenancies with monthly rent, amenities, and a simple enquiry form.</p>
+                            <p>Available For Rent listings with monthly rent, amenities, and a simple enquiry form.</p>
                         </article>
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <article class="kad-service" data-kad-anim="fade-up" data-kad-delay="60">
-                            <span class="kad-service__icon">FS</span>
-                            <h3>For Sale</h3>
-                            <p>Homes and commercial units listed for purchase, with photos and asking price.</p>
+                            <span class="kad-service__icon">BR</span>
+                            <h3>Building Rent</h3>
+                            <p>Offices, shops, and homes in Temesgen Kefyalew Building, with photos and monthly rent.</p>
                         </article>
                     </div>
                     <div class="col-md-6 col-lg-3">
@@ -169,11 +132,26 @@
             </div>
         </section>
 
+        <section id="gallery" class="kad-section kad-products kad-style kad-style--catalog">
+            <div class="container-fluid kad-section__inner">
+                <div class="kad-section__head kad-section__head--wide" data-kad-anim="fade-up">
+                    <p class="kad-kicker">The development</p>
+                    <h2>Temesgen Kefyalew Building in Addis Ababa.</h2>
+                </div>
+                <div class="tk-mosaic">
+                    <figure class="tk-mosaic__wide">
+                        <img src="/website_property_rental/static/src/img/plaza-night-banner.png" alt="Temesgen Kefyalew Building" loading="lazy"/>
+                        <figcaption>Temesgen Kefyalew Building</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
         <section id="for-rent" class="kad-section kad-products kad-products--exports kad-style kad-style--catalog">
             <div class="container-fluid kad-section__inner">
                 <div class="kad-section__head kad-section__head--wide" data-kad-anim="fade-up">
                     <p class="kad-kicker">For Rent</p>
-                    <h2>Available homes and spaces for tenancy.</h2>
+                    <h2>Available units in our building.</h2>
                 </div>
                 <div class="kad-pcard-grid">
                     <t t-foreach="rentals" t-as="property">
@@ -184,35 +162,11 @@
                 <t t-if="not rentals">
                     <div class="kad-empty mt-3">
                         <h3>No rental listings yet</h3>
-                        <p>Mark a property as Available and For Tenancy to show it here.</p>
+                        <p>No For Rent listings yet. Check back soon.</p>
                     </div>
                 </t>
                 <div class="mt-4">
-                    <a href="/property?type=rent" class="kad-btn kad-btn--primary">View all for rent</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="for-sale" class="kad-section kad-products kad-products--imports kad-style kad-style--industrial">
-            <div class="container-fluid kad-section__inner">
-                <div class="kad-section__head kad-section__head--wide" data-kad-anim="fade-up">
-                    <p class="kad-kicker">For Sale</p>
-                    <h2>Homes and commercial units listed for purchase.</h2>
-                </div>
-                <div class="kad-pcard-grid">
-                    <t t-foreach="sales" t-as="property">
-                        <t t-set="image_url" t-value="'/web/image/property.property/%s/image' % property.id if property.image else '/website_property_rental/static/src/img/%s' % fallback_imgs[property.id % len(fallback_imgs)]"/>
-                        <t t-call="website_property_rental.property_card"/>
-                    </t>
-                </div>
-                <t t-if="not sales">
-                    <div class="kad-empty mt-3">
-                        <h3>No sale listings yet</h3>
-                        <p>Mark a property as Available and For Sale to show it here.</p>
-                    </div>
-                </t>
-                <div class="mt-4">
-                    <a href="/property?type=sale" class="kad-btn kad-btn--primary">View all for sale</a>
+                    <a href="/property" class="kad-btn kad-btn--primary">View all for rent</a>
                 </div>
             </div>
         </section>
@@ -228,14 +182,14 @@
                         <article class="kad-why-item" data-kad-anim="fade-up">
                             <span class="kad-why-item__num">01</span>
                             <h3>Current listings</h3>
-                            <p>For-rent and for-sale properties come from the same desk that manages availability.</p>
+                            <p>Available units in this building, managed from the same desk that updates availability.</p>
                         </article>
                     </div>
                     <div class="col-md-4">
                         <article class="kad-why-item" data-kad-anim="fade-up" data-kad-delay="80">
                             <span class="kad-why-item__num">02</span>
                             <h3>Photos and details</h3>
-                            <p>See rent or price, rooms, parking, and location before you send an enquiry.</p>
+                            <p>See monthly rent, rooms, parking, and location before you send an enquiry.</p>
                         </article>
                     </div>
                     <div class="col-md-4">
@@ -250,11 +204,11 @@
         </section>
 
         <section class="kad-cta kad-cta--photo kad-style kad-style--impact" data-kad-anim="fade-up">
-            <img src="/website_property_rental/static/src/img/night.jpg" alt="" class="kad-cta__photo" loading="lazy"/>
+            <img src="/website_property_rental/static/src/img/plaza-night.png" alt="" class="kad-cta__photo" loading="lazy"/>
             <div class="kad-cta__shade"/>
             <div class="container text-center">
-                <h2>Ready to rent or buy?</h2>
-                <p>Tell us what you need. We will match you with available listings for rent or for sale.</p>
+                <h2>Ready to rent?</h2>
+                <p>Tell us the space you need in Temesgen Kefyalew Building, Addis Ababa.</p>
                 <div class="kad-hero__actions justify-content-center">
                     <a href="#enquire" class="kad-btn kad-btn--light"><span>Send an Enquiry</span></a>
                     <a href="#contact" class="kad-btn kad-btn--ghost"><span>Contact Us</span></a>
@@ -266,22 +220,16 @@
             <div class="container-fluid kad-section__inner">
                 <div class="kad-section__head" data-kad-anim="fade-up">
                     <p class="kad-kicker">Send an Enquiry</p>
-                    <h2>Tell us whether you are looking for rent or for sale, and we will respond.</h2>
+                    <h2>Tell us the space you need in our building, and we will respond.</h2>
                 </div>
                 <form action="/get/contact" method="post" class="kad-form" data-kad-anim="fade-up">
                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                     <input type="hidden" name="form_type" value="enquire"/>
                     <div class="row g-3">
+                        <input type="hidden" name="product" value="For Rent"/>
                         <div class="col-md-6">
-                            <label class="kad-label" for="get_interest">I am looking</label>
-                            <select class="kad-input" id="get_interest" name="product" required="required">
-                                <option value="For Rent">For Rent</option>
-                                <option value="For Sale">For Sale</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="kad-label" for="get_city">City / area</label>
-                            <input class="kad-input" type="text" id="get_city" name="quantity" placeholder="e.g. Addis Ababa, Bole"/>
+                            <label class="kad-label" for="get_city">Unit / floor</label>
+                            <input class="kad-input" type="text" id="get_city" name="quantity" placeholder="e.g. office, shop, floor"/>
                         </div>
                         <div class="col-md-6">
                             <label class="kad-label" for="get_name">Full name</label>
@@ -314,7 +262,7 @@
             <div class="container-fluid kad-section__inner">
                 <div class="kad-section__head" data-kad-anim="fade-up">
                     <p class="kad-kicker">Contact Us</p>
-                    <h2>Questions about a listing, a viewing, or a new property to add?</h2>
+                    <h2>Questions about a unit, a viewing, or renting in our building?</h2>
                 </div>
                 <div class="row g-5">
                     <div class="col-lg-7">
@@ -350,20 +298,33 @@
                     <div class="col-lg-5">
                         <div class="kad-contact-aside" data-kad-anim="fade-up" data-kad-delay="160">
                             <div class="kad-contact-aside__photo">
-                                <img src="/website_property_rental/static/src/img/lobby.jpg" alt="Green Ethio" loading="lazy"/>
+                                <img src="/website_property_rental/static/src/img/gold-glass.png" alt="Temesgen Kefyalew Building Rent" loading="lazy"/>
                             </div>
                             <h3>Contact Information</h3>
                             <div class="kad-contact-block">
+                                <strong>Company</strong>
+                                <p lang="am">ተመስገን ከፍያለው ህንፃ አከራይ</p>
+                                <p>Temesgen Kefyalew Building Rent</p>
+                            </div>
+                            <div class="kad-contact-block">
                                 <strong>Address</strong>
+                                <p lang="am">አዲስ አበባ ኢትዮጵያ</p>
                                 <p>Addis Ababa, Ethiopia</p>
                             </div>
                             <div class="kad-contact-block">
-                                <strong>Email</strong>
-                                <p><a href="mailto:info@greenethiotrading.com">info@greenethiotrading.com</a></p>
+                                <strong>Phone</strong>
+                                <p>
+                                    <a href="tel:+251911200998">Mob: +251 911 20 09 98</a><br/>
+                                    <a href="tel:+251930589650">Tel: +251 930 58 96 50</a>
+                                </p>
                             </div>
                             <div class="kad-contact-block">
-                                <strong>Website</strong>
-                                <p><a href="https://greenethiotrading.com">greenethiotrading.com</a></p>
+                                <strong>WhatsApp</strong>
+                                <p><a href="https://wa.me/251911200998" target="_blank" rel="noopener">+251 911 20 09 98</a></p>
+                            </div>
+                            <div class="kad-contact-block">
+                                <strong>Email</strong>
+                                <p><a href="mailto:info@temesgenkefyalew.com">info@temesgenkefyalew.com</a></p>
                             </div>
                         </div>
                     </div>

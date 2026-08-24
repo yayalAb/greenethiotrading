@@ -11,14 +11,12 @@ from odoo.addons.advanced_property_management.controllers.advanced_property_mana
 class WebsitePropertyRental(PropertyController):
     IMG = "/website_property_rental/static/src/img"
     FALLBACKS = [
-        "podium.jpg",
-        "street-day.jpg",
-        "lobby.jpg",
-        "facade.jpg",
-        "aerial.jpg",
-        "night.jpg",
-        "corner.jpg",
-        "retail.jpg",
+        "plaza-night-banner.png",
+        "plaza-night.png",
+        "towers-day.png",
+        "street-white.png",
+        "gold-glass.png",
+        "gold-tower.png",
     ]
 
     def _fallback_image(self, property_rec):
@@ -30,21 +28,69 @@ class WebsitePropertyRental(PropertyController):
             return "/web/image/property.property/%s/image" % property_rec.id
         return self._fallback_image(property_rec)
 
-    def _listing_domain(self, listing_type):
-        domain = [("state", "=", "available")]
-        if listing_type == "sale":
-            domain.append(("sale_rent", "=", "for_sale"))
-        else:
-            domain.append(("sale_rent", "=", "for_tenancy"))
+    def _listing_domain(self, listing_type=None, kind=None, city=None):
+        domain = [
+            ("state", "=", "available"),
+            ("sale_rent", "=", "for_tenancy"),
+        ]
+        kind = (kind or listing_type or "").strip().lower()
+        if kind in ("office", "offices"):
+            domain += [
+                "|",
+                "|",
+                ("name", "ilike", "office"),
+                ("usage", "ilike", "office"),
+                ("location", "ilike", "office"),
+            ]
+        elif kind in ("shop", "shops"):
+            domain += [
+                "|",
+                "|",
+                "|",
+                ("shop_name", "!=", False),
+                ("name", "ilike", "shop"),
+                ("usage", "ilike", "shop"),
+                ("location", "ilike", "shop"),
+            ]
+        city = (city or "").strip()
+        if city:
+            domain += [
+                "|",
+                "|",
+                ("city", "ilike", city),
+                ("location", "ilike", city),
+                ("street", "ilike", city),
+            ]
         return domain
+
+    def _listing_title(self, kind=None, city=None):
+        kind = (kind or "").strip().lower()
+        if kind in ("office", "offices"):
+            return "Offices for rent"
+        if kind in ("shop", "shops"):
+            return "Shops for rent"
+        if city:
+            return "For Rent in %s" % city
+        return "Units in our building for rent."
+
+    def _public_rental(self, property_id):
+        property_rec = request.env["property.property"].sudo().browse(property_id)
+        if not property_rec.exists() or property_rec.sale_rent != "for_tenancy":
+            return None
+        return property_rec
 
     @http.route("/property", auth="public", website=True)
     def property(self, **kwargs):
-        listing_type = "sale" if kwargs.get("type") == "sale" else "rent"
+        if kwargs.get("type") == "sale":
+            return request.redirect("/property")
+        kind = kwargs.get("kind") or kwargs.get("type")
+        city = kwargs.get("city")
+        if kind == "rent":
+            kind = None
         properties = (
             request.env["property.property"]
             .sudo()
-            .search(self._listing_domain(listing_type), order="id desc")
+            .search(self._listing_domain(kind=kind, city=city), order="id desc")
         )
         return request.render(
             "website_property_rental.property_listing",
@@ -53,16 +99,18 @@ class WebsitePropertyRental(PropertyController):
                 "property_images": {
                     prop.id: self._property_image(prop) for prop in properties
                 },
-                "listing_type": listing_type,
-                "hero_image": "%s/%s"
-                % (self.IMG, "street-day.jpg" if listing_type == "sale" else "hero.jpg"),
+                "listing_type": "rent",
+                "listing_kind": kind or "",
+                "listing_city": city or "",
+                "listing_title": self._listing_title(kind=kind, city=city),
+                "hero_image": "%s/plaza-night-banner.png" % self.IMG,
             },
         )
 
     @http.route("/property/<int:property_id>", auth="public", website=True)
     def property_item(self, property_id, **kwargs):
-        property_rec = request.env["property.property"].sudo().browse(property_id)
-        if not property_rec.exists():
+        property_rec = self._public_rental(property_id)
+        if not property_rec:
             return request.not_found()
         gallery = []
         if property_rec.image:
@@ -103,8 +151,8 @@ class WebsitePropertyRental(PropertyController):
         csrf=True,
     )
     def rental_enquire(self, property_id, **post):
-        property_rec = request.env["property.property"].sudo().browse(property_id)
-        if not property_rec.exists():
+        property_rec = self._public_rental(property_id)
+        if not property_rec:
             return request.not_found()
         name = (post.get("partner_name") or "").strip()
         email = (post.get("partner_email") or "").strip()
@@ -146,7 +194,7 @@ class WebsitePropertyRental(PropertyController):
                 ("Email", email),
                 ("Phone", phone or "N/A"),
                 ("Interest", interest),
-                ("City / area", area),
+                ("Unit / floor", area),
                 ("Message", message or "N/A"),
             ]
             chunks = [
@@ -154,7 +202,7 @@ class WebsitePropertyRental(PropertyController):
                 for label, value in rows
                 if value
             ]
-            email_to = request.env.company.email or "info@greenethiotrading.com"
+            email_to = request.env.company.email or "info@temesgenkefyalew.com"
             request.env["mail.mail"].sudo().create(
                 {
                     "subject": "Website %s — %s"

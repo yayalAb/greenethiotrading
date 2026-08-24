@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Website Property Rental",
-    "version": "18.0.1.1.1",
+    "version": "18.0.1.3.8",
     "category": "Website/Website",
-    "summary": "Public for-rent and for-sale website for Advanced Property Management",
+    "summary": "Public building rental website for Advanced Property Management",
     "description": """
-Kad-style public website for Green Ethio Trading properties.
-Visitors can browse For Rent and For Sale listings, view galleries,
-and submit enquiries.
+Public website for Temesgen Kefyalew Building Rent.
+Visitors can browse For Rent listings, view galleries,
+and submit rental enquiries.
     """,
-    "author": "Green Ethio Trading",
+    "author": "Temesgen Kefyalew Building Rent",
     "depends": ["website", "mail", "advanced_property_management"],
     "data": [
         "security/ir.model.access.csv",

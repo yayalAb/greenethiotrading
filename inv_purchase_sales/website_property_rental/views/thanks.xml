@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="contact_thanks" name="Green Ethio Thank You">
+    <template id="contact_thanks" name="Thank You">
         <t t-call="website.layout">
-            <t t-set="additional_title">Thank You | Green Ethio Trading</t>
+            <t t-set="additional_title">Thank You | Temesgen Kefyalew Building Rent</t>
             <div id="wrap" class="oe_structure kad-site">
                 <section class="kad-section">
                     <div class="container text-center" style="max-width: 640px;">
+                        <img src="/website_property_rental/static/src/img/logo.png"
+                             alt="Temesgen Kefyalew Building Rent"
+                             class="kad-hero__logo mx-auto mb-4"/>
                         <p class="kad-kicker">Message received</p>
-                        <h1 class="mb-3">Thank you for contacting Green Ethio Trading</h1>
+                        <h1 class="mb-3">Thank you for contacting Temesgen Kefyalew Building Rent</h1>
                         <p class="mb-4" style="color: var(--kad-muted);">
-                            Our team will get back to you shortly about for-rent or for-sale listings.
+                            Our team will get back to you shortly about rental listings.
                         </p>
                         <a href="/" class="kad-btn kad-btn--primary">Back to Home</a>
                     </div>
