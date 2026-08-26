@@ -327,7 +327,7 @@ class LoyalPropertyDashboard(models.AbstractModel):
             "labels": ["Draft", "Available", "Rented", "Sold"],
             "datasets": [
                 {
-                    "label": "Shop By State",
+                    "label": "Shop By Status",
                     "data": [draft_props, available, rented, sold],
                     "backgroundColor": [
                         "rgba(153, 102, 255, 1)",

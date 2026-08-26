@@ -121,9 +121,9 @@
                                 <div class="col-12 lpd-legacy-chart">
                                     <ChartRenderer
                                         type="'bar'"
-                                        title="'Shop by State'"
+                                        title="'Shop by Status'"
                                         y_title="'Shops'"
-                                        x_title="'State'"
+                                        x_title="'Status'"
                                         data="state.shop_by_state"
                                         onChartClick="onShopByStateChartClick"/>
                                 </div>
