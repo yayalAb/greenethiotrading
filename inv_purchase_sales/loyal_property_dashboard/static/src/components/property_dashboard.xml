@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="loyal_property_dashboard.PropertyDashboard" owl="1">
+        <div class="container-fluid o_loyal_property_dashboard bg-light pb-2">
+            <div class="row m-1 ms-md-3 ms-0">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col p-0">
+                            <div class="d-flex align-items-center justify-content-between flex-wrap">
+                                <div class="col p-0">
+                                    <div class="shadow-sm border m-1 p-2 bg-white">
+                                        <div class="d-flex align-items-center justify-content-between flex-wrap">
+                                            <h1 class="fs-3 text-black">Property Dashboard</h1>
+                                            <div class="w-100 w-md-auto">
+                                                <div class="d-flex flex-column flex-md-row gap-2">
+                                                    <input type="date" class="form-control"
+                                                           t-att-value="state.start_date"
+                                                           t-on-change="onStartDateChange"
+                                                           placeholder="Start Date"/>
+                                                    <input type="date" class="form-control"
+                                                           t-att-value="state.end_date"
+                                                           t-on-change="onEndDateChange"
+                                                           placeholder="End Date"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <KpiCard name="'Available Shops'" value="state.available_shop.value"
+                                 percentage="state.available_shop.percentage" iconClass="'fa-arrow-up'"
+                                 bgColor="'#DDEDEA'" onClick="onAvailableShop"/>
+                        <KpiCard name="'Rented Shops'" value="state.ranted_shop.value"
+                                 percentage="state.ranted_shop.percentage" iconClass="'fa-arrow-up'"
+                                 bgColor="'#DAEAF6'" onClick="onClickRantedShop"/>
+                        <KpiCard name="'Total Collection'" value="state.this_collection.value"
+                                 percentage="state.this_collection.percentage" iconClass="'fa-arrow-up'"
+                                 bgColor="'#FFE2E5'" onClick="onThisCollection"/>
+                        <KpiCard name="'Expected Collection'" value="state.expecting_collection.value"
+                                 percentage="state.expecting_collection.percentage" iconClass="'fa-arrow-up'"
+                                 bgColor="'#F3E9FF'" onClick="onExpectingCollection"/>
+                        <KpiCard name="'Expiring Contract'" value="state.expiring_contract.value"
+                                 percentage="state.expiring_contract.percentage" iconClass="'fa-arrow-up'"
+                                 bgColor="'#FFF4DE'" onClick="onExpiringContract"/>
+                        <KpiCard name="'Overdue Payment'" value="state.expired_contract.value"
+                                 percentage="state.expired_contract.percentage" iconClass="'fa-arrow-up'"
+                                 bgColor="'#DCFCE7'" onClick="onExpiredContracts"/>
+                    </div>
+
+                    <div class="row lpd-insight-row">
+                        <div class="col-lg-6 m-0 p-0">
+                            <section class="lpd-insight-card">
+                                <div class="lpd-insight-head">
+                                    <h2>Total Revenue</h2>
+                                    <p>Rent vs sales billed by weekday (totals)</p>
+                                </div>
+                                <div class="lpd-insight-chart">
+                                    <ChartRenderer
+                                        type="'bar'"
+                                        variant="'insight'"
+                                        data="state.revenue_week"
+                                        onChartClick="onRevenueChartClick"/>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-lg-6 m-0 p-0">
+                            <section class="lpd-insight-card">
+                                <div class="lpd-insight-head">
+                                    <h2>Collection Trend</h2>
+                                    <p>Billed vs collected over 6 months</p>
+                                </div>
+                                <div class="lpd-insight-chart lpd-insight-chart--sm">
+                                    <ChartRenderer
+                                        type="'line'"
+                                        variant="'insight'"
+                                        showLegend="false"
+                                        data="state.collection_trend"
+                                        onChartClick="onCollectionTrendChartClick"/>
+                                </div>
+                                <div class="lpd-insight-split">
+                                    <div>
+                                        <span class="lpd-dot lpd-dot--blue"/> Last Month
+                                        <strong t-esc="state.collection_summary.last_month"/>
+                                    </div>
+                                    <div>
+                                        <span class="lpd-dot lpd-dot--green"/> This Month
+                                        <strong t-esc="state.collection_summary.this_month"/>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6 m-0 p-0">
+                            <div class="shadow-sm border m-1 p-3 bg-white">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h3 class="text-primary fw-bold">Collection By Month</h3>
+                                </div>
+                                <div class="col-12 lpd-legacy-chart">
+                                    <ChartRenderer
+                                        type="'line'"
+                                        title="'Collection By Month'"
+                                        y_title="'Collection'"
+                                        x_title="'Months'"
+                                        data="state.collection_by_month"
+                                        onChartClick="onMonthlyCollectionChartClick"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 m-0 p-0">
+                            <div class="shadow-sm border m-1 p-3 bg-white">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h3 class="text-primary fw-bold">Shop By Status</h3>
+                                </div>
+                                <div class="col-12 lpd-legacy-chart">
+                                    <ChartRenderer
+                                        type="'bar'"
+                                        title="'Shop by State'"
+                                        y_title="'Shops'"
+                                        x_title="'State'"
+                                        data="state.shop_by_state"
+                                        onChartClick="onShopByStateChartClick"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

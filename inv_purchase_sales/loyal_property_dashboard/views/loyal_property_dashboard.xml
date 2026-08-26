@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_property_dashboard" model="ir.actions.client">
+        <field name="name">Dashboard</field>
+        <field name="tag">loyal_property_dashboard.property_dashboard</field>
+    </record>
+
+    <menuitem
+        id="property_dashboard_menu"
+        name="Dashboard"
+        action="action_property_dashboard"
+        parent="advanced_property_management.property_root_menu"
+        sequence="0"
+        groups="advanced_property_management.group_property_agent"/>
+</odoo>
