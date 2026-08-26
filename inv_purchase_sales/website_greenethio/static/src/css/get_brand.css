@@ -93,6 +93,16 @@ header .navbar-brand .img,
     display: none !important;
 }
 
+/* White CTA button: dark text so "Request a Quote" is readable */
+.get-cta a.get-btn--light,
+.get-cta a.get-btn--light span,
+.get-site a.get-btn--light,
+.get-site a.get-btn--light span {
+    background-color: #ffffff !important;
+    background-image: none !important;
+    color: #0a3d1f !important;
+}
+
 /* Quote / contact submit — Odoo/Bootstrap otherwise paints native buttons white */
 .get-site button.get-btn,
 .get-form button[type="submit"],
