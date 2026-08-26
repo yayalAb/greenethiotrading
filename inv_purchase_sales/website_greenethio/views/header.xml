@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="get_header_site_class" inherit_id="website.layout" name="GET Header Class">
+        <xpath expr="//header[@id='top']" position="attributes">
+            <attribute name="class" add="get-site-header" separator=" "/>
+        </xpath>
+    </template>
+
+    <template id="get_header_brand" inherit_id="website.option_header_brand_logo" name="GET Header Brand">
+        <xpath expr="//span[@t-field='website.logo']" position="replace">
+            <img src="/website_greenethio/static/src/img/logo.png"
+                 alt="Green Ethio Trading P.L.C."
+                 class="get-navbar-logo"
+                 height="48"/>
+        </xpath>
+    </template>
+
+    <template id="get_header_default" inherit_id="website.template_header_default" name="GET Default Header">
+        <xpath expr="//t[@t-call='website.placeholder_header_search_box']" position="replace"/>
+        <xpath expr="//t[@t-call='website.placeholder_header_text_element']" position="replace"/>
+        <xpath expr="//t[@t-call='website.placeholder_header_social_links']" position="replace"/>
+        <xpath expr="//t[@t-call='website.placeholder_header_language_selector']" position="replace"/>
+        <xpath expr="//t[@t-call='website.placeholder_header_call_to_action']" position="replace"/>
+    </template>
+
+    <template id="get_hide_odoo_promotion" inherit_id="website.layout" name="GET Hide Odoo Promotion">
+        <xpath expr="//t[@t-call='web.brand_promotion']" position="replace"/>
+    </template>
+</odoo>

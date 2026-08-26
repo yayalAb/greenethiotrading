@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="get_frontend_fonts" inherit_id="web.layout" name="GET Frontend Fonts">
+        <xpath expr="//head" position="inside">
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+            <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Fira+Sans:wght@400;600;700;800&amp;family=Noto+Sans+Ethiopic:wght@500;700&amp;display=swap" rel="stylesheet"/>
+        </xpath>
+    </template>
+
+    <template id="get_layout_body" inherit_id="website.layout" name="GET Body Class">
+        <xpath expr="//div[@id='wrapwrap']" position="attributes">
+            <attribute name="class" add="get-wrapwrap" separator=" "/>
+        </xpath>
+        <xpath expr="//div[@id='wrapwrap']" position="inside">
+            <nav class="get-float" aria-label="Quick contact">
+                <a class="get-float__call" href="tel:+251930589650" title="Call">Call</a>
+                <a class="get-float__wa" href="https://wa.me/251930589650" target="_blank" rel="noopener" title="WhatsApp">WA</a>
+                <a class="get-float__mail" href="mailto:info@greenethiotrading.com" title="Email">Mail</a>
+                <a class="get-float__top" href="#top" title="Back to top">Top</a>
+            </nav>
+        </xpath>
+    </template>
+
+    <template id="get_footer_custom" inherit_id="website.footer_custom" name="GET Footer Content">
+        <xpath expr="//div[@id='footer']" position="replace">
+            <div id="footer" class="get-footer oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer">
+                <div class="container py-5">
+                    <div class="row g-4">
+                        <div class="col-lg-4">
+                            <img src="/website_greenethio/static/src/img/logo.png"
+                                 alt="Green Ethio Trading P.L.C."
+                                 class="get-footer__logo mb-3"/>
+                            <h3 class="get-footer__title mb-2" style="font-size:1.05rem;">Green Ethio Trading P.L.C.</h3>
+                            <p class="get-footer__text" lang="am">ግሪን ኢትዮ ትሬዲንግ ኃ.የተ.የግ.ማህበር</p>
+                            <p class="get-footer__text">
+                                We export Ethiopian coffee, soybean, sesame, and oil seeds, and import
+                                construction machinery, heavy trucks, cars, and metal.
+                            </p>
+                            <p class="get-footer__slogan" lang="am">እርስዎን ለመርዳት በንግድ ሥራ ላይ ነን!</p>
+                            <p class="get-footer__slogan">WE ARE IN THE BUSINESS OF HELPING YOURS</p>
+                        </div>
+                        <div class="col-6 col-lg-2">
+                            <h5 class="get-footer__title">Company</h5>
+                            <ul class="get-footer__list">
+                                <li><a href="/#about">About Us</a></li>
+                                <li><a href="/#services">Services</a></li>
+                                <li><a href="/#exports">Exports</a></li>
+                                <li><a href="/#imports">Imports</a></li>
+                                <li><a href="/#contact">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <h5 class="get-footer__title">Trade</h5>
+                            <ul class="get-footer__list">
+                                <li><a href="/#exports">Coffee &amp; Oil Seeds</a></li>
+                                <li><a href="/#exports">Soybean &amp; Sesame</a></li>
+                                <li><a href="/#imports">Construction Machinery</a></li>
+                                <li><a href="/#imports">Trucks, Cars &amp; Metal</a></li>
+                                <li><a href="/#quote">Request a Quote</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3">
+                            <h5 class="get-footer__title">Contact</h5>
+                            <ul class="get-footer__list">
+                                <li lang="am">አዲስ አበባ፣ ኢትዮጵያ</li>
+                                <li>Addis Ababa, Ethiopia</li>
+                                <li><a href="tel:+251930589650">Mob: +251 930 589 650</a></li>
+                                <li><a href="tel:+251928399539">Tel: +251 928 399 539</a></li>
+                                <li><a href="https://wa.me/251930589650" target="_blank" rel="noopener">WhatsApp</a></li>
+                                <li><a href="mailto:info@greenethiotrading.com">info@greenethiotrading.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="get-footer__bar">
+                    <div class="container d-flex flex-wrap justify-content-between gap-2">
+                        <span>© 2026 Green Ethio Trading P.L.C.</span>
+                        <span lang="am">እርስዎን ለመርዳት በንግድ ሥራ ላይ ነን! · WE ARE IN THE BUSINESS OF HELPING YOURS</span>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

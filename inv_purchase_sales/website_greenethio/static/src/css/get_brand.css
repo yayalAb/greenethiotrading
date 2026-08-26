@@ -1,0 +1,130 @@
+/* GET-specific brand polish on top of the shared layout */
+
+header .navbar-brand img,
+header .navbar-brand .img,
+.get-navbar-logo {
+    height: 52px !important;
+    width: auto !important;
+    max-width: 72px !important;
+    object-fit: contain;
+}
+
+.get-hero__logo {
+    width: min(168px, 38vw);
+    height: auto;
+    filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.35));
+}
+
+.get-hero__slogan {
+    margin: 0.2rem 0 0;
+    color: #e8c547;
+    font-size: clamp(0.78rem, 1.5vw, 1rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.get-hero__phones {
+    margin-top: 1.1rem;
+    color: #f0d78c;
+    font-weight: 600;
+}
+
+.get-hero__phones a {
+    color: #f0d78c !important;
+    text-decoration: none;
+}
+
+.get-hero__phones a:hover {
+    color: #fff !important;
+}
+
+.get-footer__logo {
+    width: 92px;
+    height: auto;
+}
+
+.get-footer__slogan {
+    margin: 0.15rem 0 0;
+    color: var(--get-green-bright);
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+}
+
+.get-footer__bar {
+    border-top: 3px solid #1f8a3e;
+}
+
+.get-pcard__media {
+    min-height: 180px;
+    background: linear-gradient(145deg, #0a3d1f, #1f8a3e 55%, #c9a227);
+}
+
+.get-pcard__media img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* No empty white band above the footer */
+.get-wrapwrap > main,
+.get-wrapwrap #wrap,
+#wrap.get-site,
+.get-site {
+    min-height: 0 !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.get-contact.get-section {
+    padding-bottom: 2.25rem;
+}
+
+.get-wrapwrap > footer.o_footer,
+.get-wrapwrap footer#bottom {
+    background: #062012 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.get-wrapwrap .o_footer_copyright {
+    display: none !important;
+}
+
+/* Quote / contact submit — Odoo/Bootstrap otherwise paints native buttons white */
+.get-site button.get-btn,
+.get-form button[type="submit"],
+.get-site button.get-btn--primary {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    background-color: #1f8a3e !important;
+    background-image: linear-gradient(135deg, #0d5c2e 0%, #1f8a3e 55%, #c9a227 100%) !important;
+    color: #ffffff !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    padding: 0.95rem 1.8rem !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.2 !important;
+    box-shadow: 0 12px 28px rgba(31, 138, 62, 0.45) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.get-site button.get-btn span,
+.get-form button[type="submit"] span {
+    color: #ffffff !important;
+    position: relative;
+    z-index: 1;
+}
+
+.get-site button.get-btn:hover,
+.get-form button[type="submit"]:hover {
+    background-color: #0d5c2e !important;
+    color: #ffffff !important;
+}

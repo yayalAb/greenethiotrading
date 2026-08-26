@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="homepage_body" name="GET Homepage Body">
+
+        <!-- HERO -->
+        <section class="get-hero get-style get-style--cinematic">
+            <div class="get-hero__media" aria-hidden="true">
+                <div class="get-hero__slides">
+                    <img src="/website_greenethio/static/src/img/hero.jpg" alt="" class="get-hero__photo is-active" loading="eager" fetchpriority="high" decoding="async"/>
+                </div>
+                <div class="get-hero__shade"/>
+                <span class="get-orb get-orb--1"/>
+                <span class="get-orb get-orb--2"/>
+            </div>
+
+            <div class="container-fluid get-hero__inner">
+                <div class="get-hero__brand" data-get-anim="fade-up" data-get-delay="0">
+                    <img src="/website_greenethio/static/src/img/logo.png"
+                         alt="Green Ethio Trading P.L.C."
+                         class="get-hero__logo"/>
+                    <div class="get-hero__names">
+                        <p class="get-hero__eyebrow">
+                            <span class="get-word get-word--s1" style="--i:0">Green</span>
+                            <span class="get-word get-word--s2" style="--i:1">Ethio</span>
+                            <span class="get-word get-word--s3" style="--i:2">Trading</span>
+                            <span class="get-word get-word--accent get-word--s7" style="--i:3">P.L.C.</span>
+                        </p>
+                        <p class="get-hero__amharic" lang="am">ግሪን ኢትዮ ትሬዲንግ ኃ.የተ.የግ.ማህበር</p>
+                        <p class="get-hero__slogan">WE ARE IN THE BUSINESS OF HELPING YOURS</p>
+                        <p class="get-hero__slogan" lang="am">እርስዎን ለመርዳት በንግድ ሥራ ላይ ነን!</p>
+                    </div>
+                </div>
+
+                <div class="get-hero__copy get-hero__copy--wide">
+                    <h1 class="get-hero__title" data-get-anim="fade-up" data-get-delay="140">
+                        Import &amp; Export from <span class="get-hero__title-accent">Ethiopia to the World.</span>
+                    </h1>
+                    <p class="get-hero__lead" data-get-anim="fade-up" data-get-delay="220">
+                        We export Ethiopian coffee, soybean, sesame, and oil seeds, and import
+                        construction machinery, heavy trucks, cars, and metal for partners in Ethiopia and abroad.
+                    </p>
+                    <div class="get-hero__actions" data-get-anim="fade-up" data-get-delay="300">
+                        <a href="#quote" class="get-btn get-btn--primary">
+                            <span>Request a Quote</span>
+                            <span class="get-btn__shine" aria-hidden="true"/>
+                        </a>
+                        <a href="#imports" class="get-btn get-btn--ghost">Explore Machinery</a>
+                    </div>
+                </div>
+            </div>
+            <div class="get-hero__scroll" aria-hidden="true"><span/></div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="get-section get-about get-style get-style--editorial">
+            <div class="container-fluid get-section__inner">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-5" data-get-anim="fade-up">
+                        <div class="get-photo-stack">
+                            <img src="/website_greenethio/static/src/img/about.jpg"
+                                 alt="Green Ethio Trading operations"
+                                 class="get-photo-stack__main"
+                                 loading="lazy"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="get-section__head" data-get-anim="fade-up">
+                            <p class="get-kicker">About Us</p>
+                            <h2>Who We Are</h2>
+                            <p class="get-lead">
+                                Green Ethio Trading P.L.C. is an Ethiopian import and export company
+                                connecting local agricultural products with global buyers, and supplying
+                                construction machinery, vehicles, and metal to the Ethiopian market.
+                            </p>
+                            <p class="get-lead">
+                                From Addis Ababa we source, ship, and deliver with a simple promise:
+                                we are in the business of helping yours.
+                            </p>
+                        </div>
+                        <div class="row g-3 get-about-facts">
+                            <div class="col-6 col-md-3">
+                                <div class="get-fact" data-get-anim="fade-up"><strong>2</strong><span>Trade Divisions</span></div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="get-fact" data-get-anim="fade-up" data-get-delay="80"><strong>ET</strong><span>Based in Addis Ababa</span></div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="get-fact" data-get-anim="fade-up" data-get-delay="140"><strong>EX</strong><span>Oil Seeds &amp; Coffee</span></div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="get-fact" data-get-anim="fade-up" data-get-delay="200"><strong>IM</strong><span>Machinery &amp; Metal</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-4 get-values mt-4">
+                    <div class="col-md-4">
+                        <article class="get-panel" data-get-anim="fade-up">
+                            <h3>Our Mission</h3>
+                            <p>To move Ethiopian oil seeds and coffee to world markets, and to bring reliable machinery, trucks, cars, and metal into Ethiopia.</p>
+                        </article>
+                    </div>
+                    <div class="col-md-4">
+                        <article class="get-panel get-panel--accent" data-get-anim="fade-up" data-get-delay="80">
+                            <h3>Our Vision</h3>
+                            <p>To be a trusted Ethiopian trade partner known for quality commodities and dependable equipment supply.</p>
+                        </article>
+                    </div>
+                    <div class="col-md-4">
+                        <article class="get-panel" data-get-anim="fade-up" data-get-delay="160">
+                            <h3>Our Promise</h3>
+                            <p lang="am">እርስዎን ለመርዳት በንግድ ሥራ ላይ ነን!</p>
+                            <p>WE ARE IN THE BUSINESS OF HELPING YOURS</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" class="get-section get-services get-style get-style--cards">
+            <div class="container-fluid get-section__inner">
+                <div class="get-section__head get-section__head--wide" data-get-anim="fade-up">
+                    <p class="get-kicker">What We Do</p>
+                    <h2>Import, export, and complete trade support.</h2>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <article class="get-service" data-get-anim="fade-up">
+                            <span class="get-service__icon">EX</span>
+                            <h3>Agricultural Export</h3>
+                            <p>Coffee, soybean, sesame, and oil seeds sourced in Ethiopia and packed for international buyers.</p>
+                        </article>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <article class="get-service" data-get-anim="fade-up" data-get-delay="60">
+                            <span class="get-service__icon">IM</span>
+                            <h3>Machinery Import</h3>
+                            <p>Construction equipment including excavators, loaders, dozers, graders, rollers, cranes, and forklifts.</p>
+                        </article>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <article class="get-service" data-get-anim="fade-up" data-get-delay="100">
+                            <span class="get-service__icon">VH</span>
+                            <h3>Trucks &amp; Cars</h3>
+                            <p>Heavy trucks and vehicles imported to support construction, logistics, and commercial fleets.</p>
+                        </article>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <article class="get-service" data-get-anim="fade-up" data-get-delay="140">
+                            <span class="get-service__icon">MT</span>
+                            <h3>Metal Supply</h3>
+                            <p>Imported metal for construction and industry, matched to project specifications.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPORT PRODUCTS -->
+        <span id="products"/>
+        <section id="exports" class="get-section get-products get-products--exports get-style get-style--catalog">
+            <div class="container-fluid get-section__inner">
+                <div class="get-section__head get-section__head--wide" data-get-anim="fade-up">
+                    <p class="get-kicker">Export · የቅባት እህሎች</p>
+                    <h2>Ethiopian coffee, oil seeds, pulses, and fresh produce for global buyers.</h2>
+                </div>
+                <div class="get-pcard-grid">
+                    <article class="get-pcard" data-get-anim="fade-up">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/exports/coffee.jpg" alt="Ethiopian coffee" loading="lazy"/>
+                            <span class="get-pcard__badge">Export</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Oil Seeds &amp; Coffee</span>
+                            <h3>Coffee</h3>
+                            <p>Premium Ethiopian coffee selected for aroma, origin, and export-grade packing.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="60">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/exports/sesame.jpg" alt="Sesame seeds" loading="lazy"/>
+                            <span class="get-pcard__badge">Export</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Oil Seeds</span>
+                            <h3>Sesame Seeds</h3>
+                            <p>Premium Ethiopian sesame seed for food processing and oil production, packed to export standards.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="100">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/exports/soybean.jpg" alt="Soya beans" loading="lazy"/>
+                            <span class="get-pcard__badge">Export</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Oil Seeds</span>
+                            <h3>Soya Beans</h3>
+                            <p>High-quality Ethiopian soybeans for food processing, animal feed, and industrial use.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="140">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/exports/niger-seed.jpg" alt="Niger seed nug" loading="lazy"/>
+                            <span class="get-pcard__badge">Export</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Oil Seeds</span>
+                            <h3>Niger Seed (Nug)</h3>
+                            <p>Ethiopian niger seed for oil production and specialty food markets, selected for purity and grade.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/exports/oilcake.jpg" alt="Oilcake" loading="lazy"/>
+                            <span class="get-pcard__badge">Export</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Oil Seeds</span>
+                            <h3>Oilcake</h3>
+                            <p>Oilcake from Ethiopian oilseeds for animal feed and industrial processing markets.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="60">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/exports/chickpeas.jpg" alt="Chickpeas Shimbra" loading="lazy"/>
+                            <span class="get-pcard__badge">Export</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Pulses</span>
+                            <h3>Chickpeas (Shimbra)</h3>
+                            <p>Nutritious Ethiopian chickpeas for wholesale food markets and processors.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="100">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/exports/desi-chickpeas.jpg" alt="Desi chickpeas" loading="lazy"/>
+                            <span class="get-pcard__badge">Export</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Pulses</span>
+                            <h3>Desi Chickpeas</h3>
+                            <p>Desi-type chickpeas graded for export to regional and international buyers.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="140">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/exports/green-mung.jpg" alt="Green mung Masho" loading="lazy"/>
+                            <span class="get-pcard__badge">Export</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Pulses</span>
+                            <h3>Green Mung (Masho)</h3>
+                            <p>Clean, export-grade green mung beans sourced from Ethiopian farmers.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/exports/black-beans.jpg" alt="Black kidney beans" loading="lazy"/>
+                            <span class="get-pcard__badge">Export</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Pulses</span>
+                            <h3>Black Kidney Beans</h3>
+                            <p>Premium-grade black kidney beans sourced from Ethiopian farms for global food buyers.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="60">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/exports/avocado.jpg" alt="Avocado" loading="lazy"/>
+                            <span class="get-pcard__badge">Export</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Fresh Produce</span>
+                            <h3>Avocado</h3>
+                            <p>Fresh Ethiopian avocados carefully selected and packed for international export.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="100">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/exports/mango.jpg" alt="Mango" loading="lazy"/>
+                            <span class="get-pcard__badge">Export</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Fresh Produce</span>
+                            <h3>Mango</h3>
+                            <p>Export-quality Ethiopian mangoes packed for regional and international fruit buyers.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="140">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/exports/onion.jpg" alt="Onion" loading="lazy"/>
+                            <span class="get-pcard__badge">Export</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Fresh Produce</span>
+                            <h3>Onion</h3>
+                            <p>Fresh onions produced by Ethiopian farmers with export-quality grading and packaging.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/exports/watermelon.jpg" alt="Watermelon" loading="lazy"/>
+                            <span class="get-pcard__badge">Export</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Fresh Produce</span>
+                            <h3>Watermelon</h3>
+                            <p>Fresh Ethiopian watermelon selected for size, sweetness, and export packing.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="60">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/exports/decorative-fruit.jpg" alt="Decorative fruit" loading="lazy"/>
+                            <span class="get-pcard__badge">Export</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Fresh Produce</span>
+                            <h3>Decorative Fruit</h3>
+                            <p>Specialty decorative fruit for commercial buyers and seasonal export orders.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- IMPORT PRODUCTS -->
+        <section id="imports" class="get-section get-products get-products--imports get-style get-style--industrial">
+            <div class="container-fluid get-section__inner">
+                <div class="get-section__head get-section__head--wide" data-get-anim="fade-up">
+                    <p class="get-kicker">Import · Construction Materials, Machinery, Trucks, Cars &amp; Metal</p>
+                    <h2>Glass, steel, industrial materials, and equipment for Ethiopian projects.</h2>
+                </div>
+                <div class="get-pcard-grid">
+                    <article class="get-pcard" data-get-anim="fade-up">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/float-glass.jpg" alt="Float glass" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Construction Materials</span>
+                            <h3>Float Glass</h3>
+                            <p>High-quality float glass for residential and commercial construction projects.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="60">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/laminated-glass.jpg" alt="Laminated glass" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Construction Materials</span>
+                            <h3>Laminated Glass</h3>
+                            <p>Safety laminated glass for modern building, commercial, and security applications.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="100">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/reinforcement.jpg" alt="Reinforcement steel rebars" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Metal</span>
+                            <h3>Reinforcement Steel (Rebars)</h3>
+                            <p>High-strength reinforcement bars for infrastructure, commercial, and industrial buildings.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="140">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/steel-rhs.jpg" alt="Steel rectangular hollow sections" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Metal</span>
+                            <h3>Steel RHS</h3>
+                            <p>Steel rectangular hollow sections for structural, commercial, and industrial fabrication.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/plastic-raw.jpg" alt="Plastic raw materials" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Industrial Raw Materials</span>
+                            <h3>Plastic Raw Materials</h3>
+                            <p>Colored plastic granules and pellets for manufacturing, packaging, and industrial use.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="60">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/excavator.jpg" alt="Excavator" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Construction Machinery</span>
+                            <h3>Excavator</h3>
+                            <p>Hydraulic excavators for earthworks, mining, and infrastructure projects.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="100">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/backhoe.jpg" alt="Backhoe Loader" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Construction Machinery</span>
+                            <h3>Backhoe Loader</h3>
+                            <p>Versatile backhoe loaders for digging, loading, and site work.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="140">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/wheel-loader.jpg" alt="Wheel Loader" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Construction Machinery</span>
+                            <h3>Wheel Loader</h3>
+                            <p>Wheel loaders for bulk material handling on construction and quarry sites.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/bulldozer.jpg" alt="Bulldozer" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Construction Machinery</span>
+                            <h3>Bulldozer</h3>
+                            <p>Dozer units for land clearing, grading, and heavy earth moving.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="60">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/grader.jpg" alt="Motor Grader" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Construction Machinery</span>
+                            <h3>Motor Grader</h3>
+                            <p>Motor graders for road construction and fine-grade finishing.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="100">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/roller.jpg" alt="Road Roller" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Construction Machinery</span>
+                            <h3>Road Roller</h3>
+                            <p>Compactors and road rollers for asphalt and soil compaction.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="140">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/crane.jpg" alt="Crane" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Construction Machinery</span>
+                            <h3>Crane</h3>
+                            <p>Cranes for lifting, building, and industrial installation work.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/forklift.jpg" alt="Forklift" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Construction Machinery</span>
+                            <h3>Forklift</h3>
+                            <p>Forklifts for warehouse, port, and factory material handling.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="60">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/truck.jpg" alt="Heavy truck" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Heavy Truck</span>
+                            <h3>Heavy Truck</h3>
+                            <p>Heavy-duty trucks for haulage, construction, and long-distance transport.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="100">
+                        <div class="get-pcard__media">
+                            <img src="/website_greenethio/static/src/img/imports/car.jpg" alt="Car" loading="lazy"/>
+                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
+                        </div>
+                        <div class="get-pcard__body">
+                            <span class="get-pcard__cat">Vehicles</span>
+                            <h3>Car</h3>
+                            <p>Passenger and commercial cars imported to buyer specification.</p>
+                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROCESS -->
+        <section id="process" class="get-section get-process">
+            <div class="container-fluid get-section__inner">
+                <div class="get-section__head" data-get-anim="fade-up">
+                    <p class="get-kicker">How We Work</p>
+                    <h2>A clear process from inquiry to delivery.</h2>
+                </div>
+                <ol class="get-steps">
+                    <li data-get-anim="fade-up"><span>01</span><strong>Inquiry</strong></li>
+                    <li data-get-anim="fade-up" data-get-delay="50"><span>02</span><strong>Quotation</strong></li>
+                    <li data-get-anim="fade-up" data-get-delay="100"><span>03</span><strong>Order Confirmation</strong></li>
+                    <li data-get-anim="fade-up" data-get-delay="150"><span>04</span><strong>Quality Check</strong></li>
+                    <li data-get-anim="fade-up" data-get-delay="200"><span>05</span><strong>Shipping</strong></li>
+                    <li data-get-anim="fade-up" data-get-delay="250"><span>06</span><strong>Customs</strong></li>
+                    <li data-get-anim="fade-up" data-get-delay="300"><span>07</span><strong>Delivery</strong></li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- WHY US -->
+        <section id="why-us" class="get-section get-why get-style get-style--trust">
+            <div class="container-fluid get-section__inner">
+                <div class="get-section__head" data-get-anim="fade-up">
+                    <p class="get-kicker">Why Choose GET</p>
+                    <h2>Licensed Ethiopian import and export, built around your business.</h2>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <article class="get-why-item" data-get-anim="fade-up">
+                            <span class="get-why-item__num">01</span>
+                            <h3>Licensed Trader</h3>
+                            <p>Registered import and export company operating from Addis Ababa, Ethiopia.</p>
+                        </article>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <article class="get-why-item" data-get-anim="fade-up" data-get-delay="60">
+                            <span class="get-why-item__num">02</span>
+                            <h3>Two Strong Lines</h3>
+                            <p>Agricultural export (oil seeds and coffee) plus machinery, vehicles, and metal import.</p>
+                        </article>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <article class="get-why-item" data-get-anim="fade-up" data-get-delay="100">
+                            <span class="get-why-item__num">03</span>
+                            <h3>Quality First</h3>
+                            <p>Commodity grades and equipment specs agreed before shipment or delivery.</p>
+                        </article>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <article class="get-why-item" data-get-anim="fade-up" data-get-delay="140">
+                            <span class="get-why-item__num">04</span>
+                            <h3>Direct Support</h3>
+                            <p>Call or WhatsApp our Addis Ababa team for quotes, tracking, and follow-up.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="get-cta get-cta--photo get-style get-style--impact">
+            <img src="/website_greenethio/static/src/img/containers.jpg"
+                 alt=""
+                 class="get-cta__photo"
+                 loading="lazy"/>
+            <div class="get-cta__shade"/>
+            <div class="container text-center">
+                <h2>Ready to trade with Green Ethio Trading?</h2>
+                <p>Export coffee and oil seeds, or import machinery, trucks, cars, and metal — we are in the business of helping yours.</p>
+                <div class="get-hero__actions justify-content-center">
+                    <a href="#quote" class="get-btn get-btn--light"><span>Request a Quote</span></a>
+                    <a href="tel:+251930589650" class="get-btn get-btn--ghost"><span>Call +251 930 589 650</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUOTE -->
+        <section id="quote" class="get-section get-quote-form">
+            <div class="container-fluid get-section__inner">
+                <div class="get-section__head" data-get-anim="fade-up">
+                    <p class="get-kicker">Request a Quote</p>
+                    <h2>Tell us the product, quantity, and destination.</h2>
+                </div>
+                <form action="/get/contact" method="post" class="get-form" data-get-anim="fade-up">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <input type="hidden" name="form_type" value="quote"/>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="get-label" for="get_q_product">Product</label>
+                            <input class="get-input" type="text" id="get_q_product" name="product" required="required" placeholder="e.g. Sesame, Excavator"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="get-label" for="get_q_qty">Quantity</label>
+                            <input class="get-input" type="text" id="get_q_qty" name="quantity" required="required" placeholder="e.g. 20 MT or 2 units"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="get-label" for="get_q_country">Country</label>
+                            <input class="get-input" type="text" id="get_q_country" name="country" required="required" placeholder="Destination or origin country"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="get-label" for="get_q_port">Delivery Port</label>
+                            <input class="get-input" type="text" id="get_q_port" name="port" placeholder="e.g. Djibouti"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="get-label" for="get_q_company">Company</label>
+                            <input class="get-input" type="text" id="get_q_company" name="company" placeholder="Company name"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="get-label" for="get_q_phone">Phone</label>
+                            <input class="get-input" type="tel" id="get_q_phone" name="phone" placeholder="+251 ..."/>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="get-label" for="get_q_email">Email</label>
+                            <input class="get-input" type="email" id="get_q_email" name="email" required="required" placeholder="Email Address"/>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="get-label" for="get_q_name">Contact Name</label>
+                            <input class="get-input" type="text" id="get_q_name" name="name" required="required" placeholder="Full Name"/>
+                        </div>
+                        <div class="col-12">
+                            <label class="get-label" for="get_q_message">Message</label>
+                            <textarea class="get-input get-textarea" id="get_q_message" name="message" rows="4" placeholder="Grade, model, Incoterms, or other requirements"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="get-btn get-btn--primary">
+                                <span>Submit Quote Request</span>
+                                <span class="get-btn__shine" aria-hidden="true"/>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="get-section get-contact get-style get-style--form">
+            <div class="container-fluid get-section__inner">
+                <div class="get-section__head" data-get-anim="fade-up">
+                    <p class="get-kicker">Contact Us</p>
+                    <h2>Get in touch from Addis Ababa, Ethiopia.</h2>
+                </div>
+                <div class="row g-5">
+                    <div class="col-lg-7">
+                        <form action="/get/contact" method="post" class="get-form" data-get-anim="fade-up" data-get-delay="80">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <input type="hidden" name="form_type" value="contact"/>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="get-label" for="get_name">Full Name</label>
+                                    <input class="get-input" type="text" id="get_name" name="name" required="required" placeholder="Full Name"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="get-label" for="get_email">Email Address</label>
+                                    <input class="get-input" type="email" id="get_email" name="email" required="required" placeholder="Email Address"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="get-label" for="get_phone">Phone Number</label>
+                                    <input class="get-input" type="tel" id="get_phone" name="phone" placeholder="Phone Number"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="get-label" for="get_company">Company Name</label>
+                                    <input class="get-input" type="text" id="get_company" name="company" placeholder="Company Name"/>
+                                </div>
+                                <div class="col-12">
+                                    <label class="get-label" for="get_message">Message</label>
+                                    <textarea class="get-input get-textarea" id="get_message" name="message" rows="5" required="required" placeholder="Write your message..."></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="get-btn get-btn--primary">
+                                        <span>Send Message</span>
+                                        <span class="get-btn__shine" aria-hidden="true"/>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="get-contact-aside" data-get-anim="fade-up" data-get-delay="160">
+                            <h3>Contact Information</h3>
+                            <div class="get-contact-block">
+                                <strong>Address</strong>
+                                <p lang="am">አዲስ አበባ፣ ኢትዮጵያ</p>
+                                <p>Addis Ababa, Ethiopia</p>
+                            </div>
+                            <div class="get-contact-block">
+                                <strong>Phone</strong>
+                                <p>
+                                    <a href="tel:+251930589650">Mob +251 930 589 650</a><br/>
+                                    <a href="tel:+251928399539">+251 928 399 539</a>
+                                </p>
+                            </div>
+                            <div class="get-contact-block">
+                                <strong>WhatsApp</strong>
+                                <p><a href="https://wa.me/251930589650" target="_blank" rel="noopener">Chat on WhatsApp</a></p>
+                            </div>
+                            <div class="get-contact-block">
+                                <strong>Email</strong>
+                                <p><a href="mailto:info@greenethiotrading.com">info@greenethiotrading.com</a></p>
+                            </div>
+                            <div class="get-contact-block">
+                                <strong>Slogan</strong>
+                                <p lang="am">እርስዎን ለመርዳት በንግድ ሥራ ላይ ነን!</p>
+                                <p>WE ARE IN THE BUSINESS OF HELPING YOURS</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="get-map mt-5" data-get-anim="fade-up">
+                    <iframe title="Green Ethio Trading Addis Ababa"
+                            src="https://maps.google.com/maps?q=Addis%20Ababa%20Ethiopia&amp;t=&amp;z=11&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+
+    </template>
+</odoo>
