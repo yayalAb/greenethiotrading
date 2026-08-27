@@ -41,17 +41,6 @@ class Website(models.Model):
                 values['favicon'] = logo_b64
         website.sudo().write(values)
 
-        company = self.env.company.sudo()
-        company_vals = {
-            'phone': '+251 928 399 539',
-            'mobile': '+251 930 589 650',
-        }
-        if not company.email:
-            company_vals['email'] = 'info@greenethiotrading.com'
-        if logo_b64:
-            company_vals['logo'] = logo_b64
-        company.write(company_vals)
-
         default_home = self.env.ref('website.homepage_page', raise_if_not_found=False)
         if default_home:
             default_home.sudo().write({'is_published': False})
