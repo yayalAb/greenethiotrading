@@ -15,9 +15,6 @@
 
             <div class="container-fluid get-hero__inner">
                 <div class="get-hero__brand" data-get-anim="fade-up" data-get-delay="0">
-                    <img src="/website_greenethio/static/src/img/logo.png"
-                         alt="Green Ethio Trading P.L.C."
-                         class="get-hero__logo"/>
                     <div class="get-hero__names">
                         <p class="get-hero__eyebrow">
                             <span class="get-word get-word--s1" style="--i:0">Green</span>
@@ -736,12 +733,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="get-map mt-5" data-get-anim="fade-up">
-                    <iframe title="Green Ethio Trading Addis Ababa"
-                            src="https://maps.google.com/maps?q=Addis%20Ababa%20Ethiopia&amp;t=&amp;z=11&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </section>

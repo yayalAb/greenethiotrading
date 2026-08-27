@@ -78,7 +78,19 @@ header .navbar-brand .img,
 }
 
 .get-contact.get-section {
-    padding-bottom: 2.25rem;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.get-contact .get-section__inner {
+    padding-bottom: 0 !important;
+}
+
+#wrap.get-site::after,
+.get-site.oe_structure > .oe_drop_zone {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
 }
 
 .get-wrapwrap > footer.o_footer,
@@ -137,4 +149,28 @@ header .navbar-brand .img,
 .get-form button[type="submit"]:hover {
     background-color: #0d5c2e !important;
     color: #ffffff !important;
+}
+
+/* Tighter gap between About and Services */
+.get-about.get-section {
+    padding-bottom: 2rem;
+}
+
+.get-services.get-section {
+    padding-top: 2rem;
+}
+
+.get-services .get-section__head {
+    margin-bottom: 1.5rem;
+}
+
+/* Service icons: green tile + white letters so EX / IM / VH / MT read clearly */
+.get-site .get-service__icon,
+.get-service .get-service__icon {
+    background: #1f8a3e !important;
+    background-image: linear-gradient(145deg, #0d5c2e 0%, #1f8a3e 70%, #c9a227 140%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 10px 22px rgba(13, 92, 46, 0.35) !important;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
 }
