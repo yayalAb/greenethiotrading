@@ -15,13 +15,55 @@ header .navbar-brand .img,
     filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.35));
 }
 
-.get-hero__slogan {
-    margin: 0.2rem 0 0;
-    color: #e8c547;
-    font-size: clamp(0.78rem, 1.5vw, 1rem);
-    font-weight: 700;
+.get-hero__brand {
+    margin-bottom: 3.4rem;
+}
+
+.get-hero__names {
+    gap: 1.25rem;
+}
+
+.get-hero__eyebrow {
+    font-size: clamp(1.55rem, 4.4vw, 3.75rem);
     letter-spacing: 0.06em;
+    gap: 0.28em 0.55em;
+    line-height: 1.12;
+}
+
+.get-hero__amharic {
+    font-size: clamp(1.6rem, 3.8vw, 2.85rem);
+    line-height: 1.5;
+}
+
+.get-hero__slogan {
+    margin: 0.35rem 0 0;
+    color: #e8c547;
+    font-size: clamp(1.1rem, 2.4vw, 1.75rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
+    line-height: 1.55;
+}
+
+@media (max-width: 991.98px) {
+    .get-hero__brand {
+        margin-bottom: 2.4rem;
+    }
+    .get-hero__names {
+        gap: 1rem;
+    }
+    .get-hero__eyebrow {
+        font-size: clamp(1.05rem, 5vw, 1.9rem);
+    }
+    .get-hero__amharic {
+        font-size: clamp(1.25rem, 4.8vw, 1.95rem);
+    }
+    .get-hero__slogan {
+        font-size: clamp(0.95rem, 3.4vw, 1.25rem);
+        text-align: center;
+        padding: 0 0.75rem;
+        white-space: normal;
+    }
 }
 
 .get-hero__phones {
