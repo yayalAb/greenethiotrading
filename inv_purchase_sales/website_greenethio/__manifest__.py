@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Green Ethio Trading Website',
-    'version': '18.0.1.1.5',
+    'version': '18.0.1.1.6',
     'summary': 'Public website for Greenethiotrading PLC — import & export',
     'description': """
         Branded Odoo website for Green Ethio Trading P.L.C.

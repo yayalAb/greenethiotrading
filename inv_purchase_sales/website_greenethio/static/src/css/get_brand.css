@@ -16,50 +16,50 @@ header .navbar-brand .img,
 }
 
 .get-hero__brand {
-    margin-bottom: 3.4rem;
+    margin-bottom: 2rem;
 }
 
 .get-hero__names {
-    gap: 1.25rem;
+    gap: 0.55rem;
 }
 
 .get-hero__eyebrow {
-    font-size: clamp(1.55rem, 4.4vw, 3.75rem);
-    letter-spacing: 0.06em;
-    gap: 0.28em 0.55em;
-    line-height: 1.12;
+    font-size: clamp(1.2rem, 3vw, 2.85rem);
+    letter-spacing: 0.05em;
+    gap: 0.22em 0.42em;
+    line-height: 1.1;
 }
 
 .get-hero__amharic {
-    font-size: clamp(1.6rem, 3.8vw, 2.85rem);
-    line-height: 1.5;
+    font-size: clamp(1.25rem, 3vw, 2.2rem);
+    line-height: 1.4;
 }
 
 .get-hero__slogan {
-    margin: 0.35rem 0 0;
+    margin: 0.1rem 0 0;
     color: #e8c547;
-    font-size: clamp(1.1rem, 2.4vw, 1.75rem);
+    font-size: clamp(0.88rem, 1.7vw, 1.2rem);
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
-    line-height: 1.55;
+    line-height: 1.4;
 }
 
 @media (max-width: 991.98px) {
     .get-hero__brand {
-        margin-bottom: 2.4rem;
+        margin-bottom: 1.5rem;
     }
     .get-hero__names {
-        gap: 1rem;
+        gap: 0.45rem;
     }
     .get-hero__eyebrow {
-        font-size: clamp(1.05rem, 5vw, 1.9rem);
+        font-size: clamp(0.92rem, 4vw, 1.45rem);
     }
     .get-hero__amharic {
-        font-size: clamp(1.25rem, 4.8vw, 1.95rem);
+        font-size: clamp(1.05rem, 4vw, 1.55rem);
     }
     .get-hero__slogan {
-        font-size: clamp(0.95rem, 3.4vw, 1.25rem);
+        font-size: clamp(0.78rem, 2.8vw, 1rem);
         text-align: center;
         padding: 0 0.75rem;
         white-space: normal;
