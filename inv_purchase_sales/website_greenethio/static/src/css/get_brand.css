@@ -54,6 +54,28 @@ header .navbar-brand .img,
 
 .get-footer__bar {
     border-top: 3px solid #1f8a3e;
+    padding: 0.7rem 0 !important;
+}
+
+.get-footer__bar-line {
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.4;
+}
+
+footer.o_footer .o_footer_copyright,
+.o_footer_copyright {
+    display: none !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
 }
 
 .get-pcard__media {

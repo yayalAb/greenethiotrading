@@ -9,6 +9,9 @@
     </template>
 
     <template id="get_layout_body" inherit_id="website.layout" name="GET Body Class">
+        <xpath expr="//div[@id='wrapwrap']" position="before">
+            <t t-set="no_copyright" t-value="True"/>
+        </xpath>
         <xpath expr="//div[@id='wrapwrap']" position="attributes">
             <attribute name="class" add="get-wrapwrap" separator=" "/>
         </xpath>
@@ -19,6 +22,10 @@
                 <a class="get-float__mail" href="mailto:info@greenethiotrading.com" title="Email">Mail</a>
                 <a class="get-float__top" href="#top" title="Back to top">Top</a>
             </nav>
+        </xpath>
+        <xpath expr="//div[hasclass('o_footer_copyright')]" position="attributes">
+            <attribute name="t-if">False</attribute>
+            <attribute name="class" add="d-none" separator=" "/>
         </xpath>
     </template>
 
@@ -74,9 +81,12 @@
                     </div>
                 </div>
                 <div class="get-footer__bar">
-                    <div class="container d-flex flex-wrap justify-content-between gap-2">
-                        <span>© 2026 Green Ethio Trading P.L.C.</span>
-                        <span lang="am">እርስዎን ለመርዳት በንግድ ሥራ ላይ ነን! · WE ARE IN THE BUSINESS OF HELPING YOURS</span>
+                    <div class="container">
+                        <p class="get-footer__bar-line">
+                            © 2026 Green Ethio Trading P.L.C.
+                            · <span lang="am">እርስዎን ለመርዳት በንግድ ሥራ ላይ ነን!</span>
+                            · WE ARE IN THE BUSINESS OF HELPING YOURS
+                        </p>
                     </div>
                 </div>
             </div>

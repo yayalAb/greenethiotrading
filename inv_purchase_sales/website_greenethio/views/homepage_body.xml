@@ -133,7 +133,7 @@
                         <article class="get-service" data-get-anim="fade-up" data-get-delay="60">
                             <span class="get-service__icon">IM</span>
                             <h3>Machinery Import</h3>
-                            <p>Construction equipment including excavators, loaders, dozers, graders, rollers, cranes, and forklifts.</p>
+                            <p>Construction equipment including backhoe loaders, dozers, graders, and forklifts.</p>
                         </article>
                     </div>
                     <div class="col-md-6 col-lg-3">
@@ -160,7 +160,7 @@
             <div class="container-fluid get-section__inner">
                 <div class="get-section__head get-section__head--wide" data-get-anim="fade-up">
                     <p class="get-kicker">Export · የቅባት እህሎች</p>
-                    <h2>Ethiopian coffee, oil seeds, pulses, and fresh produce for global buyers.</h2>
+                    <h2>Ethiopian coffee, oil seeds, and pulses for global buyers.</h2>
                 </div>
                 <div class="get-pcard-grid">
                     <article class="get-pcard" data-get-anim="fade-up">
@@ -271,66 +271,6 @@
                             <a href="#quote" class="get-pcard__cta">Request a Quote</a>
                         </div>
                     </article>
-                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="60">
-                        <div class="get-pcard__media">
-                            <img src="/website_greenethio/static/src/img/exports/avocado.jpg" alt="Avocado" loading="lazy"/>
-                            <span class="get-pcard__badge">Export</span>
-                        </div>
-                        <div class="get-pcard__body">
-                            <span class="get-pcard__cat">Fresh Produce</span>
-                            <h3>Avocado</h3>
-                            <p>Fresh Ethiopian avocados carefully selected and packed for international export.</p>
-                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
-                        </div>
-                    </article>
-                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="100">
-                        <div class="get-pcard__media">
-                            <img src="/website_greenethio/static/src/img/exports/mango.jpg" alt="Mango" loading="lazy"/>
-                            <span class="get-pcard__badge">Export</span>
-                        </div>
-                        <div class="get-pcard__body">
-                            <span class="get-pcard__cat">Fresh Produce</span>
-                            <h3>Mango</h3>
-                            <p>Export-quality Ethiopian mangoes packed for regional and international fruit buyers.</p>
-                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
-                        </div>
-                    </article>
-                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="140">
-                        <div class="get-pcard__media">
-                            <img src="/website_greenethio/static/src/img/exports/onion.jpg" alt="Onion" loading="lazy"/>
-                            <span class="get-pcard__badge">Export</span>
-                        </div>
-                        <div class="get-pcard__body">
-                            <span class="get-pcard__cat">Fresh Produce</span>
-                            <h3>Onion</h3>
-                            <p>Fresh onions produced by Ethiopian farmers with export-quality grading and packaging.</p>
-                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
-                        </div>
-                    </article>
-                    <article class="get-pcard" data-get-anim="fade-up">
-                        <div class="get-pcard__media">
-                            <img src="/website_greenethio/static/src/img/exports/watermelon.jpg" alt="Watermelon" loading="lazy"/>
-                            <span class="get-pcard__badge">Export</span>
-                        </div>
-                        <div class="get-pcard__body">
-                            <span class="get-pcard__cat">Fresh Produce</span>
-                            <h3>Watermelon</h3>
-                            <p>Fresh Ethiopian watermelon selected for size, sweetness, and export packing.</p>
-                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
-                        </div>
-                    </article>
-                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="60">
-                        <div class="get-pcard__media">
-                            <img src="/website_greenethio/static/src/img/exports/decorative-fruit.jpg" alt="Decorative fruit" loading="lazy"/>
-                            <span class="get-pcard__badge">Export</span>
-                        </div>
-                        <div class="get-pcard__body">
-                            <span class="get-pcard__cat">Fresh Produce</span>
-                            <h3>Decorative Fruit</h3>
-                            <p>Specialty decorative fruit for commercial buyers and seasonal export orders.</p>
-                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
-                        </div>
-                    </article>
                 </div>
             </div>
         </section>
@@ -405,18 +345,6 @@
                     </article>
                     <article class="get-pcard" data-get-anim="fade-up" data-get-delay="60">
                         <div class="get-pcard__media">
-                            <img src="/website_greenethio/static/src/img/imports/excavator.jpg" alt="Excavator" loading="lazy"/>
-                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
-                        </div>
-                        <div class="get-pcard__body">
-                            <span class="get-pcard__cat">Construction Machinery</span>
-                            <h3>Excavator</h3>
-                            <p>Hydraulic excavators for earthworks, mining, and infrastructure projects.</p>
-                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
-                        </div>
-                    </article>
-                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="100">
-                        <div class="get-pcard__media">
                             <img src="/website_greenethio/static/src/img/imports/backhoe.jpg" alt="Backhoe Loader" loading="lazy"/>
                             <span class="get-pcard__badge get-pcard__badge--import">Import</span>
                         </div>
@@ -424,18 +352,6 @@
                             <span class="get-pcard__cat">Construction Machinery</span>
                             <h3>Backhoe Loader</h3>
                             <p>Versatile backhoe loaders for digging, loading, and site work.</p>
-                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
-                        </div>
-                    </article>
-                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="140">
-                        <div class="get-pcard__media">
-                            <img src="/website_greenethio/static/src/img/imports/wheel-loader.jpg" alt="Wheel Loader" loading="lazy"/>
-                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
-                        </div>
-                        <div class="get-pcard__body">
-                            <span class="get-pcard__cat">Construction Machinery</span>
-                            <h3>Wheel Loader</h3>
-                            <p>Wheel loaders for bulk material handling on construction and quarry sites.</p>
                             <a href="#quote" class="get-pcard__cta">Request a Quote</a>
                         </div>
                     </article>
@@ -460,30 +376,6 @@
                             <span class="get-pcard__cat">Construction Machinery</span>
                             <h3>Motor Grader</h3>
                             <p>Motor graders for road construction and fine-grade finishing.</p>
-                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
-                        </div>
-                    </article>
-                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="100">
-                        <div class="get-pcard__media">
-                            <img src="/website_greenethio/static/src/img/imports/roller.jpg" alt="Road Roller" loading="lazy"/>
-                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
-                        </div>
-                        <div class="get-pcard__body">
-                            <span class="get-pcard__cat">Construction Machinery</span>
-                            <h3>Road Roller</h3>
-                            <p>Compactors and road rollers for asphalt and soil compaction.</p>
-                            <a href="#quote" class="get-pcard__cta">Request a Quote</a>
-                        </div>
-                    </article>
-                    <article class="get-pcard" data-get-anim="fade-up" data-get-delay="140">
-                        <div class="get-pcard__media">
-                            <img src="/website_greenethio/static/src/img/imports/crane.jpg" alt="Crane" loading="lazy"/>
-                            <span class="get-pcard__badge get-pcard__badge--import">Import</span>
-                        </div>
-                        <div class="get-pcard__body">
-                            <span class="get-pcard__cat">Construction Machinery</span>
-                            <h3>Crane</h3>
-                            <p>Cranes for lifting, building, and industrial installation work.</p>
                             <a href="#quote" class="get-pcard__cta">Request a Quote</a>
                         </div>
                     </article>

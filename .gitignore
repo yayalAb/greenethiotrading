@@ -7,6 +7,3 @@
 *.db-wal
 mdocker
 venv/
-letsencrypt/
-.env
-certbot-webroot/
