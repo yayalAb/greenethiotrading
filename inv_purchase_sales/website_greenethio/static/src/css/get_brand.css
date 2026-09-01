@@ -3,9 +3,9 @@
 header .navbar-brand img,
 header .navbar-brand .img,
 .get-navbar-logo {
-    height: 52px !important;
+    height: 56px !important;
     width: auto !important;
-    max-width: 72px !important;
+    max-width: 96px !important;
     object-fit: contain;
 }
 
@@ -82,7 +82,7 @@ header .navbar-brand .img,
 }
 
 .get-footer__logo {
-    width: 92px;
+    width: 108px;
     height: auto;
 }
 
