@@ -34,7 +34,6 @@ def _set_website_branding(env):
 
     img_path = join(dirname(abspath(__file__)), "static", "src", "img", "logo.png")
     vals = {"name": "TEMESGEN KEFEYALEW BUILDING RENT"}
-    logo_b64 = False
     try:
         with open(img_path, "rb") as logo_file:
             logo_b64 = base64.b64encode(logo_file.read())
@@ -45,18 +44,8 @@ def _set_website_branding(env):
         pass
     websites = env["website"].sudo().search([])
     if websites:
-        if "phone" in websites._fields:
-            vals["phone"] = "+251 911 20 09 98"
         websites.write(vals)
-    companies = env["res.company"].sudo().search([])
-    if companies:
-        company_vals = {
-            "phone": "+251 911 20 09 98",
-            "mobile": "+251 930 58 96 50",
-        }
-        if logo_b64:
-            company_vals["logo"] = logo_b64
-        companies.write(company_vals)
+
 
 
 def _sync_website_menus(env):
