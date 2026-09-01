@@ -17,10 +17,18 @@
         </xpath>
         <xpath expr="//div[@id='wrapwrap']" position="inside">
             <nav class="get-float" aria-label="Quick contact">
-                <a class="get-float__call" href="tel:+251930589650" title="Call">Call</a>
-                <a class="get-float__wa" href="https://wa.me/251930589650" target="_blank" rel="noopener" title="WhatsApp">WA</a>
-                <a class="get-float__mail" href="mailto:info@greenethiotrading.com" title="Email">Mail</a>
-                <a class="get-float__top" href="#top" title="Back to top">Top</a>
+                <a class="get-float__call" href="tel:+251930589650" title="Call" aria-label="Call">
+                    <i class="fa fa-phone" aria-hidden="true"/>
+                </a>
+                <a class="get-float__wa" href="https://wa.me/251930589650" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp">
+                    <i class="fa fa-whatsapp" aria-hidden="true"/>
+                </a>
+                <a class="get-float__mail" href="mailto:info@greenethiotrading.com" title="Email" aria-label="Email">
+                    <i class="fa fa-envelope" aria-hidden="true"/>
+                </a>
+                <a class="get-float__top" href="#top" title="Back to top" aria-label="Back to top">
+                    <i class="fa fa-chevron-up" aria-hidden="true"/>
+                </a>
             </nav>
         </xpath>
         <xpath expr="//div[hasclass('o_footer_copyright')]" position="attributes">
