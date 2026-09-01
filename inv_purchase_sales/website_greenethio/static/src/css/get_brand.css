@@ -238,3 +238,34 @@ footer.o_footer .o_footer_copyright,
     font-size: 0.82rem;
     letter-spacing: 0.04em;
 }
+
+/* Import cards sit on a dark section — keep body text dark on the white card */
+.get-style--industrial .get-pcard,
+.get-products--imports .get-pcard {
+    background: #ffffff !important;
+    color: #0d1f14 !important;
+}
+.get-style--industrial .get-pcard__body,
+.get-products--imports .get-pcard__body,
+.get-style--industrial .get-pcard__body p,
+.get-products--imports .get-pcard__body p {
+    color: #3d4d40 !important;
+}
+.get-style--industrial .get-pcard__cat,
+.get-products--imports .get-pcard__cat {
+    color: #1f8a3e !important;
+}
+.get-style--industrial .get-pcard h3,
+.get-products--imports .get-pcard h3 {
+    color: #0a3d1f !important;
+}
+.get-style--industrial .get-pcard__cta,
+.get-products--imports .get-pcard__cta {
+    color: #fff !important;
+    background: #1a7a3c !important;
+}
+.get-style--industrial .get-pcard__cta:hover,
+.get-products--imports .get-pcard__cta:hover {
+    color: #fff !important;
+    background: #0d5c2e !important;
+}

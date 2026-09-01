@@ -6,20 +6,31 @@ function getScrollRoot() {
     return document.getElementById("wrapwrap") || document.scrollingElement || document.documentElement;
 }
 
+function getHashId(href) {
+    if (!href) {
+        return "";
+    }
+    const hashIndex = href.indexOf("#");
+    if (hashIndex === -1) {
+        return "";
+    }
+    return href.slice(hashIndex);
+}
+
 function scrollToTarget(target, headerOffset = 88) {
-    const root = getScrollRoot();
-    if (!target || !root) {
+    if (!target) {
         return;
     }
-    if (root === document.body || root === document.documentElement || root === document.scrollingElement) {
-        const top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-        window.scrollTo({ top, behavior: "smooth" });
+    const wrap = document.getElementById("wrapwrap");
+    const wrapScrolls = wrap && wrap.scrollHeight > wrap.clientHeight + 2;
+    const rect = target.getBoundingClientRect();
+    if (wrapScrolls) {
+        const top = wrap.scrollTop + rect.top - wrap.getBoundingClientRect().top - headerOffset;
+        wrap.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
         return;
     }
-    const rootRect = root.getBoundingClientRect();
-    const targetRect = target.getBoundingClientRect();
-    const top = targetRect.top - rootRect.top + root.scrollTop - headerOffset;
-    root.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    const top = rect.top + (window.pageYOffset || document.documentElement.scrollTop || 0) - headerOffset;
+    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
 }
 
 function animateCount(el, delay = 0) {
@@ -87,7 +98,7 @@ function animateStatsIn(root) {
 publicWidget.registry.GetWebsite = publicWidget.Widget.extend({
     selector: ".get-site",
     events: {
-        "click a[href^='#']": "_onAnchorClick",
+        "click a[href*='#']": "_onAnchorClick",
     },
 
     start() {
@@ -112,7 +123,7 @@ publicWidget.registry.GetWebsite = publicWidget.Widget.extend({
 
     _bindGlobalAnchors() {
         this._globalClickHandler = (event) => {
-            const anchor = event.target.closest("a[href^='#']");
+            const anchor = event.target.closest("a[href*='#']");
             if (!anchor || !document.querySelector(".get-site")) {
                 return;
             }
@@ -126,16 +137,23 @@ publicWidget.registry.GetWebsite = publicWidget.Widget.extend({
     },
 
     _scrollFromAnchor(event, anchor) {
-        const id = anchor.getAttribute("href");
-        if (!id || id === "#" || !id.startsWith("#")) {
+        const id = getHashId(anchor.getAttribute("href"));
+        if (!id || id === "#") {
             return;
         }
-        const target = document.querySelector(id);
+        const target = document.getElementById(id.slice(1)) || document.querySelector(id);
         if (!target) {
             return;
         }
         event.preventDefault();
         event.stopPropagation();
+        if (anchor.classList.contains("get-pcard__cta")) {
+            const title = anchor.closest(".get-pcard") && anchor.closest(".get-pcard").querySelector("h3");
+            const input = document.getElementById("get_q_product");
+            if (title && input) {
+                input.value = title.textContent.trim();
+            }
+        }
         scrollToTarget(target);
         if (history.replaceState) {
             history.replaceState(null, "", id);

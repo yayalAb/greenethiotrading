@@ -1344,11 +1344,24 @@ header a.btn-primary {
     margin-top: auto;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    align-self: flex-start;
     font-weight: 700;
-    color: var(--get-blue);
+    font-size: 0.82rem;
+    color: #fff !important;
+    background: #1a7a3c;
     text-decoration: none;
+    padding: 0.5rem 0.95rem;
+    border-radius: 999px;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    pointer-events: auto;
 }
-.get-pcard__cta:hover { color: var(--get-green); }
+.get-pcard__cta:hover {
+    color: #fff !important;
+    background: #0d5c2e;
+}
 
 .get-process { background: #fff; }
 .get-steps {
@@ -1748,6 +1761,22 @@ header a.btn-primary {
 .get-style--industrial .get-section-banner {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
     border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.get-style--industrial .get-pcard {
+    color: #0d1f14;
+}
+.get-style--industrial .get-pcard h3 {
+    color: #0a3d1f;
+}
+.get-style--industrial .get-pcard p,
+.get-style--industrial .get-pcard__body {
+    color: #3d4d40;
+}
+.get-style--industrial .get-pcard__cat {
+    color: #1f8a3e;
+}
+.get-style--industrial .get-pcard__cta {
+    color: #1a7a3c;
 }
 
 /* --- Extra styles: trust + impact + form --- */
