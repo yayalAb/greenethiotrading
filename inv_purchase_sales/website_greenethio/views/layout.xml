@@ -26,9 +26,6 @@
                 <a class="get-float__mail" href="mailto:info@greenethiotrading.com" title="Email" aria-label="Email">
                     <i class="fa fa-envelope" aria-hidden="true"/>
                 </a>
-                <a class="get-float__top" href="#top" title="Back to top" aria-label="Back to top">
-                    <i class="fa fa-chevron-up" aria-hidden="true"/>
-                </a>
             </nav>
         </xpath>
         <xpath expr="//div[hasclass('o_footer_copyright')]" position="attributes">

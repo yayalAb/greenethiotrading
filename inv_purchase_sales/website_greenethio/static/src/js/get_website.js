@@ -95,7 +95,6 @@ publicWidget.registry.GetWebsite = publicWidget.Widget.extend({
         this._setupReveals();
         this._bindGlobalAnchors();
         this._bindScrollChrome();
-        this._setupBackToTop();
         return this._super(...arguments);
     },
 
@@ -156,22 +155,6 @@ publicWidget.registry.GetWebsite = publicWidget.Widget.extend({
         root.addEventListener("scroll", this._scrollHandler, { passive: true });
         window.addEventListener("scroll", this._scrollHandler, { passive: true });
         this._scrollHandler();
-    },
-
-    _setupBackToTop() {
-        const btn = document.querySelector(".get-float__top");
-        if (!btn) {
-            return;
-        }
-        btn.addEventListener("click", (event) => {
-            event.preventDefault();
-            const root = getScrollRoot();
-            if (root === document.body || root === document.documentElement || root === document.scrollingElement) {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-            } else {
-                root.scrollTo({ top: 0, behavior: "smooth" });
-            }
-        });
     },
 
     _setupReveals() {
