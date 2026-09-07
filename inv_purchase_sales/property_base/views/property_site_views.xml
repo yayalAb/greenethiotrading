@@ -13,7 +13,7 @@
     </record>
     <!-- Property site menu item -->
     <menuitem id="property_site_menu" name="Sites"
-              parent="advanced_property_management.property_configuration_menu"
+              parent="property_management.property_configuration_menu"
               action="property_site_action" sequence="4"/>
     <!-- Property site list view -->
     <record id="property_site_view_list" model="ir.ui.view">

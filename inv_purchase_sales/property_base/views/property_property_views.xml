@@ -4,7 +4,7 @@
     <record id="property_property_view_form_inherit_base" model="ir.ui.view">
         <field name="name">property.property.view.form.inherit.advanced.property.base</field>
         <field name="model">property.property</field>
-        <field name="inherit_id" ref="advanced_property_management.property_property_view_form"/>
+        <field name="inherit_id" ref="property_management.property_property_view_form"/>
         <field name="arch" type="xml">
             <group name="price_details" position="before">
                 <group string="Site Details">
@@ -19,7 +19,7 @@
     <record id="property_property_view_list_inherit_base" model="ir.ui.view">
         <field name="name">property.property.view.list.inherit.advanced.property.base</field>
         <field name="model">property.property</field>
-        <field name="inherit_id" ref="advanced_property_management.property_property_view_list"/>
+        <field name="inherit_id" ref="property_management.property_property_view_list"/>
         <field name="arch" type="xml">
             <field name="city" position="after">
                 <field name="site_id" optional="show"/>
@@ -32,7 +32,7 @@
     <record id="property_property_view_search_inherit_base" model="ir.ui.view">
         <field name="name">property.property.view.search.inherit.advanced.property.base</field>
         <field name="model">property.property</field>
-        <field name="inherit_id" ref="advanced_property_management.property_property_view_search"/>
+        <field name="inherit_id" ref="property_management.property_property_view_search"/>
         <field name="arch" type="xml">
             <field name="state_id" position="after">
                 <field name="site_id"/>

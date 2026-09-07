@@ -13,7 +13,7 @@
     </record>
     <!-- Property building menu item -->
     <menuitem id="property_building_menu" name="Buildings"
-              parent="advanced_property_management.property_configuration_menu"
+              parent="property_management.property_configuration_menu"
               action="property_building_action" sequence="5"/>
     <!-- Property building list view -->
     <record id="property_building_view_list" model="ir.ui.view">

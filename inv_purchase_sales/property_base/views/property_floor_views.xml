@@ -13,7 +13,7 @@
     </record>
     <!-- Property floor menu item -->
     <menuitem id="property_floor_menu" name="Floors"
-              parent="advanced_property_management.property_configuration_menu"
+              parent="property_management.property_configuration_menu"
               action="property_floor_action" sequence="6"/>
     <!-- Property floor list view -->
     <record id="property_floor_view_list" model="ir.ui.view">
