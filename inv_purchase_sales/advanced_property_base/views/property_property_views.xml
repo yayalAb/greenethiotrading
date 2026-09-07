@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add Site/Building/Floor to the property form view -->
+    <record id="property_property_view_form_inherit_base" model="ir.ui.view">
+        <field name="name">property.property.view.form.inherit.advanced.property.base</field>
+        <field name="model">property.property</field>
+        <field name="inherit_id" ref="advanced_property_management.property_property_view_form"/>
+        <field name="arch" type="xml">
+            <group name="price_details" position="before">
+                <group string="Site Details">
+                    <field name="site_id"/>
+                    <field name="building_id"/>
+                    <field name="floor_id"/>
+                </group>
+            </group>
+        </field>
+    </record>
+    <!-- Add Site/Building/Floor to the property list view -->
+    <record id="property_property_view_list_inherit_base" model="ir.ui.view">
+        <field name="name">property.property.view.list.inherit.advanced.property.base</field>
+        <field name="model">property.property</field>
+        <field name="inherit_id" ref="advanced_property_management.property_property_view_list"/>
+        <field name="arch" type="xml">
+            <field name="city" position="after">
+                <field name="site_id" optional="show"/>
+                <field name="building_id" optional="show"/>
+                <field name="floor_id" optional="hide"/>
+            </field>
+        </field>
+    </record>
+    <!-- Add Site filter/group by to the property search view -->
+    <record id="property_property_view_search_inherit_base" model="ir.ui.view">
+        <field name="name">property.property.view.search.inherit.advanced.property.base</field>
+        <field name="model">property.property</field>
+        <field name="inherit_id" ref="advanced_property_management.property_property_view_search"/>
+        <field name="arch" type="xml">
+            <field name="state_id" position="after">
+                <field name="site_id"/>
+                <field name="building_id"/>
+                <field name="floor_id"/>
+            </field>
+            <filter name="state" position="after">
+                <filter string="Site" context="{'group_by': 'site_id'}"
+                        name="group_site_id"/>
+                <filter string="Building" context="{'group_by': 'building_id'}"
+                        name="group_building_id"/>
+            </filter>
+        </field>
+    </record>
+</odoo>

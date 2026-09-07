@@ -78,7 +78,7 @@
                         <group>
                             <field name="property_type" widget="radio"
                                    options="{'horizontal': True}"/>
-                            <field name="construct_year"/>
+                            <!-- <field name="construct_year"/> -->
                             <field name="property_tags"
                                    widget="many2many_tags"/>
                         </group>

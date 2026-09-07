@@ -41,10 +41,10 @@ class Property(models.Model):
     )
     property_type = fields.Selection(
         [
-            ("land", "Land"),
+            # ("land", "Land"),
             ("residential", "Residential"),
             ("commercial", "Commercial"),
-            ("industry", "Industry"),
+            # ("industry", "Industry"),
         ],
         string="Type",
         required=True,
@@ -66,9 +66,11 @@ class Property(models.Model):
         "* The 'Rented' status is used when the property is rented.\n"
         "* The 'sold' status is used when the property is sold.\n",
     )
-    street = fields.Char(string="Street", required=True, help="The street name")
+    street = fields.Char(string="Street", required=True,
+                         help="The street name")
     street2 = fields.Char(string="Street2", help="The street2 name")
-    zip = fields.Char(string="Zip", change_default=True, help="Zip code for the place")
+    zip = fields.Char(string="Zip", change_default=True,
+                      help="Zip code for the place")
     city = fields.Char(string="City", help="The name of the city")
     country_id = fields.Many2one(
         "res.country",
@@ -155,11 +157,13 @@ class Property(models.Model):
         string="Area In Hector", help="The area of the land in hector"
     )
     shop_name = fields.Char(string="Shop Name", help="The name of the shop")
-    industry_name = fields.Char(string="Industry Name", help="The name of the industry")
+    industry_name = fields.Char(
+        string="Industry Name", help="The name of the industry")
     usage = fields.Char(
         string="Used For", help="For what purpose is this property used for"
     )
-    location = fields.Char(string="Location", help="The location of the property")
+    location = fields.Char(
+        string="Location", help="The location of the property")
     property_image_ids = fields.One2many(
         "property.image", "property_id", string="Property Images"
     )
@@ -209,7 +213,8 @@ class Property(models.Model):
         for vals in vals_list:
             if vals.get("code", "New") == "New":
                 vals["code"] = (
-                    self.env["ir.sequence"].next_by_code("property.property") or "New"
+                    self.env["ir.sequence"].next_by_code(
+                        "property.property") or "New"
                 )
         res = super(Property, self).create(vals_list)
         return res
@@ -217,7 +222,8 @@ class Property(models.Model):
     def _compute_total_sq_feet(self):
         """Calculates the total square feet of the property"""
         for rec in self:
-            rec.total_sq_feet = sum(rec.mapped("area_measurement_ids").mapped("area"))
+            rec.total_sq_feet = sum(rec.mapped(
+                "area_measurement_ids").mapped("area"))
 
     @api.model
     def _geo_localize(self, street="", zip="", city="", state="", country=""):
@@ -228,7 +234,8 @@ class Property(models.Model):
         )
         result = geo_obj.geo_find(search, force_country=country)
         if result is None:
-            search = geo_obj.geo_query_address(city=city, state=state, country=country)
+            search = geo_obj.geo_query_address(
+                city=city, state=state, country=country)
             result = geo_obj.geo_find(search, force_country=country)
         return result
 

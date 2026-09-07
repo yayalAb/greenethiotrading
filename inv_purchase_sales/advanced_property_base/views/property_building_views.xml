@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Property building action -->
+    <record id="property_building_action" model="ir.actions.act_window">
+        <field name="name">Buildings</field>
+        <field name="res_model">property.building</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Your First Building!
+            </p>
+        </field>
+    </record>
+    <!-- Property building menu item -->
+    <menuitem id="property_building_menu" name="Buildings"
+              parent="advanced_property_management.property_configuration_menu"
+              action="property_building_action" sequence="5"/>
+    <!-- Property building list view -->
+    <record id="property_building_view_list" model="ir.ui.view">
+        <field name="name">property.building.view.list</field>
+        <field name="model">property.building</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="site_id"/>
+                <field name="total_floors"/>
+                <field name="floor_count"/>
+            </list>
+        </field>
+    </record>
+    <!-- Property building form view -->
+    <record id="property_building_view_form" model="ir.ui.view">
+        <field name="name">property.building.view.form</field>
+        <field name="model">property.building</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button name="%(property_floor_action)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-list-ol"
+                                context="{'default_building_id': id, 'search_default_building_id': id}">
+                            <field name="floor_count" widget="statinfo"
+                                   string="Floors"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Building Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="site_id"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="total_floors"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Property building search view -->
+    <record id="property_building_view_search" model="ir.ui.view">
+        <field name="name">property.building.view.search</field>
+        <field name="model">property.building</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="site_id"/>
+                <group expand="1" string="Group By">
+                    <filter string="Site" context="{'group_by': 'site_id'}"
+                            name="site_id"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

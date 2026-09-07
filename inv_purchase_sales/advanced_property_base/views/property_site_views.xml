@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Property site action -->
+    <record id="property_site_action" model="ir.actions.act_window">
+        <field name="name">Sites</field>
+        <field name="res_model">property.site</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Your First Site!
+            </p>
+        </field>
+    </record>
+    <!-- Property site menu item -->
+    <menuitem id="property_site_menu" name="Sites"
+              parent="advanced_property_management.property_configuration_menu"
+              action="property_site_action" sequence="4"/>
+    <!-- Property site list view -->
+    <record id="property_site_view_list" model="ir.ui.view">
+        <field name="name">property.site.view.list</field>
+        <field name="model">property.site</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="city"/>
+                <field name="country_id"/>
+                <field name="building_count"/>
+            </list>
+        </field>
+    </record>
+    <!-- Property site form view -->
+    <record id="property_site_view_form" model="ir.ui.view">
+        <field name="name">property.site.view.form</field>
+        <field name="model">property.site</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button name="%(property_building_action)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-building"
+                                context="{'default_site_id': id, 'search_default_site_id': id}">
+                            <field name="building_count" widget="statinfo"
+                                   string="Buildings"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Site Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Address">
+                            <field name="street"/>
+                            <field name="street2"/>
+                            <field name="city"/>
+                            <field name="zip"/>
+                            <field name="state_id"/>
+                            <field name="country_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Property site search view -->
+    <record id="property_site_view_search" model="ir.ui.view">
+        <field name="name">property.site.view.search</field>
+        <field name="model">property.site</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="city"/>
+            </search>
+        </field>
+    </record>
+</odoo>

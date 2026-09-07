@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Property floor action -->
+    <record id="property_floor_action" model="ir.actions.act_window">
+        <field name="name">Floors</field>
+        <field name="res_model">property.floor</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Your First Floor!
+            </p>
+        </field>
+    </record>
+    <!-- Property floor menu item -->
+    <menuitem id="property_floor_menu" name="Floors"
+              parent="advanced_property_management.property_configuration_menu"
+              action="property_floor_action" sequence="6"/>
+    <!-- Property floor list view -->
+    <record id="property_floor_view_list" model="ir.ui.view">
+        <field name="name">property.floor.view.list</field>
+        <field name="model">property.floor</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="floor_no"/>
+                <field name="building_id"/>
+                <field name="site_id"/>
+            </list>
+        </field>
+    </record>
+    <!-- Property floor form view -->
+    <record id="property_floor_view_form" model="ir.ui.view">
+        <field name="name">property.floor.view.form</field>
+        <field name="model">property.floor</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Floor Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="building_id"/>
+                            <field name="site_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="code"/>
+                            <field name="floor_no"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Property floor search view -->
+    <record id="property_floor_view_search" model="ir.ui.view">
+        <field name="name">property.floor.view.search</field>
+        <field name="model">property.floor</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="building_id"/>
+                <field name="site_id"/>
+                <group expand="1" string="Group By">
+                    <filter string="Building" context="{'group_by': 'building_id'}"
+                            name="building_id"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>
