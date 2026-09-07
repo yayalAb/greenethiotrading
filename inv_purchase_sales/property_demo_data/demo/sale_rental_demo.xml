@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Confirmed sales, spread across the last few months so the
+             "Sales Revenue by Month" chart has more than one data point.
+             action_confirm() is the real model method: it also flips the
+             property to 'sold' and links sale_id, no accounting module
+             dependency involved. -->
+        <record id="demo_sale_skyline_villa" model="property.sale">
+            <field name="property_id" ref="demo_property_skyline_villa"/>
+            <field name="partner_id" ref="demo_partner_buyer_1"/>
+            <field name="order_date" eval="(DateTime.today() - relativedelta(months=5)).strftime('%Y-%m-%d')"/>
+        </record>
+        <record id="demo_sale_cmc_land" model="property.sale">
+            <field name="property_id" ref="demo_property_cmc_land"/>
+            <field name="partner_id" ref="demo_partner_buyer_2"/>
+            <field name="order_date" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-%d')"/>
+        </record>
+        <record id="demo_sale_bole_tower" model="property.sale">
+            <field name="property_id" ref="demo_property_bole_tower"/>
+            <field name="partner_id" ref="demo_partner_buyer_1"/>
+            <field name="order_date" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d')"/>
+        </record>
+        <record id="demo_sale_kaliti_warehouse" model="property.sale">
+            <field name="property_id" ref="demo_property_kaliti_warehouse"/>
+            <field name="partner_id" ref="demo_partner_buyer_2"/>
+            <field name="order_date" eval="(DateTime.today() - relativedelta(months=3)).strftime('%Y-%m-%d')"/>
+        </record>
+
+        <function model="property.sale" name="action_confirm" eval="[[ref('demo_sale_skyline_villa')]]"/>
+        <function model="property.sale" name="action_confirm" eval="[[ref('demo_sale_cmc_land')]]"/>
+        <function model="property.sale" name="action_confirm" eval="[[ref('demo_sale_bole_tower')]]"/>
+        <function model="property.sale" name="action_confirm" eval="[[ref('demo_sale_kaliti_warehouse')]]"/>
+
+        <!-- Active rentals. Fields are set directly (state='in_contract')
+             instead of calling action_create_contract(), which creates an
+             account.move and would make this module depend on a configured
+             chart of accounts. The property is moved to 'rented' the same
+             way action_create_contract() would, via a plain write. -->
+        <record id="demo_rental_piassa" model="property.rental">
+            <field name="property_id" ref="demo_property_piassa_apartment"/>
+            <field name="renter_id" ref="demo_partner_tenant_1"/>
+            <field name="state">in_contract</field>
+            <field name="start_date" eval="(DateTime.today() - relativedelta(months=4)).strftime('%Y-%m-%d')"/>
+            <field name="end_date" eval="(DateTime.today() + relativedelta(months=8)).strftime('%Y-%m-%d')"/>
+            <field name="invoice_date" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d')"/>
+        </record>
+        <record id="demo_rental_megenagna" model="property.rental">
+            <field name="property_id" ref="demo_property_megenagna_shop"/>
+            <field name="renter_id" ref="demo_partner_tenant_2"/>
+            <field name="state">in_contract</field>
+            <field name="start_date" eval="(DateTime.today() - relativedelta(months=6)).strftime('%Y-%m-%d')"/>
+            <field name="end_date" eval="(DateTime.today() + relativedelta(months=6)).strftime('%Y-%m-%d')"/>
+            <field name="invoice_date" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d')"/>
+        </record>
+
+        <function model="property.property" name="write" eval="[[ref('demo_property_piassa_apartment')], {'state': 'rented'}]"/>
+        <function model="property.property" name="write" eval="[[ref('demo_property_megenagna_shop')], {'state': 'rented'}]"/>
+
+    </data>
+</odoo>

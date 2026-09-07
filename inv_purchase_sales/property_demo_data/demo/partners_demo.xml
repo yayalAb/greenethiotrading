@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Landlords -->
+        <record id="demo_partner_landlord_1" model="res.partner">
+            <field name="name">Alazar Property Holdings PLC</field>
+            <field name="is_company">True</field>
+            <field name="city">Addis Ababa</field>
+            <field name="country_id" ref="base.et"/>
+        </record>
+        <record id="demo_partner_landlord_2" model="res.partner">
+            <field name="name">Mekdes Tadesse</field>
+            <field name="city">Addis Ababa</field>
+            <field name="country_id" ref="base.et"/>
+        </record>
+
+        <!-- Buyers -->
+        <record id="demo_partner_buyer_1" model="res.partner">
+            <field name="name">Yonas Girma</field>
+            <field name="city">Addis Ababa</field>
+            <field name="country_id" ref="base.et"/>
+        </record>
+        <record id="demo_partner_buyer_2" model="res.partner">
+            <field name="name">Hana Tesfaye</field>
+            <field name="city">Addis Ababa</field>
+            <field name="country_id" ref="base.et"/>
+        </record>
+
+        <!-- Tenants -->
+        <record id="demo_partner_tenant_1" model="res.partner">
+            <field name="name">Meron Alemu</field>
+            <field name="city">Addis Ababa</field>
+            <field name="country_id" ref="base.et"/>
+        </record>
+        <record id="demo_partner_tenant_2" model="res.partner">
+            <field name="name">Dawit Bekele</field>
+            <field name="city">Addis Ababa</field>
+            <field name="country_id" ref="base.et"/>
+        </record>
+
+        <!-- Reservation applicants -->
+        <record id="demo_partner_res_1" model="res.partner">
+            <field name="name">Bethlehem Assefa</field>
+            <field name="city">Addis Ababa</field>
+            <field name="country_id" ref="base.et"/>
+        </record>
+        <record id="demo_partner_res_2" model="res.partner">
+            <field name="name">Kalkidan Fikre</field>
+            <field name="city">Addis Ababa</field>
+            <field name="country_id" ref="base.et"/>
+        </record>
+        <record id="demo_partner_res_3" model="res.partner">
+            <field name="name">Natnael Worku</field>
+            <field name="city">Addis Ababa</field>
+            <field name="country_id" ref="base.et"/>
+        </record>
+        <record id="demo_partner_res_4" model="res.partner">
+            <field name="name">Rediet Solomon</field>
+            <field name="city">Addis Ababa</field>
+            <field name="country_id" ref="base.et"/>
+        </record>
+        <record id="demo_partner_res_5" model="res.partner">
+            <field name="name">Samuel Tesema</field>
+            <field name="city">Addis Ababa</field>
+            <field name="country_id" ref="base.et"/>
+        </record>
+
+        <!-- Bank references, used on reservation payment receipts -->
+        <record id="demo_bank_doc_type_transfer" model="bank.document.type">
+            <field name="name">Bank Transfer Slip</field>
+        </record>
+        <record id="demo_bank_doc_type_deposit" model="bank.document.type">
+            <field name="name">Deposit Receipt</field>
+        </record>
+        <record id="demo_bank_cbe" model="bank.configuration">
+            <field name="bank">Commercial Bank of Ethiopia</field>
+            <field name="account_number">1000123456789</field>
+        </record>
+        <record id="demo_bank_awash" model="bank.configuration">
+            <field name="bank">Awash Bank</field>
+            <field name="account_number">0132004567890</field>
+        </record>
+
+        <!-- Payment term used by properties sold/reserved on installments -->
+        <record id="demo_payment_term_standard" model="property.payment.term">
+            <field name="name">Standard 3-Installment Plan</field>
+        </record>
+        <record id="demo_pt_line_1" model="property.payment.term.line">
+            <field name="term_id" ref="demo_payment_term_standard"/>
+            <field name="name">Reservation / Down Payment</field>
+            <field name="sequence">10</field>
+            <field name="percentage">30</field>
+        </record>
+        <record id="demo_pt_line_2" model="property.payment.term.line">
+            <field name="term_id" ref="demo_payment_term_standard"/>
+            <field name="name">Second Installment</field>
+            <field name="sequence">20</field>
+            <field name="percentage">40</field>
+        </record>
+        <record id="demo_pt_line_3" model="property.payment.term.line">
+            <field name="term_id" ref="demo_payment_term_standard"/>
+            <field name="name">Final Installment</field>
+            <field name="sequence">30</field>
+            <field name="percentage">30</field>
+        </record>
+
+    </data>
+</odoo>

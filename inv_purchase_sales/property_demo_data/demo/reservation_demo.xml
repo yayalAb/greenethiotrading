@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- property.reservation.create() always sets a new reservation to
+             'draft' and immediately flips its property to 'reserved',
+             regardless of the status value passed in. Adding a payment line
+             that covers the expected amount lets the model's own compute
+             auto-promote draft -> requested; the explicit write()s below
+             then move each reservation to its final demo outcome without
+             depending on any guarded business methods (e.g.
+             approve_reservation() itself requires the property to still be
+             'available', which is no longer true by the time it would be
+             called here). -->
+
+        <!-- 1) Regular reservation, sufficiently paid, approved -> Reserved,
+                expiring soon -->
+        <record id="demo_reservation_summit" model="property.reservation">
+            <field name="property_id" ref="demo_property_summit_condo"/>
+            <field name="partner_id" ref="demo_partner_res_1"/>
+            <field name="reservation_type_id" ref="property_reservation_full.property_reservation_regular"/>
+        </record>
+        <record id="demo_reservation_payment_summit_1" model="property.reservation.payment">
+            <field name="reservation_id" ref="demo_reservation_summit"/>
+            <field name="document_type_id" ref="demo_bank_doc_type_transfer"/>
+            <field name="bank_id" ref="demo_bank_cbe"/>
+            <field name="ref_number">DEMO-PAY-1001</field>
+            <field name="transaction_date" eval="(DateTime.today() - relativedelta(days=2)).strftime('%Y-%m-%d')"/>
+            <field name="amount">105000</field>
+            <field name="payment_receipt">iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=</field>
+        </record>
+        <function model="property.reservation" name="write"
+                   eval="[[ref('demo_reservation_summit')], {
+                       'status': 'reserved',
+                       'expire_date': (DateTime.now() + relativedelta(days=2)).strftime('%Y-%m-%d %H:%M:%S'),
+                   }]"/>
+
+        <!-- 2) Regular reservation requested but under-funded -> stays
+                Draft with is_sufficient = False (Awaiting Payment demo) -->
+        <record id="demo_reservation_gerji" model="property.reservation">
+            <field name="property_id" ref="demo_property_gerji_duplex"/>
+            <field name="partner_id" ref="demo_partner_res_2"/>
+            <field name="reservation_type_id" ref="property_reservation_full.property_reservation_regular"/>
+        </record>
+
+        <!-- 3) Quick reservation, no payment required, auto-requested,
+                expiring within a day -->
+        <record id="demo_reservation_bole_ayat" model="property.reservation">
+            <field name="property_id" ref="demo_property_bole_ayat_studio"/>
+            <field name="partner_id" ref="demo_partner_res_3"/>
+            <field name="reservation_type_id" ref="property_reservation_full.property_reservation_quick"/>
+        </record>
+        <function model="property.reservation" name="write"
+                   eval="[[ref('demo_reservation_bole_ayat')], {
+                       'expire_date': (DateTime.now() + relativedelta(hours=18)).strftime('%Y-%m-%d %H:%M:%S'),
+                   }]"/>
+
+        <!-- 4) VIP fixed-deposit reservation, fully paid, converted to a
+                sale -->
+        <record id="demo_reservation_4kilo" model="property.reservation">
+            <field name="property_id" ref="demo_property_4kilo_house"/>
+            <field name="partner_id" ref="demo_partner_res_4"/>
+            <field name="reservation_type_id" ref="demo_reservation_config_vip"/>
+        </record>
+        <record id="demo_reservation_payment_4kilo_1" model="property.reservation.payment">
+            <field name="reservation_id" ref="demo_reservation_4kilo"/>
+            <field name="document_type_id" ref="demo_bank_doc_type_deposit"/>
+            <field name="bank_id" ref="demo_bank_awash"/>
+            <field name="ref_number">DEMO-PAY-1002</field>
+            <field name="transaction_date" eval="(DateTime.today() - relativedelta(days=6)).strftime('%Y-%m-%d')"/>
+            <field name="amount">155000</field>
+            <field name="payment_receipt">iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=</field>
+        </record>
+        <function model="property.reservation" name="write" eval="[[ref('demo_reservation_4kilo')], {'status': 'sold'}]"/>
+        <function model="property.property" name="write" eval="[[ref('demo_property_4kilo_house')], {'state': 'sold'}]"/>
+
+        <!-- 5) Quick reservation that was never claimed -> Expired, property
+                released back to Available -->
+        <record id="demo_reservation_kera" model="property.reservation">
+            <field name="property_id" ref="demo_property_kera_garage"/>
+            <field name="partner_id" ref="demo_partner_res_5"/>
+            <field name="reservation_type_id" ref="property_reservation_full.property_reservation_quick"/>
+        </record>
+        <function model="property.reservation" name="write"
+                   eval="[[ref('demo_reservation_kera')], {
+                       'status': 'expired',
+                       'expire_date': (DateTime.now() - relativedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S'),
+                       'canceled_time': DateTime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                   }]"/>
+        <function model="property.property" name="write" eval="[[ref('demo_property_kera_garage')], {'state': 'available'}]"/>
+
+        <!-- 6) Quick reservation the customer backed out of -> Cancelled,
+                property released back to Available -->
+        <record id="demo_reservation_yeka" model="property.reservation">
+            <field name="property_id" ref="demo_property_yeka_plot"/>
+            <field name="partner_id" ref="demo_partner_res_1"/>
+            <field name="reservation_type_id" ref="property_reservation_full.property_reservation_quick"/>
+        </record>
+        <function model="property.reservation" name="write"
+                   eval="[[ref('demo_reservation_yeka')], {
+                       'status': 'canceled',
+                       'canceled_reason': 'Customer changed mind after inspection.',
+                       'canceled_time': DateTime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                   }]"/>
+        <function model="property.property" name="write" eval="[[ref('demo_property_yeka_plot')], {'state': 'available'}]"/>
+
+    </data>
+</odoo>

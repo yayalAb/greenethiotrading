@@ -14,7 +14,7 @@
     """,
     'author': 'Yayal Abayneh',
     'website': 'https://www.yourwebsite.com',
-    'depends': ['base', 'web', 'advanced_property_management'],
+    'depends': ['base', 'web', 'property_management'],
     'data': [
         'views/menu_items.xml',
     ],

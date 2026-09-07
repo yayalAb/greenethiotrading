@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Extra reservation type alongside property_reservation_full's
+             Quick/Regular/Special configs: a fixed-amount deposit used by
+             high-value listings. -->
+        <record id="demo_reservation_config_vip" model="property.reservation.configuration">
+            <field name="name">VIP Fixed Deposit</field>
+            <field name="reservation_type">special</field>
+            <field name="payment_type">fixed</field>
+            <field name="amount">150000.0</field>
+            <field name="duration_in">days</field>
+            <field name="duration">14</field>
+            <field name="is_payment_required">True</field>
+        </record>
+
+    </data>
+</odoo>

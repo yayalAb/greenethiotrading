@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Advanced Property Base",
+    'name': "Property Base",
     'version': '18.0.1.0.0',
     'category': 'Industries',
     'summary': """Adds Site, Building and Floor structure to properties""",

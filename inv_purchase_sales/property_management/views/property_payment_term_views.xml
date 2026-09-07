@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Property payment term action -->
+    <record id="property_payment_term_action" model="ir.actions.act_window">
+        <field name="name">Payment Terms</field>
+        <field name="res_model">property.payment.term</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new installment plan
+            </p>
+        </field>
+    </record>
+    <!-- Property payment term menu item -->
+    <menuitem id="property_payment_term_menu" name="Payment Terms"
+              parent="property_configuration_menu"
+              action="property_payment_term_action" sequence="4"/>
+    <!-- Property payment term list view -->
+    <record id="property_payment_term_view_list" model="ir.ui.view">
+        <field name="name">property.payment.term.view.list</field>
+        <field name="model">property.payment.term</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="total_percentage"/>
+            </list>
+        </field>
+    </record>
+    <!-- Property payment term form view -->
+    <record id="property_payment_term_view_form" model="ir.ui.view">
+        <field name="name">property.payment.term.view.form</field>
+        <field name="model">property.payment.term</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="percentage"/>
+                        </list>
+                    </field>
+                    <group>
+                        <field name="total_percentage"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
