@@ -10,7 +10,7 @@
     'company': 'Niyat Consultancy',
     'maintainer': 'Niyat Consultancy',
     'website': 'https://niyatconsultancy.com',
-    'depends': ['advanced_property_management'],
+    'depends': ['property_management'],
     'data': [
         'security/ir.model.access.csv',
         'views/property_floor_views.xml',
