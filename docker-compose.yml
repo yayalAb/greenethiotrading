@@ -24,7 +24,10 @@ services:
             retries: 5
 
     odoo:
-        image: odoo:18.0
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: greenethiotrading-odoo:18.0
         container_name: odoo18-web
         restart: unless-stopped
         depends_on:
