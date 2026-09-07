@@ -19,7 +19,7 @@
     'depends': [
         'base',
         'crm',
-        'property_management',
+        'advanced_property_management',
     ],
 
     'data': [
