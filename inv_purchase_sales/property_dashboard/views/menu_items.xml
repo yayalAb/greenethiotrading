@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="action_property_dashboard" model="ir.actions.client">
+            <field name="name">Dashboard</field>
+            <field name="tag">property_dashboard.dashboard_main_view</field>
+        </record>
+
+        <menuitem
+            id="property_dashboard_menu"
+            name="Dashboard"
+            parent="property_management.property_root_menu"
+            action="action_property_dashboard"
+            groups="property_management.group_property_agent"
+            sequence="1"/>
+    </data>
+</odoo>

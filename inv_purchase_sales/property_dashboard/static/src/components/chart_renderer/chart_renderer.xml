@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="property_dashboard.ChartRenderer" owl="1">
+        <div class="property-dashboard-chart-wrap">
+            <canvas t-if="hasData" t-ref="chart"/>
+            <div t-else="" class="property-dashboard-empty">
+                <i class="fa fa-bar-chart me-2"/>No data available yet.
+            </div>
+        </div>
+    </t>
+</templates>

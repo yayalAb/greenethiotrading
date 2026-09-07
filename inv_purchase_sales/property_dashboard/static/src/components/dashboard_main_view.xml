@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="property_dashboard.MainDashboard" owl="1">
+        <div class="container-fluid property-dashboard-scroll-root property-dashboard-page pb-4" t-ref="dashboardRoot">
+            <div class="property-dashboard-scroll-pane" t-ref="dashboardInner">
+            <div class="row m-0 ms-md-1 ms-0">
+                <div class="col-12">
+
+                    <!-- Toolbar: filters + date range + actions -->
+                    <div class="pdb-toolbar">
+                        <div class="pdb-toolbar__filters">
+                            <span class="pdb-toolbar__filters-label"><i class="fa fa-filter"/>Filters</span>
+                            <select class="pdb-select" t-on-change="(ev) => onFilterChange('propertyType', ev.target.value)">
+                                <option value="">All Property Types</option>
+                                <option value="land">Land</option>
+                                <option value="residential">Residential</option>
+                                <option value="commercial">Commercial</option>
+                                <option value="industry">Industry</option>
+                            </select>
+                            <select class="pdb-select" t-on-change="(ev) => onFilterChange('saleRent', ev.target.value)">
+                                <option value="">All Sale/Rent Modes</option>
+                                <option value="for_sale">For Sale</option>
+                                <option value="for_tenancy">For Tenancy</option>
+                                <option value="for_auction">For Auction</option>
+                            </select>
+                            <select class="pdb-select" t-on-change="(ev) => onFilterChange('readiness', ev.target.value)">
+                                <option value="">All Payment Readiness</option>
+                                <option value="sufficient">Sufficiently Paid</option>
+                                <option value="awaiting">Awaiting Payment</option>
+                            </select>
+                        </div>
+                        <div class="pdb-toolbar__right">
+                            <div class="pdb-date-tabs">
+                                <button type="button" t-attf-class="pdb-date-tab #{state.datePreset === 'today' ? 'active' : ''}" t-on-click="() => onDatePreset('today')">Today</button>
+                                <button type="button" t-attf-class="pdb-date-tab #{state.datePreset === 'wtd' ? 'active' : ''}" t-on-click="() => onDatePreset('wtd')">WTD</button>
+                                <button type="button" t-attf-class="pdb-date-tab #{state.datePreset === 'mtd' ? 'active' : ''}" t-on-click="() => onDatePreset('mtd')">MTD</button>
+                                <button type="button" t-attf-class="pdb-date-tab #{state.datePreset === 'ytd' ? 'active' : ''}" t-on-click="() => onDatePreset('ytd')">YTD</button>
+                            </div>
+                            <div class="pdb-date-inputs">
+                                <input type="date" t-att-value="state.dateFrom" t-on-change="(ev) => onDateFromChange(ev.target.value)"/>
+                                <span>-</span>
+                                <input type="date" t-att-value="state.dateTo" t-on-change="(ev) => onDateToChange(ev.target.value)"/>
+                            </div>
+                            <button type="button" class="pdb-icon-btn" title="Refresh" t-on-click="onRefreshClick">
+                                <i class="fa fa-refresh"/>
+                            </button>
+                            <button type="button" class="pdb-icon-btn" title="Export pipeline as CSV" t-on-click="onExportClick">
+                                <i class="fa fa-download"/>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- KPI Cards -->
+                    <div class="row g-0 mx-0 property-dashboard-metrics-row">
+                        <DashboardCard name="'Total Properties'" value="state.total_properties.value" iconClass="'fa-building'" accent="'navy'"
+                            badgeText="state.total_properties.current_month_count > 0 ? ('+' + state.total_properties.current_month_count + ' New') : 'No Change'"
+                            badgeVariant="state.total_properties.current_month_count > 0 ? 'green' : 'gray'"
+                            subtitle="state.available_properties.value + ' Available Now'"
+                            onClick="onTotalPropertiesClick" uom="''"/>
+                        <DashboardCard name="'Available'" value="state.available_properties.value" iconClass="'fa-check-circle'" accent="'green'"
+                            badgeText="(state.total_properties.value ? Math.round(state.available_properties.value / state.total_properties.value * 100) : 0) + '% of Portfolio'"
+                            badgeVariant="'blue'"
+                            subtitle="state.total_properties.value + ' Total in View'"
+                            onClick="onAvailablePropertiesClick" uom="''"/>
+                        <DashboardCard name="'Reserved'" value="state.reserved_properties.value" iconClass="'fa-bookmark'" accent="'amber'"
+                            badgeText="state.reservations_expiring.value > 0 ? (state.reservations_expiring.value + ' Expiring Soon') : 'Stable'"
+                            badgeVariant="state.reservations_expiring.value > 0 ? 'amber' : 'gray'"
+                            subtitle="state.reservations_insufficient.value + ' Awaiting Payment'"
+                            onClick="onReservedPropertiesClick" uom="''"/>
+                        <DashboardCard name="'Rented'" value="state.rented_properties.value" iconClass="'fa-key'" accent="'blue'"
+                            badgeText="'Live'" badgeVariant="'blue'"
+                            subtitle="state.monthly_rent_revenue.current_month_count + ' Active Leases'"
+                            onClick="onRentedPropertiesClick" uom="''"/>
+                        <DashboardCard name="'Sold'" value="state.sold_properties.value" iconClass="'fa-money'" accent="'purple'"
+                            badgeText="state.reservations_sold.value + ' via Reservation'" badgeVariant="'green'"
+                            subtitle="'Lifetime Total'"
+                            onClick="onSoldPropertiesClick" uom="''"/>
+                        <DashboardCard name="'Sales Value'" value="state.total_sales_value.value" iconClass="'fa-line-chart'" accent="'orange'"
+                            badgeText="state.total_sales_value.current_month_count + ' Sales'" badgeVariant="'blue'"
+                            subtitle="state.dateFrom + ' to ' + state.dateTo"
+                            onClick="onSalesClick" uom="state.currency_symbol"/>
+                        <DashboardCard name="'Rent Revenue'" value="state.monthly_rent_revenue.value" iconClass="'fa-home'" accent="'teal'"
+                            badgeText="'Monthly'" badgeVariant="'blue'"
+                            subtitle="state.monthly_rent_revenue.current_month_count + ' Active Leases'"
+                            onClick="onRentalsClick" uom="state.currency_symbol"/>
+                        <DashboardCard name="'Awaiting Payment'" value="state.reservations_insufficient.value" iconClass="'fa-exclamation-triangle'" accent="'red'"
+                            badgeText="state.reservations_insufficient.value > 0 ? 'Action Req.' : 'All Clear'"
+                            badgeVariant="state.reservations_insufficient.value > 0 ? 'red' : 'green'"
+                            subtitle="state.active_reservations.value + ' Active Reservations'"
+                            onClick="onInsufficientReservationsClick" uom="''"/>
+                    </div>
+
+                    <!-- Pipeline table + Portfolio donut -->
+                    <div class="row g-0 mx-0">
+                        <div class="col-lg-7 col-md-12 p-1">
+                            <div class="property-dashboard-chart-card p-3 h-100 d-flex flex-column">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <h3 class="property-dashboard-chart-card__title"><i class="fa fa-list-alt me-2"/>Reservations Execution Pipeline</h3>
+                                    <a class="property-dashboard-chart-link-btn" t-attf-href="/web#model=property.reservation">
+                                        <span class="fa fa-arrow-right"/>
+                                    </a>
+                                </div>
+                                <div t-if="!state.reservation_pipeline.length" class="property-dashboard-empty flex-grow-1 d-flex align-items-center justify-content-center">
+                                    <i class="fa fa-check-circle me-2"/>No active reservations in the pipeline.
+                                </div>
+                                <t t-else="">
+                                <div class="table-responsive">
+                                    <table class="pdb-pipeline-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Customer</th>
+                                                <th>Property</th>
+                                                <th>Target</th>
+                                                <th>Progress</th>
+                                                <th>Readiness</th>
+                                                <th>Risk Flag</th>
+                                                <th/>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="state.reservation_pipeline" t-as="row" t-key="row.id">
+                                                <tr>
+                                                    <td>
+                                                        <div class="pdb-pipeline-table__primary" t-esc="row.partner_name"/>
+                                                        <div class="pdb-pipeline-table__muted" t-esc="row.type_name"/>
+                                                    </td>
+                                                    <td t-esc="row.property_name"/>
+                                                    <td t-esc="row.target_label"/>
+                                                    <td class="pdb-progress-cell">
+                                                        <span class="pdb-progress"><span class="pdb-progress__bar" t-attf-style="width: #{row.percent_paid}%"/></span>
+                                                        <span t-esc="row.percent_paid + '%'"/>
+                                                    </td>
+                                                    <td><span t-attf-class="property-dashboard-badge property-dashboard-badge--#{row.readiness_class}" t-esc="row.readiness_label"/></td>
+                                                    <td t-esc="row.risk_label"/>
+                                                    <td><button type="button" class="pdb-open-btn" t-on-click="() => onPipelineRowClick(row)">Open</button></td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mt-2 pdb-pipeline-footer">
+                                    <span>Showing <t t-esc="state.reservation_pipeline.length"/> of <t t-esc="state.active_reservations.value"/> active reservations</span>
+                                    <a href="#" class="pdb-see-all" t-on-click.prevent="onActiveReservationsClick">See All Reservations <i class="fa fa-arrow-right ms-1"/></a>
+                                </div>
+                                </t>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 col-md-12 p-1">
+                            <div class="property-dashboard-chart-card p-3 h-100 d-flex flex-column">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <h3 class="property-dashboard-chart-card__title"><i class="fa fa-pie-chart me-2"/>Portfolio &amp; Occupancy</h3>
+                                    <span class="pdc-v2__badge pdc-badge--blue" t-esc="state.occupancy.percent + '% Occupied'"/>
+                                </div>
+                                <p class="property-dashboard-panel__subtitle mb-2">Property status breakdown across the filtered portfolio.</p>
+                                <div class="d-flex align-items-center gap-3 flex-grow-1">
+                                    <div class="pdb-donut-wrap">
+                                        <ChartRenderer type="'doughnut'" title="'Portfolio'" data="state.properties_by_status" onChartClick="onPropertiesByStatusClick" legend="false"/>
+                                        <div class="pdb-donut-center">
+                                            <span class="pdb-donut-center__value" t-esc="state.total_properties.value"/>
+                                            <span class="pdb-donut-center__label">Total Properties</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 pdb-legend">
+                                        <t t-foreach="state.properties_by_status.labels" t-as="label" t-key="label_index">
+                                            <div class="pdb-legend-item">
+                                                <span>
+                                                    <span class="pdb-legend-dot" t-attf-style="background: #{state.properties_by_status.datasets[0].backgroundColor[label_index]}"/>
+                                                    <t t-esc="label"/>
+                                                </span>
+                                                <b t-esc="state.properties_by_status.datasets[0].data[label_index]"/>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mt-2 pdb-pipeline-footer">
+                                    <span><t t-esc="state.properties_by_status.labels.length"/> Statuses &#8226; <t t-esc="state.total_properties.value"/> Total Properties</span>
+                                    <span t-esc="state.occupancy.percent + '% Occupied'"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weekly activity + Alert Center -->
+                    <div class="row g-0 mx-0">
+                        <div class="col-lg-7 col-md-12 p-1">
+                            <div class="property-dashboard-chart-card p-3">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <h3 class="property-dashboard-chart-card__title"><i class="fa fa-bar-chart me-2"/>Weekly Reservation Activity</h3>
+                                </div>
+                                <p class="property-dashboard-panel__subtitle mb-2">New reservations created per day across the filtered portfolio, last 7 days.</p>
+                                <div style="height: 260px;">
+                                    <ChartRenderer type="'bar'" title="'Weekly Reservation Activity'" y_title="'Reservations'" x_title="'Day'" data="state.weekly_activity"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 col-md-12 p-1">
+                            <div class="property-dashboard-chart-card p-3 h-100 d-flex flex-column">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <h3 class="property-dashboard-chart-card__title"><i class="fa fa-bell me-2"/>Operational Alert Center</h3>
+                                    <span t-if="state.alerts.length" class="pdc-v2__badge pdc-badge--red">Action Needed</span>
+                                    <span t-else="" class="pdc-v2__badge pdc-badge--green">All Clear</span>
+                                </div>
+                                <div t-if="!state.alerts.length" class="property-dashboard-empty flex-grow-1 d-flex align-items-center justify-content-center">
+                                    <i class="fa fa-check-circle me-2"/>No active alerts right now.
+                                </div>
+                                <div t-else="">
+                                    <t t-foreach="state.alerts" t-as="alert" t-key="alert_index">
+                                        <div class="pdb-alert-item">
+                                            <div t-attf-class="pdb-alert-icon pdb-alert-icon--#{alert.severity}">
+                                                <i t-attf-class="fa #{alert.severity === 'critical' ? 'fa-exclamation-triangle' : 'fa-clock-o'}"/>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex align-items-center justify-content-between gap-2">
+                                                    <span class="pdb-alert-title" t-esc="alert.title"/>
+                                                    <span t-attf-class="pdc-v2__badge pdc-badge--#{alert.severity === 'critical' ? 'red' : 'amber'}" t-esc="alert.badge"/>
+                                                </div>
+                                                <div class="pdb-alert-desc" t-esc="alert.description"/>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- More Analytics -->
+                    <h2 class="property-dashboard-section-title mt-3"><i class="fa fa-area-chart me-2"/>More Analytics</h2>
+
+                    <div class="row">
+                        <div class="col-12 m-0 p-0">
+                            <div class="property-dashboard-chart-card m-1 p-3">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h3 class="property-dashboard-chart-card__title">Sales Revenue by Month</h3>
+                                    <a class="property-dashboard-chart-link-btn" t-attf-href="/web#action=&amp;model=property.sale">
+                                        <span class="fa fa-arrow-right"/>
+                                    </a>
+                                </div>
+                                <div class="col-12" style="height: 300px;">
+                                    <ChartRenderer
+                                        type="'line'"
+                                        title="'Sales Revenue by Month'"
+                                        y_title="'Revenue'"
+                                        x_title="'Month'"
+                                        data="state.sales_by_month"
+                                        onChartClick="onSalesByMonthClick"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-lg-6 m-0 p-0">
+                            <div class="property-dashboard-chart-card m-1 p-3">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h3 class="property-dashboard-chart-card__title">Properties by Type</h3>
+                                    <a class="property-dashboard-chart-link-btn" t-attf-href="/web#model=property.property">
+                                        <span class="fa fa-arrow-right"/>
+                                    </a>
+                                </div>
+                                <div class="col-12" style="height: 300px;">
+                                    <ChartRenderer
+                                        type="'bar'"
+                                        title="'Properties by Type'"
+                                        y_title="'Number of Properties'"
+                                        x_title="'Type'"
+                                        data="state.properties_by_type"
+                                        onChartClick="onPropertiesByTypeClick"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-lg-6 m-0 p-0">
+                            <div class="property-dashboard-chart-card m-1 p-3">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h3 class="property-dashboard-chart-card__title">Reservations by Status</h3>
+                                    <a class="property-dashboard-chart-link-btn" t-attf-href="/web#model=property.reservation">
+                                        <span class="fa fa-arrow-right"/>
+                                    </a>
+                                </div>
+                                <div class="col-12" style="height: 300px;">
+                                    <ChartRenderer
+                                        type="'doughnut'"
+                                        title="'Reservations by Status'"
+                                        data="state.reservations_by_status"
+                                        onChartClick="onReservationsByStatusClick"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 m-0 p-0">
+                            <div class="property-dashboard-chart-card m-1 p-3">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h3 class="property-dashboard-chart-card__title">Rentals by Status</h3>
+                                    <a class="property-dashboard-chart-link-btn" t-attf-href="/web#model=property.rental">
+                                        <span class="fa fa-arrow-right"/>
+                                    </a>
+                                </div>
+                                <div class="col-12" style="height: 300px;">
+                                    <ChartRenderer
+                                        type="'bar'"
+                                        title="'Rentals by Status'"
+                                        y_title="'Number of Rentals'"
+                                        x_title="'Status'"
+                                        data="state.rentals_by_status"
+                                        onChartClick="onRentalsByStatusClick"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </t>
+</templates>

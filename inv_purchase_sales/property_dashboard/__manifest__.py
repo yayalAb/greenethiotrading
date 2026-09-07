@@ -1,29 +1,36 @@
-# -*- coding: utf-8 -*-
+# __manifest__.py
 {
-    "name": "Property Dashboard",
-    "version": "18.0.1.0.0",
-    "category": "Industries",
-    "summary": "Rent, sales, collection and contract dashboard for Property Management",
-    "description": """
-Analytics dashboard for Advanced Property Management.
-Shows rent collection, property sales, active contracts,
-payment collection, and enquiry trends.
+    'name': 'Property Dashboard',
+    'version': '18.0.1.0.0',
+    'category': 'Industries',
+    'summary': 'Dashboard for the Property Management app',
+    'description': """
+        Property Dashboard
+        ===================
+        Gives property managers an overview of:
+        - Property inventory by type and status
+        - Sales performance and revenue
+        - Rental contracts and monthly rent revenue
     """,
-    "author": "Temesgen Kefyalew Building Rent",
-    "depends": ["web", "advanced_property_management"],
-    "data": [
-        "security/ir.model.access.csv",
-        "views/property_dashboard_views.xml",
+    'author': 'Yayal Abayneh',
+    'website': 'https://www.yourwebsite.com',
+    'depends': ['base', 'web', 'property_management'],
+    'data': [
+        'views/menu_items.xml',
     ],
-    "assets": {
-        "web.assets_backend": [
-            "property_dashboard/static/src/dashboard/property_dashboard.css",
-            "property_dashboard/static/src/dashboard/property_dashboard.xml",
-            "property_dashboard/static/src/dashboard/property_dashboard.js",
-        ],
+    'assets': {
+        'web.assets_backend': [
+            'property_dashboard/static/src/components/chart_renderer/chart_renderer.js',
+            'property_dashboard/static/src/components/chart_renderer/chart_renderer.xml',
+            'property_dashboard/static/src/components/dashboard_card/dashboard_card.js',
+            'property_dashboard/static/src/components/dashboard_card/dashboard_card.xml',
+            'property_dashboard/static/src/components/dashboard_main_view.xml',
+            'property_dashboard/static/src/components/main_dashboard_js.js',
+            'property_dashboard/static/src/css/custom_styles.css',
+        ]
     },
-    "license": "LGPL-3",
-    "installable": True,
-    "application": False,
-    "auto_install": False,
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+    'license': 'LGPL-3',
 }

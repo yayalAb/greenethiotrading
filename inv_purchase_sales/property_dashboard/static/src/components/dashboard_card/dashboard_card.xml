@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="property_dashboard.DashboardCard" owl="1">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-3 p-0 px-1">
+            <div class="pdc-v2" t-on-click="props.onClick" tabindex="0">
+                <div class="pdc-v2__top">
+                    <div t-attf-class="pdc-v2__icon pdc-icon--#{props.accent || 'blue'}">
+                        <i t-if="props.iconClass" t-att-class="'fa ' + props.iconClass"/>
+                    </div>
+                    <span t-if="props.badgeText" t-attf-class="pdc-v2__badge pdc-badge--#{props.badgeVariant || 'gray'}" t-esc="props.badgeText"/>
+                </div>
+                <div class="pdc-v2__label" t-esc="props.name"/>
+                <div class="pdc-v2__value">
+                    <span t-esc="props.value"/>
+                    <t t-if="props.uom">
+                        <span t-esc="' ' + props.uom"/>
+                    </t>
+                </div>
+                <div class="pdc-v2__subtitle" t-if="props.subtitle" t-esc="props.subtitle"/>
+            </div>
+        </div>
+    </t>
+</templates>
