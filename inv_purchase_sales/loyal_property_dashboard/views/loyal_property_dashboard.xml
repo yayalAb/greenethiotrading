@@ -9,7 +9,7 @@
         id="property_dashboard_menu"
         name="Dashboard"
         action="action_property_dashboard"
-        parent="advanced_property_management.property_root_menu"
+        parent="property_management.property_root_menu"
         sequence="0"
-        groups="advanced_property_management.group_property_agent"/>
+        groups="property_management.group_property_agent"/>
 </odoo>

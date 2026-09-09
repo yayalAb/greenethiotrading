@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="homepage_body" name="Temesgen Kefyalew Homepage Body">
-        <t t-set="Property" t-value="request.env['property.property'].sudo()"/>
-        <t t-set="rentals" t-value="Property.search([('state', '=', 'available'), ('sale_rent', '=', 'for_tenancy')], limit=8, order='id desc')"/>
-        <t t-set="sales" t-value="Property.search([('state', '=', 'available'), ('sale_rent', '=', 'for_sale')], limit=8, order='id desc')"/>
+        <t t-set="Property" t-value="request.env['property.property'].sudo() if 'property.property' in request.env else None"/>
+        <t t-set="rentals" t-value="Property.search([('state', '=', 'available'), ('sale_rent', '=', 'for_tenancy')], limit=8, order='id desc') if Property else []"/>
+        <t t-set="sales" t-value="Property.search([('state', '=', 'available'), ('sale_rent', '=', 'for_sale')], limit=8, order='id desc') if Property else []"/>
         <t t-set="fallback_imgs" t-value="['plaza-night-banner.png', 'plaza-night.png', 'towers-day.png', 'street-white.png', 'gold-glass.png', 'gold-tower.png']"/>
 
         <section class="kad-hero kad-style kad-style--cinematic">

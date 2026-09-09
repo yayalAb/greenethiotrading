@@ -6,8 +6,8 @@
     </record>
     <menuitem id="property_dashboard_menu"
               name="Dashboard"
-              parent="advanced_property_management.property_root_menu"
+              parent="property_management.property_root_menu"
               action="action_property_dashboard"
               sequence="1"
-              groups="advanced_property_management.group_property_agent"/>
+              groups="property_management.group_property_agent"/>
 </odoo>

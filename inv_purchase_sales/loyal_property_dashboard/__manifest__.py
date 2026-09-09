@@ -9,7 +9,7 @@
     """,
     "author": "Yayal Abayneh",
     "website": "https://www.yourwebsite.com",
-    "depends": ["base", "web", "account", "advanced_property_management"],
+    "depends": ["base", "web", "account", "property_management"],
     "data": [
         "security/ir.model.access.csv",
         "views/loyal_property_dashboard.xml",

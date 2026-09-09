@@ -73,7 +73,7 @@ def _sync_website_menus(env):
                 menu.write({"name": name, "url": url, "sequence": sequence})
 
     extra = env.ref(
-        "advanced_property_management.menu_property_form", raise_if_not_found=False
+        "property_management.menu_property_form", raise_if_not_found=False
     )
     if extra:
         extra.unlink()

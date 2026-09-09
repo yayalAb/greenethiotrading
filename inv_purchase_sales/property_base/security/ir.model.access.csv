@@ -1,7 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_property_site_agent,access.property.site.agent,model_property_site,advanced_property_management.group_property_agent,1,0,0,0
-access_property_site_manager,access.property.site.manager,model_property_site,advanced_property_management.group_property_manager,1,1,1,1
-access_property_building_agent,access.property.building.agent,model_property_building,advanced_property_management.group_property_agent,1,0,0,0
-access_property_building_manager,access.property.building.manager,model_property_building,advanced_property_management.group_property_manager,1,1,1,1
-access_property_floor_agent,access.property.floor.agent,model_property_floor,advanced_property_management.group_property_agent,1,0,0,0
-access_property_floor_manager,access.property.floor.manager,model_property_floor,advanced_property_management.group_property_manager,1,1,1,1
+access_property_site_agent,access.property.site.agent,model_property_site,property_management.group_property_agent,1,0,0,0
+access_property_site_manager,access.property.site.manager,model_property_site,property_management.group_property_manager,1,1,1,1
+access_property_building_agent,access.property.building.agent,model_property_building,property_management.group_property_agent,1,0,0,0
+access_property_building_manager,access.property.building.manager,model_property_building,property_management.group_property_manager,1,1,1,1
+access_property_floor_agent,access.property.floor.agent,model_property_floor,property_management.group_property_agent,1,0,0,0
+access_property_floor_manager,access.property.floor.manager,model_property_floor,property_management.group_property_manager,1,1,1,1

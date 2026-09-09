@@ -3,7 +3,7 @@ from odoo import http
 from odoo.http import request
 from markupsafe import escape, Markup
 
-from odoo.addons.advanced_property_management.controllers.advanced_property_management import (
+from odoo.addons.property_management.controllers.property_management import (
     PropertyController,
 )
 
