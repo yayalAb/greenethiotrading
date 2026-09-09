@@ -10,7 +10,7 @@ Visitors can browse For Rent listings, view galleries,
 and submit rental enquiries.
     """,
     "author": "Temesgen Kefyalew Building Rent",
-    "depends": ["website", "mail", "advanced_property_management"],
+    "depends": ["website", "mail", "property_management"],
     "data": [
         "security/ir.model.access.csv",
         "data/unlock_homepage.xml",
