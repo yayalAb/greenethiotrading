@@ -90,7 +90,7 @@
 
     <menuitem id="property_rental_request_menu"
               name="Website Enquiries"
-              parent="advanced_property_management.property_menu"
+              parent="property_management.property_menu"
               action="action_property_rental_request"
               sequence="21"/>
 </odoo>
