@@ -20,7 +20,7 @@
                             <select class="pdb-select" t-on-change="(ev) => onFilterChange('saleRent', ev.target.value)">
                                 <option value="">All Sale/Rent Modes</option>
                                 <option value="for_sale">For Sale</option>
-                                <option value="for_tenancy">For Tenancy</option>
+                                <option value="for_tenancy">For Rent</option>
                                 <option value="for_auction">For Auction</option>
                             </select>
                             <select class="pdb-select" t-on-change="(ev) => onFilterChange('readiness', ev.target.value)">

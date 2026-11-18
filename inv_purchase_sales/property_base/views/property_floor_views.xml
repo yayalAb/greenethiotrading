@@ -11,65 +11,53 @@
             </p>
         </field>
     </record>
-    <!-- Property floor menu item -->
-    <menuitem id="property_floor_menu" name="Floors"
-              parent="property_management.property_configuration_menu"
-              action="property_floor_action" sequence="6"/>
-    <!-- Property floor list view -->
-    <record id="property_floor_view_list" model="ir.ui.view">
-        <field name="name">property.floor.view.list</field>
+
+    <!-- Property floor list view inherit -->
+    <record id="property_floor_view_list_inherit_base" model="ir.ui.view">
+        <field name="name">property.floor.view.list.inherit.base</field>
         <field name="model">property.floor</field>
+        <field name="inherit_id" ref="property_management.property_floor_view_list"/>
         <field name="arch" type="xml">
-            <list editable="bottom">
-                <field name="name"/>
-                <field name="code"/>
-                <field name="floor_no"/>
+            <field name="floor_no" position="after">
                 <field name="building_id"/>
                 <field name="site_id"/>
-            </list>
+            </field>
         </field>
     </record>
-    <!-- Property floor form view -->
-    <record id="property_floor_view_form" model="ir.ui.view">
-        <field name="name">property.floor.view.form</field>
+
+    <!-- Property floor form view inherit -->
+    <record id="property_floor_view_form_inherit_base" model="ir.ui.view">
+        <field name="name">property.floor.view.form.inherit.base</field>
         <field name="model">property.floor</field>
+        <field name="inherit_id" ref="property_management.property_floor_view_form"/>
         <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <div class="oe_title">
-                        <h1>
-                            <field name="name" placeholder="Floor Name"/>
-                        </h1>
-                    </div>
-                    <group>
-                        <group>
-                            <field name="building_id"/>
-                            <field name="site_id" readonly="1"/>
-                        </group>
-                        <group>
-                            <field name="code"/>
-                            <field name="floor_no"/>
-                        </group>
-                    </group>
-                </sheet>
-            </form>
+            <xpath expr="//group[1]" position="inside">
+                <group string="Building / Site">
+                    <field name="building_id"/>
+                    <field name="site_id" readonly="1"/>
+                </group>
+            </xpath>
         </field>
     </record>
-    <!-- Property floor search view -->
-    <record id="property_floor_view_search" model="ir.ui.view">
-        <field name="name">property.floor.view.search</field>
+
+    <!-- Property floor search view inherit -->
+    <record id="property_floor_view_search_inherit_base" model="ir.ui.view">
+        <field name="name">property.floor.view.search.inherit.base</field>
         <field name="model">property.floor</field>
+        <field name="inherit_id" ref="property_management.property_floor_view_search"/>
         <field name="arch" type="xml">
-            <search>
-                <field name="name"/>
-                <field name="code"/>
+            <field name="code" position="after">
                 <field name="building_id"/>
                 <field name="site_id"/>
+            </field>
+            <filter name="inactive" position="after">
                 <group expand="1" string="Group By">
                     <filter string="Building" context="{'group_by': 'building_id'}"
                             name="building_id"/>
+                    <filter string="Site" context="{'group_by': 'site_id'}"
+                            name="site_id"/>
                 </group>
-            </search>
+            </filter>
         </field>
     </record>
 </odoo>

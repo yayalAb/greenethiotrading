@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Property location action -->
+    <record id="property_location_action" model="ir.actions.act_window">
+        <field name="name">Locations</field>
+        <field name="res_model">property.location</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Your First Location!
+            </p>
+        </field>
+    </record>
+
+    <!-- Property location menu item -->
+    <menuitem id="property_location_menu" name="Locations"
+              parent="property_configuration_menu"
+              action="property_location_action" sequence="1"/>
+
+    <!-- Property location list view -->
+    <record id="property_location_view_list" model="ir.ui.view">
+        <field name="name">property.location.view.list</field>
+        <field name="model">property.location</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="street"/>
+                <field name="city"/>
+                <field name="state_id"/>
+                <field name="country_id"/>
+                <field name="property_count" optional="show"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Property location form view -->
+    <record id="property_location_view_form" model="ir.ui.view">
+        <field name="name">property.location.view.form</field>
+        <field name="model">property.location</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_properties" type="object"
+                                class="oe_stat_button" icon="fa-building-o">
+                            <field name="property_count" widget="statinfo" string="Properties"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" string="Location Name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Bole Medhanialem, Kazanchis"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="General">
+                            <field name="code" placeholder="e.g. LOC-01"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Address Details">
+                            <label for="street" string="Address"/>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Street..."
+                                       class="o_address_street"/>
+                                <field name="street2" placeholder="Street 2..."
+                                       class="o_address_street"/>
+                                <field name="city" placeholder="City"
+                                       class="o_address_city"/>
+                                <field name="zip" placeholder="ZIP"
+                                       class="o_address_zip"/>
+                                <field name="state_id" class="o_address_state"
+                                       placeholder="State"
+                                       options='{"no_open": True}'/>
+                                <field name="country_id" placeholder="Country"
+                                       class="o_address_country"
+                                       options='{"no_open": True, "no_create": True}'/>
+                            </div>
+                            <field name="latitude"/>
+                            <field name="longitude"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Property location search view -->
+    <record id="property_location_view_search" model="ir.ui.view">
+        <field name="name">property.location.view.search</field>
+        <field name="model">property.location</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Location"/>
+                <field name="code"/>
+                <field name="city"/>
+                <field name="state_id"/>
+                <field name="country_id"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="1" string="Group By">
+                    <filter string="City" name="group_city" context="{'group_by': 'city'}"/>
+                    <filter string="Country" name="group_country" context="{'group_by': 'country_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

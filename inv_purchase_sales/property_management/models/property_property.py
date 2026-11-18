@@ -48,6 +48,7 @@ class Property(models.Model):
         ],
         string="Type",
         required=True,
+        default="commercial",
         help="The type of the property",
     )
     state = fields.Selection(
@@ -66,7 +67,7 @@ class Property(models.Model):
         "* The 'Rented' status is used when the property is rented.\n"
         "* The 'sold' status is used when the property is sold.\n",
     )
-    street = fields.Char(string="Street", required=True,
+    street = fields.Char(string="Street",
                          help="The street name")
     street2 = fields.Char(string="Street2", help="The street2 name")
     zip = fields.Char(string="Zip", change_default=True,
@@ -76,7 +77,6 @@ class Property(models.Model):
         "res.country",
         string="Country",
         ondelete="restrict",
-        required=True,
         help="The name of the country",
     )
     state_id = fields.Many2one(
@@ -127,6 +127,11 @@ class Property(models.Model):
     type_residence = fields.Char(
         string="Type of Residence", help="The type of the residence"
     )
+    floor_id = fields.Many2one(
+        "property.floor",
+        string="Floor",
+        help="The floor on which the property is located",
+    )
     total_floor = fields.Integer(
         string="Total Floor",
         default=1,
@@ -162,8 +167,17 @@ class Property(models.Model):
     usage = fields.Char(
         string="Used For", help="For what purpose is this property used for"
     )
+    location_id = fields.Many2one(
+        "property.location",
+        string="Location",
+        help="The location of the property",
+    )
     location = fields.Char(
-        string="Location", help="The location of the property")
+        string="Location Name",
+        related="location_id.name",
+        store=True,
+        help="The location of the property",
+    )
     property_image_ids = fields.One2many(
         "property.image", "property_id", string="Property Images"
     )
@@ -188,14 +202,31 @@ class Property(models.Model):
     sale_rent = fields.Selection(
         [
             ("for_sale", "For Sale"),
-            ("for_tenancy", "For Tenancy"),
+            ("for_tenancy", "For Rent"),
             ("for_auction", "For Auction"),
         ],
         string="Sale | Rent",
         required=True,
+        default="for_tenancy",
+    )
+    total_area = fields.Float(
+        string="Total Area",
+        digits=(16, 2),
+        help="Total area in square meters (m²)",
+        tracking=True,
+    )
+    price_per_m2 = fields.Monetary(
+        string="Price per m²",
+        currency_field="currency_id",
+        help="Price per square meter",
+        tracking=True,
     )
     unit_price = fields.Monetary(
-        string="Sales Price", help="Selling price of the Property."
+        string="Sales Price",
+        help="Selling price of the Property.",
+        compute="_compute_prices",
+        store=True,
+        readonly=False,
     )
     sale_id = fields.Many2one(
         "property.sale",
@@ -204,7 +235,12 @@ class Property(models.Model):
         tracking=True,
     )
     rent_month = fields.Monetary(
-        string="Rent/Month", help="Rent price per month", tracking=True
+        string="Rent/Month",
+        help="Rent price per month",
+        tracking=True,
+        compute="_compute_prices",
+        store=True,
+        readonly=False,
     )
     payment_structure_id = fields.Many2one(
         "property.payment.term",
@@ -213,15 +249,67 @@ class Property(models.Model):
         "or sold",
     )
 
+    @api.depends("total_area", "price_per_m2", "sale_rent")
+    def _compute_prices(self):
+        for rec in self:
+            if rec.total_area and rec.price_per_m2:
+                calculated = rec.total_area * rec.price_per_m2
+                if rec.sale_rent == "for_sale":
+                    rec.unit_price = calculated
+                elif rec.sale_rent == "for_tenancy":
+                    rec.rent_month = calculated
+            else:
+                rec.unit_price = rec.unit_price or 0.0
+                rec.rent_month = rec.rent_month or 0.0
+
+    @api.onchange("total_area", "price_per_m2", "sale_rent")
+    def _onchange_calculate_price(self):
+        """Immediately update rent/sale price in the form interface"""
+        if self.total_area and self.price_per_m2:
+            calculated = self.total_area * self.price_per_m2
+            if self.sale_rent == "for_sale":
+                self.unit_price = calculated
+            elif self.sale_rent == "for_tenancy":
+                self.rent_month = calculated
+
+    @api.onchange("location_id")
+    def _onchange_location_id(self):
+        """Populate address fields when location is selected"""
+        if self.location_id:
+            self.street = self.location_id.street
+            self.street2 = self.location_id.street2
+            self.city = self.location_id.city
+            self.zip = self.location_id.zip
+            self.state_id = self.location_id.state_id
+            self.country_id = self.location_id.country_id
+            self.latitude = self.location_id.latitude
+            self.longitude = self.location_id.longitude
+
     @api.model_create_multi
     def create(self, vals_list):
-        """Generating sequence number at the time of creation of record"""
+        """Generating sequence number and populating address from location if set"""
         for vals in vals_list:
             if vals.get("code", "New") == "New":
                 vals["code"] = (
                     self.env["ir.sequence"].next_by_code(
                         "property.property") or "New"
                 )
+            if vals.get("location_id"):
+                loc = self.env["property.location"].browse(vals["location_id"])
+                if loc:
+                    for field in [
+                        "street",
+                        "street2",
+                        "city",
+                        "zip",
+                        "state_id",
+                        "country_id",
+                        "latitude",
+                        "longitude",
+                    ]:
+                        if not vals.get(field):
+                            val = getattr(loc, field)
+                            vals[field] = val.id if hasattr(val, "id") else val
         res = super(Property, self).create(vals_list)
         return res
 

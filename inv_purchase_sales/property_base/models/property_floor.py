@@ -3,16 +3,10 @@ from odoo import fields, models
 
 
 class PropertyFloor(models.Model):
-    """A class for the model property floor to represent a floor
-    that belongs to a building"""
+    """Extends property.floor to link floors to buildings and sites"""
 
-    _name = "property.floor"
-    _description = "Property Floor"
-    _order = "floor_no"
+    _inherit = "property.floor"
 
-    name = fields.Char(string="Name", required=True, help="Name of the floor")
-    code = fields.Char(string="Code", help="Reference code for the floor")
-    floor_no = fields.Integer(string="Floor Number", help="Sequence number of the floor")
     building_id = fields.Many2one(
         "property.building",
         string="Building",
@@ -26,4 +20,3 @@ class PropertyFloor(models.Model):
     company_id = fields.Many2one(
         related="building_id.company_id", string="Company", store=True
     )
-    active = fields.Boolean(string="Active", default=True)

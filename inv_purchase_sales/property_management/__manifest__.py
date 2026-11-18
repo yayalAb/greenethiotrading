@@ -40,6 +40,8 @@
         'data/property_management_data.xml',
         'data/ir_cron_data.xml',
         'views/property_property_views.xml',
+        'views/property_location_views.xml',
+        'views/property_floor_views.xml',
         'views/property_facility_views.xml',
         'views/property_payment_term_views.xml',
         'views/property_tag_views.xml',
