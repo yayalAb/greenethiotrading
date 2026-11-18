@@ -18,7 +18,7 @@
         <field name="model">property.property</field>
         <field name="inherit_id" ref="property_management.property_property_view_list"/>
         <field name="arch" type="xml">
-            <field name="city" position="after">
+            <field name="rent_month" position="after">
                 <field name="site_id" optional="show"/>
                 <field name="building_id" optional="show"/>
             </field>
