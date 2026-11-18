@@ -13,7 +13,7 @@
         </field>
     </record>
     <!-- Property menu items -->
-    <menuitem id="property_root_menu" name="Property Management"
+    <menuitem id="property_root_menu" name="Property"
               groups="property_management.group_property_agent"
               web_icon="property_management,static/description/icon.png"/>
     <menuitem id="property_menu" name="Property" parent="property_root_menu"
