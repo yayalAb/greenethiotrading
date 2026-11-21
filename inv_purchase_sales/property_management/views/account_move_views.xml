@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!--
-        Inherit from stock_picking_custom's account.move view
-        (which already removes the broken refresh_invoice_currency_rate button)
-        to add Rental Period fields on the invoice form.
-        Visible only when the invoice is linked to a property rental.
+        Inherit from stock_picking_custom's account.move view.
+        On rental invoices:
+          - Hide FS No, MRC No, Payment Method
+          - Show Payment Period Start / End in their place
+          - No separate "Rental Period" section above invoice lines
     -->
     <record id="account_move_form_rental_period" model="ir.ui.view">
         <field name="name">account.move.form.rental.period</field>
@@ -12,18 +13,33 @@
         <field name="inherit_id"
                ref="stock_picking_custom.view_move_form_fs_mrc_payment"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='invoice_line_ids']" position="before">
-                <group string="Rental Period"
-                       invisible="property_rental_id == False">
-                    <group>
-                        <field name="property_rental_id" readonly="1"/>
-                        <field name="rental_invoice_start_date"/>
-                    </group>
-                    <group>
-                        <field name="rental_invoice_end_date"/>
-                    </group>
-                </group>
+
+            <!-- Payment Period fields placed BEFORE fs_no (in place of FS No) -->
+            <xpath expr="//field[@name='fs_no']" position="before">
+                <field name="property_rental_id" invisible="1"/>
+                <field name="rental_invoice_start_date"
+                       string="Payment Period Start"
+                       invisible="not property_rental_id"/>
+                <field name="rental_invoice_end_date"
+                       string="Payment Period End"
+                       invisible="not property_rental_id"/>
             </xpath>
+
+            <!-- Hide FS No on rental invoices -->
+            <xpath expr="//field[@name='fs_no']" position="attributes">
+                <attribute name="invisible">move_type not in ('out_invoice', 'out_refund') or property_rental_id</attribute>
+            </xpath>
+
+            <!-- Hide MRC No on rental invoices -->
+            <xpath expr="//field[@name='mrc_no']" position="attributes">
+                <attribute name="invisible">move_type not in ('out_invoice', 'out_refund') or property_rental_id</attribute>
+            </xpath>
+
+            <!-- Hide Payment Method on rental invoices -->
+            <xpath expr="//field[@name='payment_method']" position="attributes">
+                <attribute name="invisible">move_type not in ('out_invoice', 'out_refund') or property_rental_id</attribute>
+            </xpath>
+
         </field>
     </record>
 </odoo>

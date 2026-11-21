@@ -28,9 +28,9 @@ class RentalInvoiceWizard(models.TransientModel):
                                  string='Contract Start', readonly=True)
     contract_end = fields.Date(related='rental_id.end_date',
                                string='Contract End', readonly=True)
-    period_start = fields.Date(string='Period Start', required=True,
+    period_start = fields.Date(string='Payment Period Start', required=True,
                                help='Start of the rental period to invoice')
-    period_end = fields.Date(string='Period End', required=True,
+    period_end = fields.Date(string='Payment Period End', required=True,
                              help='End of the rental period to invoice')
 
     @api.constrains('period_start', 'period_end')

@@ -18,12 +18,12 @@
                             <field name="contract_end"/>
                         </group>
                     </group>
-                    <group string="Invoice Period">
+                    <group string="Payment Period">
                         <group>
-                            <field name="period_start"/>
+                            <field name="period_start" string="Payment Period Start"/>
                         </group>
                         <group>
-                            <field name="period_end"/>
+                            <field name="period_end" string="Payment Period End"/>
                         </group>
                     </group>
                 </sheet>

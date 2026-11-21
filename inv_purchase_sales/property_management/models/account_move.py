@@ -37,11 +37,11 @@ class AccountMove(models.Model):
                                          help='The corresponding property '
                                               'rental order')
     rental_invoice_start_date = fields.Date(
-        string='Rental Period Start',
-        help='Start date of the rental period covered by this invoice')
+        string='Payment Period Start',
+        help='Start date of the payment/rental period covered by this invoice')
     rental_invoice_end_date = fields.Date(
-        string='Rental Period End',
-        help='End date of the rental period covered by this invoice')
+        string='Payment Period End',
+        help='End date of the payment/rental period covered by this invoice')
 
     @api.constrains('rental_invoice_start_date', 'rental_invoice_end_date',
                     'property_rental_id')
