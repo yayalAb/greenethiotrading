@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_landscape_narrow" model="report.paperformat">
+        <field name="name">Landscape Narrow Margin</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">5</field>
+        <field name="dpi">96</field>
+    </record>
+
+    <record id="action_report_rental_sales" model="ir.actions.report">
+        <field name="name">Rental Summary of Sales</field>
+        <field name="model">property.rental.sales.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">property_rental_sales_report.report_rental_sales</field>
+        <field name="report_file">property_rental_sales_report.report_rental_sales</field>
+        <field name="print_report_name">'Rental_Summary_of_Sales_%s' % (object.fiscal_year)</field>
+        <field name="paperformat_id" ref="paperformat_landscape_narrow"/>
+    </record>
+</odoo>

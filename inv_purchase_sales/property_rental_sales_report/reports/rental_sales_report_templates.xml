@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_rental_sales">
+        <t t-call="web.html_container">
+            <div class="article" style="font-family: Arial, sans-serif; font-size: 8px;">
+                <div style="margin-bottom: 10px;">
+                    <h4 style="margin: 0; font-weight: bold;"><t t-esc="data['company_name']"/></h4>
+                    <h5 style="margin: 3px 0; font-weight: bold;">SUMMARY OF SALES</h5>
+                    <p style="margin: 0; font-weight: bold; color: #555;"><t t-esc="data['period_title']"/></p>
+                </div>
+
+                <table class="table table-bordered table-sm" style="width: 100%; border-collapse: collapse; font-size: 7.5px;">
+                    <thead style="background-color: #D9E1F2; text-align: center;">
+                        <tr>
+                            <th style="border: 1px solid #ccc; padding: 2px;">S/N</th>
+                            <th style="border: 1px solid #ccc; padding: 2px;">Shop Code</th>
+                            <th style="border: 1px solid #ccc; padding: 2px;">Customer Name</th>
+                            <th style="border: 1px solid #ccc; padding: 2px;">Remark</th>
+                            <th style="border: 1px solid #ccc; padding: 2px;">Location</th>
+                            <th style="border: 1px solid #ccc; padding: 2px;">Floor</th>
+                            <th style="border: 1px solid #ccc; padding: 2px;">Start Date</th>
+                            <th style="border: 1px solid #ccc; padding: 2px;">End Date</th>
+                            <th style="border: 1px solid #ccc; padding: 2px;">Total Area</th>
+                            <th style="border: 1px solid #ccc; padding: 2px;">Price/Sqm (No VAT)</th>
+                            <th style="border: 1px solid #ccc; padding: 2px;">Monthly (No VAT)</th>
+                            <th style="border: 1px solid #ccc; padding: 2px;">Monthly (With VAT)</th>
+                            <t t-foreach="data['months']" t-as="m">
+                                <th style="border: 1px solid #ccc; padding: 2px;"><t t-esc="m['label']"/></th>
+                            </t>
+                            <th style="border: 1px solid #ccc; padding: 2px;">TOTAL</th>
+                            <th style="border: 1px solid #ccc; padding: 2px;">Remark</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="data['rows']" t-as="row">
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center;"><t t-esc="row['sn']"/></td>
+                                <td style="border: 1px solid #ddd; padding: 2px;"><t t-esc="row['shop_code']"/></td>
+                                <td style="border: 1px solid #ddd; padding: 2px;"><t t-esc="row['customer_name']"/></td>
+                                <td style="border: 1px solid #ddd; padding: 2px;"><t t-esc="row['remark_cust']"/></td>
+                                <td style="border: 1px solid #ddd; padding: 2px;"><t t-esc="row['location']"/></td>
+                                <td style="border: 1px solid #ddd; padding: 2px;"><t t-esc="row['floor']"/></td>
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center;"><t t-esc="row['start_date']"/></td>
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: center;"><t t-esc="row['end_date']"/></td>
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: right;"><t t-esc="'%.2f' % row['total_area'] if row['total_area'] else ''"/></td>
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: right;"><t t-esc="'{:,.2f}'.format(row['price_per_sqm']) if row['price_per_sqm'] else ''"/></td>
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: right;"><t t-esc="'{:,.2f}'.format(row['monthly_before_vat']) if row['monthly_before_vat'] else ''"/></td>
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: right;"><t t-esc="'{:,.2f}'.format(row['monthly_with_vat']) if row['monthly_with_vat'] else ''"/></td>
+                                <t t-foreach="data['months']" t-as="m">
+                                    <td style="border: 1px solid #ddd; padding: 2px; text-align: right;">
+                                        <t t-set="mval" t-value="row['month_values'].get(m['code'], 0.0)"/>
+                                        <t t-if="mval">
+                                            <t t-esc="'{:,.2f}'.format(mval)"/>
+                                        </t>
+                                    </td>
+                                </t>
+                                <td style="border: 1px solid #ddd; padding: 2px; text-align: right; font-weight: bold;"><t t-esc="'{:,.2f}'.format(row['total']) if row['total'] else ''"/></td>
+                                <td style="border: 1px solid #ddd; padding: 2px;"><t t-esc="row['remark']"/></td>
+                            </tr>
+                        </t>
+                        <!-- Grand Totals Row -->
+                        <tr style="background-color: #FFF2CC; font-weight: bold;">
+                            <td colspan="2" style="border: 1px solid #ccc; padding: 3px; text-align: center;">TOTAL</td>
+                            <td colspan="10" style="border: 1px solid #ccc; padding: 3px;"></td>
+                            <t t-foreach="data['months']" t-as="m">
+                                <td style="border: 1px solid #ccc; padding: 3px; text-align: right;">
+                                    <t t-esc="'{:,.2f}'.format(data['month_totals'].get(m['code'], 0.0))"/>
+                                </td>
+                            </t>
+                            <td style="border: 1px solid #ccc; padding: 3px; text-align: right;">
+                                <t t-esc="'{:,.2f}'.format(data['grand_total'])"/>
+                            </td>
+                            <td style="border: 1px solid #ccc; padding: 3px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

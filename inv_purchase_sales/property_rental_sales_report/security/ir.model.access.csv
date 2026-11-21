@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_property_rental_sales_report_wizard_agent,access.property.rental.sales.report.wizard.agent,model_property_rental_sales_report_wizard,property_management.group_property_agent,1,1,1,0
+access_property_rental_sales_report_wizard_manager,access.property.rental.sales.report.wizard.manager,model_property_rental_sales_report_wizard,property_management.group_property_manager,1,1,1,1
+access_property_rental_sales_report_wizard_base,access.property.rental.sales.report.wizard.base,model_property_rental_sales_report_wizard,base.group_user,1,1,1,1
+access_rental_sales_report_line_base,access.rental.sales.report.line.base,model_rental_sales_report_line,base.group_user,1,1,1,1
+access_rental_sales_report_line_agent,access.rental.sales.report.line.agent,model_rental_sales_report_line,property_management.group_property_agent,1,1,1,1
+access_rental_sales_report_line_manager,access.rental.sales.report.line.manager,model_rental_sales_report_line,property_management.group_property_manager,1,1,1,1

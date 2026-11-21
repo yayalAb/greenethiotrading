@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_property_rental_sales_report_wizard_form" model="ir.ui.view">
+        <field name="name">property.rental.sales.report.wizard.form</field>
+        <field name="model">property.rental.sales.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Filter Rental Summary of Sales">
+                <sheet>
+                    <div class="oe_title">
+                        <h2>Filter Rental Summary of Sales</h2>
+                        <p class="text-muted">
+                            Select Ethiopian Fiscal Year (Hamle -> Sene) and optional filters to refresh the report.
+                        </p>
+                    </div>
+                    <group>
+                        <group string="Period Selection">
+                            <field name="filter_by" widget="radio"/>
+                            <field name="fiscal_year" invisible="filter_by != 'fiscal_year'" required="filter_by == 'fiscal_year'"/>
+                            <label for="date_to" string="Date Range" invisible="filter_by != 'date_range'"/>
+                            <div class="d-flex" invisible="filter_by != 'date_range'">
+                                <field name="date_to" widget="daterange" options="{'start_date_field': 'date_from', 'always_range': True}" required="filter_by == 'date_range'"/>
+                                <field name="date_from" invisible="1" required="filter_by == 'date_range'"/>
+                            </div>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Filters (Optional)">
+                            <field name="location_id"/>
+                            <field name="floor_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Select Specific Properties (Optional)">
+                            <field name="property_ids" widget="many2many_tags" placeholder="Leave blank to report all properties..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="action_view_list" string="Apply &amp; View List" type="object" class="btn-primary" icon="fa-list"/>
+                    <button name="action_generate_excel" string="Export Excel (.xlsx)" type="object" class="btn-secondary" icon="fa-file-excel-o"/>
+                    <button name="action_generate_pdf" string="Export PDF" type="object" class="btn-secondary" icon="fa-file-pdf-o"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for the Wizard -->
+    <record id="action_property_rental_sales_report_wizard" model="ir.actions.act_window">
+        <field name="name">Filter Rental Summary of Sales</field>
+        <field name="res_model">property.rental.sales.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

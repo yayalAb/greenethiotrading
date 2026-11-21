@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List / Tree view for Rental Summary of Sales -->
+    <record id="view_rental_sales_report_line_tree" model="ir.ui.view">
+        <field name="name">rental.sales.report.line.list</field>
+        <field name="model">rental.sales.report.line</field>
+        <field name="arch" type="xml">
+            <list string="Rental Summary of Sales" create="0" delete="0" edit="0">
+                <header>
+                    <button name="action_export_excel" string="Export Excel (.xlsx)" type="object" class="btn-primary" icon="fa-file-excel-o"/>
+                    <button name="action_export_pdf" string="Export PDF" type="object" class="btn-secondary" icon="fa-file-pdf-o"/>
+                    <button name="%(property_rental_sales_report.action_property_rental_sales_report_wizard)d" string="Change Fiscal Year / Filter" type="action" class="btn-secondary" icon="fa-filter"/>
+                </header>
+                <field name="sn" string="S/N"/>
+                <field name="shop_code" string="Shop Code"/>
+                <field name="customer_name" string="Customer Name"/>
+                <field name="remark_cust" string="Remark" optional="show"/>
+                <field name="location" string="Location"/>
+                <field name="floor" string="Floor"/>
+                <field name="start_date" string="Rent Start"/>
+                <field name="end_date" string="Rent End"/>
+                <field name="total_area" string="Total Area" sum="Total Area"/>
+                <field name="price_per_sqm" string="Price /Sqm (No VAT)"/>
+                <field name="monthly_before_vat" string="Monthly (No VAT)" sum="Monthly (No VAT)"/>
+                <field name="monthly_with_vat" string="Monthly (With VAT)" sum="Monthly (With VAT)"/>
+                <!-- 12 Ethiopian Months -->
+                <field name="m_0" string="Hamle" sum="Hamle"/>
+                <field name="m_1" string="Nehase" sum="Nehase"/>
+                <field name="m_2" string="Meskerem" sum="Meskerem"/>
+                <field name="m_3" string="Tikimt" sum="Tikimt"/>
+                <field name="m_4" string="Hidar" sum="Hidar"/>
+                <field name="m_5" string="Tahsas" sum="Tahsas"/>
+                <field name="m_6" string="Tir" sum="Tir"/>
+                <field name="m_7" string="Yekatit" sum="Yekatit"/>
+                <field name="m_8" string="Megabit" sum="Megabit"/>
+                <field name="m_9" string="Miazia" sum="Miazia"/>
+                <field name="m_10" string="Ginbot" sum="Ginbot"/>
+                <field name="m_11" string="Sene" sum="Sene"/>
+                <field name="total" string="TOTAL" sum="Grand Total"/>
+                <field name="remark" string="Status"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search View with Rich Filters and Group By -->
+    <record id="view_rental_sales_report_line_search" model="ir.ui.view">
+        <field name="name">rental.sales.report.line.search</field>
+        <field name="model">rental.sales.report.line</field>
+        <field name="arch" type="xml">
+            <search string="Search Rental Sales Report">
+                <field name="shop_code" string="Shop Code"/>
+                <field name="customer_name" string="Customer / Renter"/>
+                <field name="location" string="Location / Building"/>
+                <field name="floor" string="Floor"/>
+                <field name="fiscal_year" string="Fiscal Year"/>
+
+                <separator/>
+                <filter string="Active Rentals" name="filter_active" domain="[('remark', '=', 'Active')]"/>
+                <filter string="Unrented Properties" name="filter_unrented" domain="['|', ('remark_cust', '=', 'Unrented'), ('remark', '=', 'Unrented')]"/>
+                <filter string="With Invoiced Revenue" name="filter_has_revenue" domain="[('total', '>', 0)]"/>
+
+                <group expand="0" string="Group By">
+                    <filter string="Location" name="group_location" context="{'group_by': 'location'}"/>
+                    <filter string="Floor" name="group_floor" context="{'group_by': 'floor'}"/>
+                    <filter string="Status" name="group_remark" context="{'group_by': 'remark'}"/>
+                    <filter string="Fiscal Year" name="group_fy" context="{'group_by': 'fiscal_year'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action Action for Direct List View (Direct Menu Target) -->
+    <record id="action_rental_sales_report_line_view" model="ir.actions.server">
+        <field name="name">Rental Summary of Sales</field>
+        <field name="model_id" ref="property_rental_sales_report.model_rental_sales_report_line"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_refresh_data()</field>
+    </record>
+
+    <!-- Menu Item directly triggers the List View via Server Action -->
+    <menuitem id="menu_property_rental_sales_report_list"
+              name="Rental Summary of Sales"
+              parent="property_management.property_report_menu"
+              action="action_rental_sales_report_line_view"
+              sequence="20"/>
+
+    <!-- Action menu bindings for selected records export -->
+    <record id="action_export_excel_server" model="ir.actions.server">
+        <field name="name">Export to Excel (.xlsx)</field>
+        <field name="model_id" ref="property_rental_sales_report.model_rental_sales_report_line"/>
+        <field name="binding_model_id" ref="property_rental_sales_report.model_rental_sales_report_line"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_export_excel()</field>
+    </record>
+
+    <record id="action_export_pdf_server" model="ir.actions.server">
+        <field name="name">Export to PDF</field>
+        <field name="model_id" ref="property_rental_sales_report.model_rental_sales_report_line"/>
+        <field name="binding_model_id" ref="property_rental_sales_report.model_rental_sales_report_line"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_export_pdf()</field>
+    </record>
+</odoo>
