@@ -13,12 +13,12 @@
                 </header>
                 <field name="sn" string="S/N" optional="show"/>
                 <field name="shop_code" string="Shop Code" optional="show"/>
-                <field name="customer_name" string="Customer Name" optional="show"/>
+                <field name="customer_name" string="Customer Name" optional="hide"/>
                 <field name="remark_cust" string="Remark" optional="hide"/>
                 <field name="location" string="Location" optional="hide"/>
                 <field name="floor" string="Floor" optional="show"/>
-                <field name="start_date" string="Rent Start" optional="show"/>
-                <field name="end_date" string="Rent End" optional="show"/>
+                <field name="start_date" string="Rent Start" optional="hide"/>
+                <field name="end_date" string="Rent End" optional="hide"/>
                 <field name="total_area" string="Total Area" sum="Total Area" optional="show"/>
                 <field name="price_per_sqm" string="Price /Sqm (No VAT)" optional="show"/>
                 <field name="monthly_before_vat" string="Monthly (No VAT)" sum="Monthly (No VAT)" optional="show"/>
