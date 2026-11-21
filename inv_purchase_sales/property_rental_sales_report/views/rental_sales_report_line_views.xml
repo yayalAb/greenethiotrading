@@ -11,33 +11,34 @@
                     <button name="action_export_pdf" string="Export PDF" type="object" class="btn-secondary" icon="fa-file-pdf-o"/>
                     <button name="%(property_rental_sales_report.action_property_rental_sales_report_wizard)d" string="Change Fiscal Year / Filter" type="action" class="btn-secondary" icon="fa-filter"/>
                 </header>
-                <field name="sn" string="S/N"/>
-                <field name="shop_code" string="Shop Code"/>
-                <field name="customer_name" string="Customer Name"/>
-                <field name="remark_cust" string="Remark" optional="show"/>
-                <field name="location" string="Location"/>
-                <field name="floor" string="Floor"/>
-                <field name="start_date" string="Rent Start"/>
-                <field name="end_date" string="Rent End"/>
-                <field name="total_area" string="Total Area" sum="Total Area"/>
-                <field name="price_per_sqm" string="Price /Sqm (No VAT)"/>
-                <field name="monthly_before_vat" string="Monthly (No VAT)" sum="Monthly (No VAT)"/>
-                <field name="monthly_with_vat" string="Monthly (With VAT)" sum="Monthly (With VAT)"/>
-                <!-- 12 Ethiopian Months -->
-                <field name="m_0" string="Hamle" sum="Hamle"/>
-                <field name="m_1" string="Nehase" sum="Nehase"/>
-                <field name="m_2" string="Meskerem" sum="Meskerem"/>
-                <field name="m_3" string="Tikimt" sum="Tikimt"/>
-                <field name="m_4" string="Hidar" sum="Hidar"/>
-                <field name="m_5" string="Tahsas" sum="Tahsas"/>
-                <field name="m_6" string="Tir" sum="Tir"/>
-                <field name="m_7" string="Yekatit" sum="Yekatit"/>
-                <field name="m_8" string="Megabit" sum="Megabit"/>
-                <field name="m_9" string="Miazia" sum="Miazia"/>
-                <field name="m_10" string="Ginbot" sum="Ginbot"/>
-                <field name="m_11" string="Sene" sum="Sene"/>
-                <field name="total" string="TOTAL" sum="Grand Total"/>
-                <field name="remark" string="Status"/>
+                <field name="sn" string="S/N" optional="show"/>
+                <field name="shop_code" string="Shop Code" optional="show"/>
+                <field name="customer_name" string="Customer Name" optional="show"/>
+                <field name="remark_cust" string="Remark" optional="hide"/>
+                <field name="location" string="Location" optional="hide"/>
+                <field name="floor" string="Floor" optional="show"/>
+                <field name="start_date" string="Rent Start" optional="show"/>
+                <field name="end_date" string="Rent End" optional="show"/>
+                <field name="total_area" string="Total Area" sum="Total Area" optional="show"/>
+                <field name="price_per_sqm" string="Price /Sqm (No VAT)" optional="show"/>
+                <field name="monthly_before_vat" string="Monthly (No VAT)" sum="Monthly (No VAT)" optional="show"/>
+                <field name="monthly_with_vat" string="Monthly (With VAT)" sum="Monthly (With VAT)" optional="show"/>
+                <!-- 12 Ethiopian Months: Hamle, Nehase, Meskerem shown by default, remaining hidden by default -->
+                <field name="m_0" string="Hamle" sum="Hamle" optional="show"/>
+                <field name="m_1" string="Nehase" sum="Nehase" optional="show"/>
+                <field name="m_2" string="Meskerem" sum="Meskerem" optional="show"/>
+                <field name="m_3" string="Tikimt" sum="Tikimt" optional="hide"/>
+                <field name="m_4" string="Hidar" sum="Hidar" optional="hide"/>
+                <field name="m_5" string="Tahsas" sum="Tahsas" optional="hide"/>
+                <field name="m_6" string="Tir" sum="Tir" optional="hide"/>
+                <field name="m_7" string="Yekatit" sum="Yekatit" optional="hide"/>
+                <field name="m_8" string="Megabit" sum="Megabit" optional="hide"/>
+                <field name="m_9" string="Miazia" sum="Miazia" optional="hide"/>
+                <field name="m_10" string="Ginbot" sum="Ginbot" optional="hide"/>
+                <field name="m_11" string="Sene" sum="Sene" optional="hide"/>
+                <field name="total" string="TOTAL" sum="Grand Total" optional="show"/>
+                <field name="remark" string="Status" optional="show"/>
+                <field name="fiscal_year" string="Fiscal Year" optional="hide"/>
             </list>
         </field>
     </record>
