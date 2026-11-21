@@ -14,15 +14,18 @@
                ref="stock_picking_custom.view_move_form_fs_mrc_payment"/>
         <field name="arch" type="xml">
 
-            <!-- Payment Period fields placed BEFORE fs_no (in place of FS No) -->
+            <!-- Payment Period field placed BEFORE fs_no with daterange widget (identical to Planned Date) -->
             <xpath expr="//field[@name='fs_no']" position="before">
                 <field name="property_rental_id" invisible="1"/>
-                <field name="rental_invoice_start_date"
-                       string="Payment Period Start"
+                <label for="rental_invoice_end_date" string="Payment Period"
                        invisible="not property_rental_id"/>
-                <field name="rental_invoice_end_date"
-                       string="Payment Period End"
-                       invisible="not property_rental_id"/>
+                <div class="d-flex" invisible="not property_rental_id">
+                    <field name="rental_invoice_end_date"
+                           widget="daterange"
+                           string="Payment Period"
+                           options="{'start_date_field': 'rental_invoice_start_date'}"/>
+                    <field name="rental_invoice_start_date" invisible="1"/>
+                </div>
             </xpath>
 
             <!-- Hide FS No on rental invoices -->
