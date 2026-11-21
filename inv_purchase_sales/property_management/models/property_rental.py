@@ -67,11 +67,14 @@ class PropertyRental(models.Model):
     invoice_count = fields.Integer(string='Invoice Count',
                                    compute='_compute_invoice_count',
                                    help='The Invoices related to this rental')
+    invoice_ids = fields.One2many('account.move', 'property_rental_id',
+                                  string='Invoices')
     rental_bills_ids = fields.One2many('rental.bill', 'rental_id')
     invoice_date = fields.Date(string='Invoice Date',
                                help='The latest Invoiced Date')
     next_invoice = fields.Date(string='Next Invoice',
                                compute='_compute_next_invoice',
+                               store=True,
                                help='The next invoicing date')
     company_id = fields.Many2one('res.company',
                                  string="Property Management Company",
@@ -93,12 +96,23 @@ class PropertyRental(models.Model):
         self.invoice_count = self.env['account.move'].search_count(
             [('property_rental_id', '=', self.id)])
 
+    @api.depends('invoice_ids.rental_invoice_end_date', 'invoice_ids.state', 'end_date')
     def _compute_next_invoice(self):
-        """Computes the next_invoice date"""
-        if self.invoice_date and fields.Date.today() < self.end_date:
-            self.next_invoice = fields.Date.add(self.invoice_date, months=1)
-        else:
-            self.next_invoice = False
+        """Computes next_invoice date from the latest invoice's end date + 1 day."""
+        for rec in self:
+            # Find all out_invoices linked to this rental that have an end date set
+            valid_invoices = rec.invoice_ids.filtered(
+                lambda m: m.move_type == 'out_invoice' and m.state != 'cancel' and m.rental_invoice_end_date
+            )
+            if valid_invoices:
+                latest_end_date = max(valid_invoices.mapped('rental_invoice_end_date'))
+                next_date = latest_end_date + relativedelta(days=1)
+                # Next invoice date is valid as long as it does not exceed the contract's end date
+                rec.next_invoice = next_date if rec.end_date and next_date <= rec.end_date else False
+            elif rec.invoice_date and rec.end_date and fields.Date.today() < rec.end_date:
+                rec.next_invoice = fields.Date.add(rec.invoice_date, months=1)
+            else:
+                rec.next_invoice = False
 
     def action_cancel(self):
         """ Changes the record stage to cancel """
@@ -114,16 +128,20 @@ class PropertyRental(models.Model):
                 _('The Customer %r is Blacklisted.', self.renter_id.name))
 
         today = fields.Date.today()
-        # Default start and end dates to current month's start and end
-        month_start = today.replace(day=1)
-        month_end = today + relativedelta(day=31)
-
-        # Bound by rental start and end dates if within this month
-        default_start = max(month_start, self.start_date) if self.start_date else month_start
-        default_end = min(month_end, self.end_date) if self.end_date else month_end
-        if default_start > default_end:
-            default_start = self.start_date
-            default_end = min(self.start_date + relativedelta(months=1, days=-1), self.end_date)
+        # If there's a computed next_invoice date (i.e. last invoice end date + 1), start from it
+        if self.next_invoice:
+            default_start = self.next_invoice
+            # Default to 1 month from next_invoice
+            default_end = min(default_start + relativedelta(months=1, days=-1), self.end_date)
+        else:
+            # Default start and end dates to current month's start and end
+            month_start = today.replace(day=1)
+            month_end = today + relativedelta(day=31)
+            default_start = max(month_start, self.start_date) if self.start_date else month_start
+            default_end = min(month_end, self.end_date) if self.end_date else month_end
+            if default_start > default_end:
+                default_start = self.start_date
+                default_end = min(self.start_date + relativedelta(months=1, days=-1), self.end_date)
 
         months_qty = self.env['account.move']._calculate_rental_months(default_start, default_end)
 
