@@ -80,7 +80,7 @@
 
     <!-- Menu Item directly triggers the List View via Server Action -->
     <menuitem id="menu_property_rental_sales_report_list"
-              name="Rental Summary of Sales"
+              name="Rental Summary"
               parent="property_management.property_report_menu"
               action="action_rental_sales_report_line_view"
               sequence="20"/>
