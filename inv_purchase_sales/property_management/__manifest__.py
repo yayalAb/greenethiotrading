@@ -52,6 +52,7 @@
         'views/property_rental_views.xml',
         'views/res_partner_views.xml',
         'views/rental_bill_views.xml',
+        'views/account_move_views.xml',
         'views/property_auction_views.xml',
         'reports/property_sale_report.xml',
         'reports/property_report.xml',

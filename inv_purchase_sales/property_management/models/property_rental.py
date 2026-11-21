@@ -77,7 +77,6 @@ class PropertyRental(models.Model):
                                  default=lambda self: self.env.company)
     currency_id = fields.Many2one('res.currency', string='Currency',
                                   related='company_id.currency_id')
-
     @api.model_create_multi
     def create(self, vals_list):
         """Setting the sequence when record is created"""
@@ -106,11 +105,16 @@ class PropertyRental(models.Model):
         self.state = 'cancel'
 
     def action_create_contract(self):
-        """Creates an invoice for contract. Checks if the customer
-        is blacklisted."""
+        """Creates an invoice for the rental contract.
+        Checks if the customer is blacklisted.
+        On first creation (Draft) transitions the rental to In Contract."""
         if self.renter_id.blacklisted:
             raise ValidationError(
                 _('The Customer %r is Blacklisted.', self.renter_id.name))
+        income_account = self.env['account.account'].search([
+            ('account_type', '=', 'income'),
+            ('company_ids', 'in', [self.company_id.id])
+        ], limit=1)
         self.env['account.move'].create({
             'move_type': 'out_invoice',
             'property_rental_id': self.id,
@@ -119,15 +123,14 @@ class PropertyRental(models.Model):
                 'name': self.property_id.name,
                 'price_unit': self.rent_price,
                 'currency_id': self.env.user.company_id.currency_id.id,
-                'account_id': self.env['account.account'].search([
-                    ('account_type', '=', 'income'),
-                    ('company_ids', 'in', [self.company_id.id])
-                ], limit=1).id,
+                'account_id': income_account.id,
             })]
         })
         self.invoice_date = fields.Date.today()
-        self.property_id.state = 'rented'
-        self.state = 'in_contract'
+        # Only transition to In Contract on the very first invoice (Draft state)
+        if self.state == 'draft':
+            self.property_id.state = 'rented'
+            self.state = 'in_contract'
 
     def action_view_invoice(self):
         """Views all the related invoice in tree view related to the records"""
@@ -151,6 +154,10 @@ class PropertyRental(models.Model):
             if not rec.next_invoice:
                 rec.state = 'expired'
             if fields.Date.today() == rec.next_invoice:
+                income_account = self.env['account.account'].search([
+                    ('account_type', '=', 'income'),
+                    ('company_ids', 'in', [rec.company_id.id])
+                ], limit=1)
                 self.env['account.move'].create({
                     'move_type': 'out_invoice',
                     'property_rental_id': rec.id,
@@ -159,10 +166,7 @@ class PropertyRental(models.Model):
                         'name': rec.property_id.name,
                         'price_unit': rec.rent_price,
                         'currency_id': rec.env.user.company_id.currency_id.id,
-                        'account_id': self.env['account.account'].search([
-                            ('account_type', '=', 'income'),
-                            ('company_ids', 'in', [rec.company_id.id])
-                        ], limit=1).id,
+                        'account_id': income_account.id,
                     })]
                 })
                 rec.invoice_date = fields.Date.today()

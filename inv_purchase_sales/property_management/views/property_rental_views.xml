@@ -42,7 +42,8 @@
                     <field name="state" widget="statusbar"
                            options="{'clickable': '1'}"/>
                     <button name="action_create_contract" class="oe_highlight"
-                            string="Create Contract" invisible="state != 'draft'"
+                            string="Create Invoice"
+                            invisible="state not in ('draft', 'in_contract')"
                             type="object"/>
                 </header>
                 <sheet>
