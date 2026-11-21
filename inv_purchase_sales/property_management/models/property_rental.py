@@ -19,6 +19,7 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
@@ -105,22 +106,61 @@ class PropertyRental(models.Model):
         self.state = 'cancel'
 
     def action_create_contract(self):
-        """Opens the rental invoice wizard to collect the billing period,
-        validate overlap, and create the invoice."""
+        """Opens the standard account.move invoice form view with contract default values,
+        defaulting payment period to the current month's start and end date."""
         self.ensure_one()
         if self.renter_id.blacklisted:
             raise ValidationError(
                 _('The Customer %r is Blacklisted.', self.renter_id.name))
-        wizard = self.env['rental.invoice.wizard'].create({
-            'rental_id': self.id,
-        })
+
+        today = fields.Date.today()
+        # Default start and end dates to current month's start and end
+        month_start = today.replace(day=1)
+        month_end = today + relativedelta(day=31)
+
+        # Bound by rental start and end dates if within this month
+        default_start = max(month_start, self.start_date) if self.start_date else month_start
+        default_end = min(month_end, self.end_date) if self.end_date else month_end
+        if default_start > default_end:
+            default_start = self.start_date
+            default_end = min(self.start_date + relativedelta(months=1, days=-1), self.end_date)
+
+        months_qty = self.env['account.move']._calculate_rental_months(default_start, default_end)
+
+        income_account = self.env['account.account'].search([
+            ('account_type', '=', 'income'),
+            ('company_ids', 'in', [self.company_id.id])
+        ], limit=1)
+
+        line_name = _('%s — Rental Period: %s to %s') % (
+            self.property_id.name,
+            default_start,
+            default_end,
+        )
+
         return {
             'name': _('Create Rental Invoice'),
             'type': 'ir.actions.act_window',
-            'res_model': 'rental.invoice.wizard',
-            'res_id': wizard.id,
+            'res_model': 'account.move',
             'view_mode': 'form',
-            'target': 'new',
+            'view_id': self.env.ref('stock_picking_custom.view_move_form_fs_mrc_payment').id,
+            'target': 'current',
+            'context': {
+                'default_move_type': 'out_invoice',
+                'default_partner_id': self.renter_id.id,
+                'default_property_rental_id': self.id,
+                'default_rental_invoice_start_date': default_start,
+                'default_rental_invoice_end_date': default_end,
+                'default_invoice_date': today,
+                'default_invoice_line_ids': [
+                    (0, 0, {
+                        'name': line_name,
+                        'price_unit': self.rent_price,
+                        'quantity': months_qty,
+                        'account_id': income_account.id if income_account else False,
+                    })
+                ],
+            },
         }
 
     def action_view_invoice(self):

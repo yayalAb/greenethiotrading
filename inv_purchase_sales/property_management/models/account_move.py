@@ -44,6 +44,18 @@ class AccountMove(models.Model):
         string='Payment Period End',
         help='End date of the payment/rental period covered by this invoice')
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        moves = super().create(vals_list)
+        for move in moves:
+            if move.property_rental_id:
+                rental = move.property_rental_id
+                rental.invoice_date = fields.Date.today()
+                if rental.state == 'draft':
+                    rental.property_id.state = 'rented'
+                    rental.state = 'in_contract'
+        return moves
+
     @api.onchange('rental_invoice_start_date', 'rental_invoice_end_date')
     def _onchange_rental_invoice_dates(self):
         """Update line quantity based on number of months in the selected period."""
