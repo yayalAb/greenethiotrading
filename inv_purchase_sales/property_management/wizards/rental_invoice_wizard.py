@@ -95,6 +95,8 @@ class RentalInvoiceWizard(models.TransientModel):
             self.period_end,
         )
 
+        months_qty = self.env['account.move']._calculate_rental_months(self.period_start, self.period_end)
+
         self.env['account.move'].create({
             'move_type': 'out_invoice',
             'property_rental_id': rental.id,
@@ -103,6 +105,7 @@ class RentalInvoiceWizard(models.TransientModel):
             'rental_invoice_end_date': self.period_end,
             'invoice_line_ids': [fields.Command.create({
                 'name': line_name,
+                'quantity': months_qty,
                 'price_unit': rental.rent_price,
                 'currency_id': rental.currency_id.id,
                 'account_id': income_account.id,

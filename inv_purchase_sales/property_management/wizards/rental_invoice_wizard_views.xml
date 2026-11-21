@@ -22,9 +22,9 @@
                         <label for="period_end" string="Payment Period"/>
                         <div class="d-flex">
                             <field name="period_end" widget="daterange"
-                                   options="{'start_date_field': 'period_start'}"
+                                   options="{'start_date_field': 'period_start', 'always_range': True}"
                                    required="1"/>
-                            <field name="period_start" invisible="1"/>
+                            <field name="period_start" required="1" invisible="1"/>
                         </div>
                     </group>
                 </sheet>

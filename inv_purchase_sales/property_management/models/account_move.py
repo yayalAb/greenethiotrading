@@ -19,6 +19,7 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
@@ -43,16 +44,42 @@ class AccountMove(models.Model):
         string='Payment Period End',
         help='End date of the payment/rental period covered by this invoice')
 
+    @api.onchange('rental_invoice_start_date', 'rental_invoice_end_date')
+    def _onchange_rental_invoice_dates(self):
+        """Update line quantity based on number of months in the selected period."""
+        for move in self:
+            if not move.property_rental_id or not move.rental_invoice_start_date or not move.rental_invoice_end_date:
+                continue
+            if move.rental_invoice_start_date > move.rental_invoice_end_date:
+                continue
+            months = move._calculate_rental_months(move.rental_invoice_start_date, move.rental_invoice_end_date)
+            for line in move.invoice_line_ids:
+                line.quantity = months
+
+    @staticmethod
+    def _calculate_rental_months(start_date, end_date):
+        """Calculate the number of months between start_date and end_date (inclusive)."""
+        if not start_date or not end_date or end_date < start_date:
+            return 1.0
+        end_incl = end_date + relativedelta(days=1)
+        d = relativedelta(end_incl, start_date)
+        full_months = d.years * 12 + d.months
+        if full_months >= 1 and d.days == 0:
+            return float(full_months)
+        total = full_months + (d.days / 30.0)
+        return max(1.0, round(total, 2)) if total > 1.0 else 1.0
+
     @api.constrains('rental_invoice_start_date', 'rental_invoice_end_date',
                     'property_rental_id')
     def _check_rental_period_overlap(self):
-        """Prevent saving an invoice whose rental period overlaps with any
-        other invoice linked to the same rental contract."""
+        """Prevent saving an invoice without mandatory payment period
+        or whose rental period overlaps with any other invoice linked to the same rental contract."""
         for move in self:
             if not move.property_rental_id:
                 continue
             if not move.rental_invoice_start_date or not move.rental_invoice_end_date:
-                continue
+                raise ValidationError(
+                    _('Payment Period Start and End dates are mandatory for rental invoices.'))
             if move.rental_invoice_start_date > move.rental_invoice_end_date:
                 raise ValidationError(
                     _('Rental Period Start must be before Rental Period End.'))
