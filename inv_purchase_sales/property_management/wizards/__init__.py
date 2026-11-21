@@ -20,3 +20,4 @@
 #
 #############################################################################
 from . import property_sale_report
+from . import rental_invoice_wizard

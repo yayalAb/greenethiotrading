@@ -31,7 +31,7 @@
     'maintainer': 'Cybrosys Techno Solutions',
     'website': 'https://cybrosys.com',
     'depends': ['base', 'mail', 'sale_management', 'website',
-                'base_geolocalize'],
+                'base_geolocalize', 'stock_picking_custom'],
     'data': [
         'security/user_groups.xml',
         'security/property_security.xml',
@@ -52,11 +52,12 @@
         'views/property_rental_views.xml',
         'views/res_partner_views.xml',
         'views/rental_bill_views.xml',
-        'views/account_move_views.xml',
         'views/property_auction_views.xml',
         'reports/property_sale_report.xml',
         'reports/property_report.xml',
         'wizards/property_sale_report_views.xml',
+        'wizards/rental_invoice_wizard_views.xml',
+        'views/account_move_views.xml',
     ],
     'assets': {
         'web.assets_frontend': [

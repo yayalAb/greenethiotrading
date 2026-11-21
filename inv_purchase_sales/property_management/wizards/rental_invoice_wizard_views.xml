@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="rental_invoice_wizard_form" model="ir.ui.view">
+        <field name="name">rental.invoice.wizard.form</field>
+        <field name="model">rental.invoice.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Rental Invoice">
+                <sheet>
+                    <group string="Rental Contract">
+                        <group>
+                            <field name="rental_id" invisible="1"/>
+                            <field name="property_id"/>
+                            <field name="renter_id"/>
+                        </group>
+                        <group>
+                            <field name="rent_price"/>
+                            <field name="contract_start"/>
+                            <field name="contract_end"/>
+                        </group>
+                    </group>
+                    <group string="Invoice Period">
+                        <group>
+                            <field name="period_start"/>
+                        </group>
+                        <group>
+                            <field name="period_end"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_create_invoice" string="Create Invoice"
+                            type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

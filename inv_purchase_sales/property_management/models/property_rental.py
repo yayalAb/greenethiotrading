@@ -105,32 +105,23 @@ class PropertyRental(models.Model):
         self.state = 'cancel'
 
     def action_create_contract(self):
-        """Creates an invoice for the rental contract.
-        Checks if the customer is blacklisted.
-        On first creation (Draft) transitions the rental to In Contract."""
+        """Opens the rental invoice wizard to collect the billing period,
+        validate overlap, and create the invoice."""
+        self.ensure_one()
         if self.renter_id.blacklisted:
             raise ValidationError(
                 _('The Customer %r is Blacklisted.', self.renter_id.name))
-        income_account = self.env['account.account'].search([
-            ('account_type', '=', 'income'),
-            ('company_ids', 'in', [self.company_id.id])
-        ], limit=1)
-        self.env['account.move'].create({
-            'move_type': 'out_invoice',
-            'property_rental_id': self.id,
-            'partner_id': self.renter_id.id,
-            'invoice_line_ids': [fields.Command.create({
-                'name': self.property_id.name,
-                'price_unit': self.rent_price,
-                'currency_id': self.env.user.company_id.currency_id.id,
-                'account_id': income_account.id,
-            })]
+        wizard = self.env['rental.invoice.wizard'].create({
+            'rental_id': self.id,
         })
-        self.invoice_date = fields.Date.today()
-        # Only transition to In Contract on the very first invoice (Draft state)
-        if self.state == 'draft':
-            self.property_id.state = 'rented'
-            self.state = 'in_contract'
+        return {
+            'name': _('Create Rental Invoice'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'rental.invoice.wizard',
+            'res_id': wizard.id,
+            'view_mode': 'form',
+            'target': 'new',
+        }
 
     def action_view_invoice(self):
         """Views all the related invoice in tree view related to the records"""
