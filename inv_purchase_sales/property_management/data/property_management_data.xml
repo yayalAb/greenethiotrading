@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data noupdate="1">
+        <!-- Default Payment Modalities -->
+        <record id="payment_modality_monthly" model="property.payment.modality">
+            <field name="name">Monthly</field>
+            <field name="number">1</field>
+            <field name="modality">months</field>
+            <field name="description">Billed once every month</field>
+        </record>
+
+        <record id="payment_modality_quarterly" model="property.payment.modality">
+            <field name="name">Quarterly</field>
+            <field name="number">3</field>
+            <field name="modality">months</field>
+            <field name="description">Billed once every 3 months</field>
+        </record>
+
+        <record id="payment_modality_semi_annual" model="property.payment.modality">
+            <field name="name">Semi-Annual</field>
+            <field name="number">6</field>
+            <field name="modality">months</field>
+            <field name="description">Billed once every 6 months</field>
+        </record>
+
+        <record id="payment_modality_annual" model="property.payment.modality">
+            <field name="name">Annual</field>
+            <field name="number">1</field>
+            <field name="modality">years</field>
+            <field name="description">Billed once every year</field>
+        </record>
+
         <!-- Property menu -->
         <record id="menu_property_form" model="website.menu">
             <field name="name">Property</field>

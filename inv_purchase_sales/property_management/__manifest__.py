@@ -43,6 +43,7 @@
         'views/property_location_views.xml',
         'views/property_floor_views.xml',
         'views/property_facility_views.xml',
+        'views/property_payment_modality_views.xml',
         'views/property_payment_term_views.xml',
         'views/property_tag_views.xml',
         'views/property_search_pannel_views.xml',

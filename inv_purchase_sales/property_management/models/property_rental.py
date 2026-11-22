@@ -70,6 +70,10 @@ class PropertyRental(models.Model):
     invoice_ids = fields.One2many('account.move', 'property_rental_id',
                                   string='Invoices')
     rental_bills_ids = fields.One2many('rental.bill', 'rental_id')
+    payment_modality_id = fields.Many2one(
+        'property.payment.modality',
+        string='Payment Modality',
+        help='The payment modality (e.g. Monthly, Quarterly, Annual) for this rental contract')
     invoice_date = fields.Date(string='Invoice Date',
                                help='The latest Invoiced Date')
     next_invoice = fields.Date(string='Next Invoice',
@@ -131,17 +135,29 @@ class PropertyRental(models.Model):
         # If there's a computed next_invoice date (i.e. last invoice end date + 1), start from it
         if self.next_invoice:
             default_start = self.next_invoice
-            # Default to 1 month from next_invoice
-            default_end = min(default_start + relativedelta(months=1, days=-1), self.end_date)
         else:
-            # Default start and end dates to current month's start and end
+            # Default start to current month start or contract start date
             month_start = today.replace(day=1)
-            month_end = today + relativedelta(day=31)
             default_start = max(month_start, self.start_date) if self.start_date else month_start
+
+        # Calculate default_end based on payment_modality if configured
+        if self.payment_modality_id and self.payment_modality_id.number:
+            mod_num = self.payment_modality_id.number
+            mod_unit = self.payment_modality_id.modality
+            if mod_unit == 'days':
+                target_end = default_start + relativedelta(days=mod_num - 1)
+            elif mod_unit == 'years':
+                target_end = default_start + relativedelta(years=mod_num, days=-1)
+            else:  # months
+                target_end = default_start + relativedelta(months=mod_num, days=-1)
+            default_end = min(target_end, self.end_date) if self.end_date else target_end
+        else:
+            month_end = default_start + relativedelta(months=1, days=-1)
             default_end = min(month_end, self.end_date) if self.end_date else month_end
-            if default_start > default_end:
-                default_start = self.start_date
-                default_end = min(self.start_date + relativedelta(months=1, days=-1), self.end_date)
+
+        if default_start > default_end:
+            default_start = self.start_date or today
+            default_end = self.end_date or today
 
         months_qty = self.env['account.move']._calculate_rental_months(default_start, default_end)
 

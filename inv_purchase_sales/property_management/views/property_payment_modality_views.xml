@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Property payment modality action -->
+    <record id="property_payment_modality_action" model="ir.actions.act_window">
+        <field name="name">Payment Modality</field>
+        <field name="res_model">property.payment.modality</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Payment Modality!
+            </p>
+            <p>
+                Define payment frequencies such as Monthly, Quarterly, Semi-Annual, or Custom Days/Months/Years.
+            </p>
+        </field>
+    </record>
+
+    <!-- Property payment modality menu item -->
+    <menuitem id="property_payment_modality_menu" name="Payment Modality"
+              parent="property_configuration_menu"
+              action="property_payment_modality_action" sequence="4"/>
+
+    <!-- Property payment modality list view -->
+    <record id="property_payment_modality_view_list" model="ir.ui.view">
+        <field name="name">property.payment.modality.view.list</field>
+        <field name="model">property.payment.modality</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="number"/>
+                <field name="modality"/>
+                <field name="description"/>
+                <field name="active" widget="boolean_toggle" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Property payment modality form view -->
+    <record id="property_payment_modality_view_form" model="ir.ui.view">
+        <field name="name">property.payment.modality.view.form</field>
+        <field name="model">property.payment.modality</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <field name="active" invisible="1"/>
+                    <div class="oe_title">
+                        <label for="name" string="Modality Name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Monthly, Quarterly, Semi-Annual, Annual"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="number"/>
+                            <field name="modality"/>
+                        </group>
+                    </group>
+                    <group string="Description">
+                        <field name="description" placeholder="Additional details or notes about this payment modality..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Property payment modality search view -->
+    <record id="property_payment_modality_view_search" model="ir.ui.view">
+        <field name="name">property.payment.modality.view.search</field>
+        <field name="model">property.payment.modality</field>
+        <field name="arch" type="xml">
+            <search string="Search Payment Modality">
+                <field name="name"/>
+                <field name="modality"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Modality Unit" name="group_modality" context="{'group_by': 'modality'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>
