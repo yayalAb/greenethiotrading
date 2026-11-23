@@ -7,8 +7,13 @@ class PropertyPenalty(models.Model):
     """Penalty configuration for overdue / late rental payments."""
     _name = 'property.penalty'
     _description = 'Property Rental Penalty'
-    _order = 'name asc, id desc'
+    _order = 'sequence, name, id'
 
+    sequence = fields.Integer(
+        string='Sequence',
+        default=10,
+        help='Display and priority sequence order'
+    )
     name = fields.Char(
         string='Name',
         required=True,

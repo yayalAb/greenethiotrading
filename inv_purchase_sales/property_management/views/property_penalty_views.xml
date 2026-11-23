@@ -26,6 +26,7 @@
         <field name="model">property.penalty</field>
         <field name="arch" type="xml">
             <list editable="bottom">
+                <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="tolerance_days"/>
                 <field name="amount_type"/>
@@ -53,6 +54,7 @@
                     </div>
                     <group>
                         <group>
+                            <field name="sequence"/>
                             <field name="tolerance_days"/>
                             <field name="amount_type"/>
                             <label for="amount"/>
