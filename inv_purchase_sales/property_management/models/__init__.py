@@ -31,6 +31,7 @@ from . import property_location
 from . import property_nearby_connectivity
 from . import property_payment_modality
 from . import property_payment_term
+from . import property_penalty
 from . import property_property
 from . import property_rental
 from . import property_sale

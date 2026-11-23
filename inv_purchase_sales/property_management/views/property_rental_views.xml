@@ -24,6 +24,7 @@
                 <field name="property_id"/>
                 <field name="renter_id"/>
                 <field name="payment_modality_id" optional="show"/>
+                <field name="penalty_id" optional="hide"/>
                 <field name="start_date"/>
                 <field name="end_date"/>
                 <field name="state"/>
@@ -67,6 +68,7 @@
                             <field name="renter_id"/>
                             <field name="rent_price"/>
                             <field name="payment_modality_id"/>
+                            <field name="penalty_id"/>
                             <field name="owner_id" invisible="1"/>
                         </group>
                         <group>

@@ -39,3 +39,6 @@ access_rental_invoice_wizard_manager,access.rental.invoice.wizard.manager,model_
 access_property_payment_modality_agent,access.property.payment.modality.agent,model_property_payment_modality,property_management.group_property_agent,1,0,0,0
 access_property_payment_modality_manager,access.property.payment.modality.manager,model_property_payment_modality,property_management.group_property_manager,1,1,1,1
 access_property_payment_modality_user,access.property.payment.modality.user,model_property_payment_modality,base.group_user,1,0,0,0
+access_property_penalty_agent,access.property.penalty.agent,model_property_penalty,property_management.group_property_agent,1,0,0,0
+access_property_penalty_manager,access.property.penalty.manager,model_property_penalty,property_management.group_property_manager,1,1,1,1
+access_property_penalty_user,access.property.penalty.user,model_property_penalty,base.group_user,1,0,0,0

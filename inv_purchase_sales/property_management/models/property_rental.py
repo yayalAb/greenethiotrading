@@ -74,6 +74,10 @@ class PropertyRental(models.Model):
         'property.payment.modality',
         string='Payment Modality',
         help='The payment modality (e.g. Monthly, Quarterly, Annual) for this rental contract')
+    penalty_id = fields.Many2one(
+        'property.penalty',
+        string='Penalty',
+        help='Penalty rule applied to this rental contract in case of late payment')
     invoice_date = fields.Date(string='Invoice Date',
                                help='The latest Invoiced Date')
     next_invoice = fields.Date(string='Next Invoice',
